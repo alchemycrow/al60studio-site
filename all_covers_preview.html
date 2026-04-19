@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>HOV! — 6 Kapak Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root { --gold: #C9A961; --ink: #8A3540; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:#1a1a1a;
+    padding:40px 20px;
+    min-height:100vh;
+    font-family:system-ui,sans-serif;
+    color:#999;
+  }
+  h1 {
+    text-align:center;
+    color:#ccc;
+    font-size:14px;
+    font-weight:400;
+    letter-spacing:0.3em;
+    margin-bottom:32px;
+    text-transform:uppercase;
+  }
+  .grid {
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+    max-width:1400px;
+    margin:0 auto;
+  }
+  .item {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .cover {
+    width:100%;
+    aspect-ratio: 600 / 848;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    box-shadow:0 15px 40px rgba(0,0,0,0.6);
+  }
+  .cover[data-img="natal"]      { background-image:url('natal.png'); }
+  .cover[data-img="predictive"] { background-image:url('predictive.png'); }
+  .cover[data-img="sinastri"]   { background-image:url('sinastri.png'); }
+  .cover[data-img="draconic"]   { background-image:url('draconic.png'); }
+  .cover[data-img="odak"]       { background-image:url('odak1.png'); }
+  .cover[data-img="tam_paket"]  { background-image:url('tam_paket.png'); }
+
+  .mark {
+    position:absolute;
+    bottom:3.2%;
+    right:4%;
+    font-family:'Cinzel',serif;
+    font-size:0.85vw;
+    font-weight:500;
+    letter-spacing:0.28em;
+    color:var(--ink);
+    text-indent:0.28em;
+    white-space:nowrap;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.15);
+  }
+
+  .label {
+    margin-top:12px;
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:#888;
+  }
+</style>
+</head>
+<body>
+
+  <h1>HOV! — 6 Ürün Kapak Preview · HOV! '26 Minimal</h1>
+
+  <div class="grid">
+    <div class="item">
+      <div class="cover" data-img="natal"><div class="mark">HOV! '26</div></div>
+      <div class="label">Natal</div>
+    </div>
+    <div class="item">
+      <div class="cover" data-img="predictive"><div class="mark">HOV! '26</div></div>
+      <div class="label">Predictive</div>
+    </div>
+    <div class="item">
+      <div class="cover" data-img="sinastri"><div class="mark">HOV! '26</div></div>
+      <div class="label">Sinastri</div>
+    </div>
+    <div class="item">
+      <div class="cover" data-img="draconic"><div class="mark">HOV! '26</div></div>
+      <div class="label">Draconic</div>
+    </div>
+    <div class="item">
+      <div class="cover" data-img="odak"><div class="mark">HOV! '26</div></div>
+      <div class="label">Odak</div>
+    </div>
+    <div class="item">
+      <div class="cover" data-img="tam_paket"><div class="mark">HOV! '26</div></div>
+      <div class="label">Tam Paket</div>
+    </div>
+  </div>
+
+</body>
+</html>

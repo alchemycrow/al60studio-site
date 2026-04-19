@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOV! — Psikodinamik Astroloji</title>
+<meta name="description" content="HOV! · AL 6.0 Studio — Haritan, falın değil; içselliğinin belgesidir. Derinlik psikolojisi gözüyle okunan natal, predictive, sinastri ve draconic raporlar.">
+<meta name="author" content="HOV! · AL 6.0 Studio">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://al60studio.com/">
+
+<!-- Open Graph (Facebook, LinkedIn, Instagram) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HOV! Studio">
+<meta property="og:title" content="HOV! — Psikodinamik Astroloji">
+<meta property="og:description" content="Fal değil. Teselli değil. Haritan içselliğinin belgesidir — derinlik psikolojisi gözüyle okunur.">
+<meta property="og:url" content="https://al60studio.com/">
+<meta property="og:image" content="https://al60studio.com/hov_banner_final.png">
+<meta property="og:image:width" content="4072">
+<meta property="og:image:height" content="517">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:locale:alternate" content="en_US">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HOV! — Psikodinamik Astroloji">
+<meta name="twitter:description" content="Fal değil. Teselli değil. Haritan içselliğinin belgesidir.">
+<meta name="twitter:image" content="https://al60studio.com/hov_banner_final.png">
+
+<!-- Favicon (inline SVG) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23172E3E'/%3E%3Ctext x='50%25' y='72%25' text-anchor='middle' fill='%23E8C871' font-family='Georgia,serif' font-size='26' font-weight='700' font-style='italic'%3E!%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400;1,9..144,500&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* ── ÜST KATMAN — krem / pastel turuncu (gündüz) ── */
+  --cream:          #F2E8D0;
+  --cream-deep:     #E8DCBE;
+  --cream-shadow:   #DAC9A0;
+  --ink-warm:       #2A1F18;
+  --ink-warm-dim:   #5A4A3E;
+  --ink-warm-muted: #8A7A6B;
+  --copper:         #B0482A;        /* kiremit, mat toprak */
+  --copper-deep:    #8B3A23;
+  --rose-pale:      #D4A5A5;        /* pudra gül */
+  --rose-warm:      #C4887A;        /* tozlu şeftali */
+  --gold-warm:      #B58B3A;
+  --ember:          #A84A3A;         /* bordo */
+
+  /* ── ALT KATMAN — petrol mavi gecesi (bilinçdışı) ── */
+  --night:          #172E3E;        /* petrol mavi, biraz daha koyu */
+  --night-deep:     #0F2330;
+  --night-lift:     #244055;
+  --night-card:     #142838;
+  --ink-light:      #E2DED7;
+  --ink-light-dim:  #A8A49D;
+  --ink-light-muted:#6A6660;
+  --gold:           #C9A959;
+  --gold-bright:    #E8C871;
+  --gold-dim:       #B89A48;
+  --rose-dark:      #B87870;        /* gece güleri, daha yoğun */
+
+  /* ── Claude grisi (Anthropic brand accent) ── */
+  --claude-gray:    #141413;
+
+  /* ── Crimson (CTA accent) ── */
+  --crimson:        #E74C3C;
+
+  /* ── Ortak ── */
+  --line-light:     rgba(42,31,24,0.14);
+  --line-soft-light:rgba(42,31,24,0.06);
+  --line-dark:      rgba(226,222,215,0.10);
+  --line-soft-dark: rgba(226,222,215,0.04);
+
+  /* Fontlar */
+  --f-display:      'Fraunces', 'Crimson Pro', Georgia, serif;
+  --f-serif:        'Crimson Pro', Georgia, serif;
+  --f-mono:         'Space Mono', 'Courier New', monospace;
+  --f-hand:         'Mrs Saint Delafield', cursive;
+
+  /* Cursor trail — zemin değişince güncellenir */
+  --trail-color:    var(--copper);
+  --trail-glow:     rgba(176,72,42,0.6);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink-warm);
+  font-family: var(--f-serif);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 1.2s ease;
+}
+
+/* Zone-driven background + cursor color */
+body[data-zone="light"] {
+  background: var(--cream);
+  --trail-color: var(--copper);
+  --trail-glow: rgba(176,72,42,0.55);
+}
+body[data-zone="dark"] {
+  background: var(--night);
+  --trail-color: var(--gold-bright);
+  --trail-glow: rgba(232,200,113,0.6);
+}
+
+/* Grain — ton farklı iki zone için */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply; pointer-events: none; opacity: 0.5;
+}
+
+nav, section, footer { position: relative; z-index: 2; }
+
+/* ═══════════════════════════════════════════════════════════════
+   CURSOR TRAIL — kayan yıldız
+   ═══════════════════════════════════════════════════════════════ */
+.star {
+  position: fixed;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99;
+  transform: translate(-50%, -50%);
+  background: var(--trail-color);
+  box-shadow: 0 0 8px var(--trail-glow), 0 0 16px var(--trail-glow);
+  mix-blend-mode: screen;
+  animation: starFade 1200ms cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+  --drift-x: 0px;
+  --drift-y: 10px;
+  --rot: 45deg;
+}
+@keyframes starFade {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.3) rotate(0); }
+  15%  { opacity: 1; transform: translate(-50%, -50%) scale(1.2) rotate(calc(var(--rot) * 0.3)); }
+  60%  { opacity: 0.7; }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--drift-x)), calc(-50% + var(--drift-y)))
+               scale(0.2) rotate(var(--rot));
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  .star { display: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL REVEAL
+   ═══════════════════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.95s cubic-bezier(0.2, 0.9, 0.3, 1),
+              transform 0.95s cubic-bezier(0.2, 0.9, 0.3, 1);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NAV
+   ═══════════════════════════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 3rem;
+  background: rgba(242,232,208,0.88);
+  backdrop-filter: blur(14px);
+  transition: padding 0.3s, background 1.2s, border-color 0.3s;
+  border-bottom: 1px solid transparent;
+}
+body[data-zone="dark"] nav {
+  background: rgba(20,20,19,0.94);
+  border-bottom-color: rgba(232,200,113,0.18);
+}
+nav.scrolled { padding: 0.9rem 3rem; border-bottom-color: var(--line-light); }
+body[data-zone="dark"] nav.scrolled { border-bottom-color: rgba(232,200,113,0.25); }
+
+.nav-logo {
+  font-family: var(--f-mono);
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.35em;
+  color: var(--ink-warm); text-decoration: none; text-transform: uppercase;
+  transition: color 1.2s;
+}
+.nav-logo .hov { color: var(--copper); transition: color 1.2s; }
+body[data-zone="dark"] .nav-logo { color: var(--gold-dim); }
+body[data-zone="dark"] .nav-logo .hov { color: var(--gold-bright); }
+
+.nav-right { display: flex; align-items: center; gap: 2.5rem; }
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a {
+  font-family: var(--f-mono);
+  font-size: 0.6rem; font-weight: 400; letter-spacing: 0.3em;
+  color: var(--ink-warm-dim); text-decoration: none; text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--copper); }
+body[data-zone="dark"] .nav-links a { color: var(--gold-bright); }
+body[data-zone="dark"] .nav-links a:hover { color: var(--cream); }
+
+.lang-toggle { display: flex; border: 1px solid var(--line-light); transition: border-color 1.2s; }
+body[data-zone="dark"] .lang-toggle { border-color: rgba(232,200,113,0.4); }
+.lang-btn {
+  font-family: var(--f-mono);
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.18em;
+  padding: 0.35rem 0.6rem;
+  background: transparent; border: none;
+  color: var(--ink-warm-dim); cursor: pointer;
+  text-transform: uppercase; transition: all 0.25s;
+}
+.lang-btn.active { background: var(--copper); color: var(--cream); }
+body[data-zone="dark"] .lang-btn { color: var(--gold-bright); }
+body[data-zone="dark"] .lang-btn.active { background: var(--gold-bright); color: var(--claude-gray); }
+
+/* ═══════════════════════════════════════════════════════════════
+   BANNER PLACEHOLDER — MJ görseli buraya gelecek
+   ═══════════════════════════════════════════════════════════════ */
+.banner {
+  margin-top: 64px;
+  width: 100%;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  background: var(--cream-deep);
+  border-bottom: 1px solid var(--line-light);
+}
+.banner-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  gap: 0.6rem;
+  background:
+    linear-gradient(90deg,
+      var(--cream) 0%,
+      var(--cream-deep) 35%,
+      var(--cream-shadow) 65%,
+      var(--night-lift) 100%);
+}
+.banner-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 25% 20%;
+  border: 1px solid var(--copper);
+  opacity: 0.25;
+}
+.banner-placeholder::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent, var(--copper) 25%, var(--ember) 55%, var(--gold-dim) 100%);
+  opacity: 0.5;
+}
+.banner-note {
+  font-family: var(--f-mono);
+  font-size: 0.58rem; letter-spacing: 0.4em;
+  color: var(--ink-warm-muted);
+  text-transform: uppercase;
+  z-index: 2;
+}
+.banner-sign {
+  position: absolute;
+  bottom: 1rem; right: 2rem;
+  font-family: var(--f-hand);
+  font-size: 1.75rem;
+  color: var(--copper);
+  line-height: 1;
+  opacity: 0.85;
+  z-index: 2;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TRUST BAR — banner ile hero arası, küçük otorite satırı
+   ═══════════════════════════════════════════════════════════════ */
+.trust-bar {
+  background: var(--cream-deep);
+  padding: 1.1rem 2rem;
+  border-bottom: 1px solid var(--line-light);
+}
+.trust-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem 1.2rem;
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  color: var(--ink-warm-dim);
+  text-transform: uppercase;
+}
+.trust-item { white-space: nowrap; }
+.trust-dot {
+  color: var(--copper);
+  opacity: 0.6;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO — tek sütun, krem, editorial
+   ═══════════════════════════════════════════════════════════════ */
+#hero {
+  min-height: 80vh;
+  padding: 7rem 3rem 6rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.hero-mark {
+  position: absolute;
+  top: 3rem; right: 3rem;
+  width: 28px; height: 28px;
+  opacity: 0.65;
+  animation: markRotate 32s linear infinite;
+}
+.hero-mark svg { width: 100%; height: 100%; }
+@keyframes markRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.hero-eyebrow {
+  font-family: var(--f-mono);
+  font-size: 0.62rem; font-weight: 400; letter-spacing: 0.4em;
+  color: var(--copper);
+  text-transform: uppercase;
+  margin-bottom: 3.5rem;
+}
+.hero-title {
+  font-family: var(--f-display);
+  font-size: clamp(3rem, 7vw, 6.2rem);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--ink-warm);
+  margin-bottom: 2.5rem;
+  max-width: 900px;
+}
+.hero-title .line2 {
+  display: block;
+  font-style: italic;
+  color: var(--ink-warm-dim);
+  margin-top: 0.1em;
+  font-weight: 300;
+}
+.hero-title .line2 em {
+  color: var(--copper);
+  font-style: italic;
+}
+
+.hero-divider {
+  width: 180px; height: 1px;
+  background: var(--line-light);
+  margin: 1.5rem 0 2.5rem;
+}
+
+.hero-sub {
+  font-family: var(--f-serif);
+  font-size: 1.2rem;
+  line-height: 1.75;
+  color: var(--ink-warm-dim);
+  max-width: 560px;
+  font-style: italic;
+}
+
+.scroll-hint {
+  position: absolute; bottom: 2.5rem; left: 3rem;
+  font-family: var(--f-mono);
+  font-size: 0.55rem; font-weight: 400; letter-spacing: 0.4em;
+  color: var(--ink-warm-muted);
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.scroll-hint::before {
+  content: ''; width: 40px; height: 1px; background: var(--copper);
+  animation: scrollLine 2.5s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0%, 100% { transform: scaleX(0.3); opacity: 0.4; }
+  50% { transform: scaleX(1); opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CHAPTER SHARED
+   ═══════════════════════════════════════════════════════════════ */
+section.chapter {
+  padding: 10rem 3rem;
+  position: relative;
+  transition: background-color 1.2s ease, color 1.2s ease;
+}
+.chapter-inner { max-width: 1280px; margin: 0 auto; }
+.chapter-mark {
+  font-family: var(--f-mono);
+  font-size: 0.6rem; font-weight: 400; letter-spacing: 0.38em;
+  text-transform: uppercase;
+  margin-bottom: 3.5rem;
+  display: flex; align-items: center; gap: 0.8rem;
+}
+.chapter-mark::before {
+  content: ''; width: 40px; height: 1px;
+  background: currentColor; opacity: 0.5;
+}
+.chapter-heading {
+  font-family: var(--f-display);
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 3rem;
+}
+.chapter-heading em {
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   I. TANINMA — krem, editorial
+   ═══════════════════════════════════════════════════════════════ */
+#tanınma {
+  background: var(--cream);
+  color: var(--ink-warm);
+}
+#tanınma .chapter-mark { color: var(--copper); }
+#tanınma .chapter-heading { color: var(--ink-warm); }
+#tanınma .chapter-heading em { color: var(--rose-warm); }
+
+.tanınma-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.tanınma-body p {
+  font-family: var(--f-serif);
+  font-size: 1.15rem;
+  line-height: 1.95;
+  color: var(--ink-warm);
+  margin-bottom: 1.8rem;
+  max-width: 560px;
+}
+.tanınma-body p:first-of-type { font-size: 1.3rem; color: var(--ink-warm); font-weight: 400; }
+.tanınma-body p:last-of-type { color: var(--ink-warm-dim); font-style: italic; }
+
+.tanınma-side { padding-top: 3rem; }
+.jung-quote {
+  border-left: 1px solid var(--copper);
+  padding: 0.3rem 0 0.3rem 1.8rem;
+  margin-bottom: 3.5rem;
+}
+.jung-quote p {
+  font-family: var(--f-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--ink-warm-dim);
+  margin-bottom: 0.9rem;
+}
+.jung-quote cite {
+  font-family: var(--f-mono);
+  font-style: normal;
+  font-size: 0.6rem; letter-spacing: 0.28em;
+  color: var(--copper);
+  text-transform: uppercase;
+}
+.concepts { list-style: none; display: flex; flex-direction: column; gap: 1.8rem; }
+.concepts li {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  gap: 1.2rem;
+  align-items: start;
+}
+.concepts li::before {
+  content: '';
+  width: 6px; height: 6px;
+  margin-top: 0.55rem;
+  background: var(--copper);
+  border-radius: 50%;
+}
+.concept-title {
+  font-family: var(--f-mono);
+  font-size: 0.66rem; font-weight: 400; letter-spacing: 0.22em;
+  color: var(--ink-warm);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.concept-sub {
+  font-family: var(--f-display);
+  font-size: 0.98rem;
+  font-style: italic;
+  color: var(--ink-warm-dim);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   II. SOYUNMA — gece, sıcak mürekkep, volt altın
+   ═══════════════════════════════════════════════════════════════ */
+#soyunma {
+  background: var(--night);
+  color: var(--ink-light);
+  text-align: center;
+}
+#soyunma .chapter-mark { color: var(--rose-dark); justify-content: center; }
+#soyunma .chapter-heading { color: var(--ink-light); max-width: 780px; margin-left: auto; margin-right: auto; }
+#soyunma .chapter-heading em { color: var(--gold-bright); }
+
+.soyunma-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem 3.5rem;
+  max-width: 1080px;
+  margin: 4rem auto 0;
+  text-align: left;
+}
+.soyunma-item {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 1.2rem;
+  align-items: start;
+}
+.s-num {
+  font-family: var(--f-mono);
+  font-size: 0.62rem; font-weight: 400; letter-spacing: 0.1em;
+  color: var(--gold);
+  padding-top: 0.5rem;
+}
+.s-text {
+  font-family: var(--f-display);
+  font-size: 1.12rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--ink-light);
+}
+.soyunma-coda {
+  max-width: 1080px;
+  margin: 6rem auto 0;
+  padding-top: 3.5rem;
+  border-top: 1px solid var(--line-dark);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  text-align: left;
+}
+.soyunma-coda p {
+  font-family: var(--f-serif);
+  font-size: 1.05rem;
+  font-style: italic;
+  line-height: 1.85;
+  color: var(--ink-light-dim);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   III. TEŞHİS — aynı gece zemin, 6 rapor, altın
+   ═══════════════════════════════════════════════════════════════ */
+#teshis {
+  background: var(--night);
+  color: var(--ink-light);
+}
+#teshis .chapter-mark { color: var(--gold-bright); }
+#teshis .chapter-heading { color: var(--ink-light); }
+#teshis .chapter-heading em { color: var(--gold-bright); }
+
+.teshis-sub {
+  font-family: var(--f-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--ink-light-dim);
+  max-width: 480px;
+  margin-bottom: 5rem;
+}
+
+.readings { display: flex; flex-direction: column; }
+.reading {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 3rem;
+  padding: 3.2rem 0;
+  border-top: 1px solid var(--line-dark);
+  align-items: start;
+  transition: background 0.4s, padding-left 0.4s;
+}
+.reading:last-child { border-bottom: 1px solid var(--line-dark); }
+.reading:hover {
+  background: rgba(232,200,113,0.025);
+  padding-left: 1rem;
+}
+.reading-num {
+  font-family: var(--f-mono);
+  font-size: 0.66rem; font-weight: 400; letter-spacing: 0.22em;
+  color: var(--rose-dark);
+  padding-top: 0.55rem;
+}
+.reading-name {
+  font-family: var(--f-display);
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--ink-light);
+  margin-bottom: 1.2rem;
+}
+.reading-name em {
+  font-style: italic;
+  color: var(--gold-bright);
+}
+.reading-desc {
+  font-family: var(--f-serif);
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: var(--ink-light-dim);
+  margin-bottom: 1.5rem;
+  max-width: 680px;
+}
+.reading-feats {
+  display: flex; flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  font-family: var(--f-mono);
+  font-size: 0.62rem; font-weight: 400; letter-spacing: 0.15em;
+  color: var(--ink-light-muted);
+}
+.reading-price {
+  font-family: var(--f-mono);
+  font-size: 0.88rem; font-weight: 700; letter-spacing: 0.12em;
+  color: var(--gold-bright);
+  padding-top: 0.7rem;
+  min-width: 90px;
+  text-align: right;
+}
+
+.teshis-footer {
+  margin-top: 6rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--line-dark);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+}
+.tf-label {
+  font-family: var(--f-mono);
+  font-size: 0.56rem; letter-spacing: 0.32em;
+  color: var(--rose-dark);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.tf-value {
+  font-family: var(--f-display);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--ink-light);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   IV. DAVET — aynı gece, gül aksant (mavi yok)
+   ═══════════════════════════════════════════════════════════════ */
+#davet {
+  background: var(--night);
+  color: var(--ink-light);
+}
+#davet .chapter-mark { color: var(--rose-dark); }
+#davet .chapter-heading { color: var(--ink-light); }
+#davet .chapter-heading em { color: var(--rose-dark); }
+
+.davet-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 6rem;
+  align-items: start;
+}
+.davet-body {
+  font-family: var(--f-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.8;
+  color: var(--ink-light-dim);
+  max-width: 440px;
+  margin-bottom: 3rem;
+}
+.davet-meta {
+  display: flex; flex-direction: column;
+  gap: 1.4rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--line-dark);
+  max-width: 440px;
+}
+.davet-meta-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 1rem;
+  align-items: baseline;
+}
+.davet-meta-label {
+  font-family: var(--f-mono);
+  font-size: 0.58rem; letter-spacing: 0.28em;
+  color: var(--rose-dark);
+  text-transform: uppercase;
+}
+.davet-meta-value {
+  font-family: var(--f-display);
+  font-size: 0.98rem;
+  font-style: italic;
+  color: var(--ink-light);
+  text-align: right;
+}
+
+.davet-form { display: flex; flex-direction: column; gap: 1.6rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+.form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-label {
+  font-family: var(--f-mono);
+  font-size: 0.58rem; letter-spacing: 0.28em;
+  color: var(--rose-dark);
+  text-transform: uppercase;
+}
+.form-input, .form-select, .form-textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line-dark);
+  color: var(--ink-light);
+  font-family: var(--f-display);
+  font-size: 1.05rem; font-weight: 300;
+  padding: 0.8rem 0; outline: none;
+  transition: border-color 0.3s;
+  width: 100%; appearance: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-bottom-color: var(--gold-bright);
+}
+.form-input::placeholder, .form-textarea::placeholder {
+  color: var(--ink-light-muted); font-style: italic;
+}
+.form-select option { background: var(--night); color: var(--ink-light); }
+.form-textarea { resize: vertical; min-height: 72px; }
+
+.report-options {
+  display: flex; flex-wrap: wrap;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+}
+.report-option {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--line-dark);
+  transition: all 0.3s;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--ink-light-dim);
+}
+.report-option:hover { border-color: var(--gold-dim); color: var(--ink-light); }
+.report-option input { display: none; }
+.report-option.checked {
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
+  background: rgba(232,200,113,0.05);
+}
+
+.btn-submit {
+  margin-top: 1.4rem;
+  padding: 1.35rem 2rem;
+  background: var(--crimson);
+  border: 1px solid var(--crimson);
+  color: var(--cream);
+  font-family: var(--f-mono);
+  font-size: 0.76rem; font-weight: 700; letter-spacing: 0.32em;
+  text-transform: uppercase;
+  cursor: pointer; width: 100%;
+  transition: all 0.35s;
+}
+.btn-submit:hover {
+  background: var(--gold-bright);
+  border-color: var(--gold-bright);
+  color: var(--night);
+}
+
+.form-success {
+  padding: 3rem 2rem;
+  text-align: center;
+  border: 1px solid rgba(232,200,113,0.3);
+  background: rgba(232,200,113,0.04);
+  animation: fadeInUp 0.8s ease;
+}
+.form-success-mark {
+  font-size: 2rem;
+  color: var(--gold-bright);
+  margin-bottom: 1rem;
+  letter-spacing: 0.5em;
+  padding-left: 0.5em;
+}
+.form-success h3 {
+  font-family: var(--f-display);
+  font-size: 1.8rem; font-weight: 400; font-style: italic;
+  color: var(--gold-bright);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.form-success p {
+  font-family: var(--f-serif);
+  font-size: 1rem; font-weight: 300;
+  color: var(--ink-light);
+  line-height: 1.7;
+  max-width: 420px;
+  margin: 0 auto 0.8rem;
+}
+.form-success-note {
+  font-size: 0.85rem !important;
+  color: var(--ink-light-muted) !important;
+  font-style: italic;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════════════════════ */
+footer {
+  padding: 5rem 3rem 3rem;
+  border-top: 1px solid var(--line-dark);
+  background: var(--night-deep);
+  color: var(--ink-light);
+}
+.footer-top {
+  max-width: 1280px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: end;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--line-dark);
+  margin-bottom: 2rem;
+}
+.footer-brand {
+  font-family: var(--f-display);
+  font-size: 2.2rem;
+  font-style: italic;
+  color: var(--ink-light);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.footer-brand .hov { color: var(--gold-bright); font-style: normal; letter-spacing: 0.02em; }
+.footer-tagline {
+  font-family: var(--f-mono);
+  font-size: 0.58rem; letter-spacing: 0.32em;
+  color: var(--rose-dark);
+  text-transform: uppercase;
+}
+.footer-right {
+  text-align: right;
+  font-family: var(--f-display);
+  font-size: 0.95rem; font-style: italic;
+  color: var(--ink-light-dim); line-height: 1.7;
+}
+.footer-bottom {
+  max-width: 1280px; margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+.footer-copy {
+  font-family: var(--f-mono);
+  font-size: 0.56rem; letter-spacing: 0.22em;
+  color: var(--ink-light-muted);
+  text-transform: uppercase;
+}
+.footer-sign {
+  font-family: var(--f-hand);
+  font-size: 2.4rem;
+  color: var(--gold-bright);
+  line-height: 1; letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.footer-motto {
+  font-family: var(--f-display);
+  font-size: 0.88rem; font-style: italic;
+  color: var(--ink-light-dim);
+  text-align: right;
+}
+.footer-social {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.4rem;
+}
+.footer-social a {
+  font-family: var(--f-mono);
+  font-size: 0.58rem; font-weight: 700; letter-spacing: 0.28em;
+  color: var(--gold-dim); text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s, letter-spacing 0.3s;
+}
+.footer-social a:hover {
+  color: var(--gold-bright);
+  letter-spacing: 0.32em;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 980px) {
+  nav { padding: 1.1rem 1.2rem; }
+  nav.scrolled { padding: 0.8rem 1.2rem; }
+  .nav-links { display: none; }
+  .nav-right { gap: 1rem; }
+
+  .banner { height: 180px; }
+  .banner-sign { font-size: 1.2rem; bottom: 0.6rem; right: 1rem; }
+  .trust-bar { padding: 0.85rem 1rem; }
+  .trust-inner { font-size: 0.55rem; letter-spacing: 0.22em; gap: 0.5rem 0.8rem; }
+
+  #hero { padding: 5rem 1.4rem 4rem; min-height: auto; }
+  .scroll-hint { display: none; }
+  .hero-mark { top: 5rem; right: 1.4rem; width: 20px; height: 20px; }
+
+  section.chapter { padding: 5.5rem 1.4rem; }
+  .tanınma-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .tanınma-side { padding-top: 0; }
+  .soyunma-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .soyunma-coda { grid-template-columns: 1fr; gap: 2rem; }
+
+  .reading { grid-template-columns: 36px 1fr; gap: 1rem; }
+  .reading:hover { padding-left: 0; }
+  .reading-price { grid-column: 2; text-align: left; padding-top: 0.4rem; min-width: auto; }
+  .teshis-footer { grid-template-columns: 1fr 1fr; }
+
+  .davet-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .davet-meta-row { grid-template-columns: 1fr; gap: 0.2rem; }
+  .davet-meta-value { text-align: left; }
+  .form-row { grid-template-columns: 1fr; }
+
+  .footer-top { grid-template-columns: 1fr; gap: 1.5rem; }
+  .footer-right { text-align: left; }
+  .footer-social { justify-content: flex-start; gap: 1.2rem; flex-wrap: wrap; }
+  .footer-bottom { grid-template-columns: 1fr; gap: 1rem; text-align: center; }
+  .footer-motto { text-align: center; }
+}
+</style>
+</head>
+<body data-zone="light">
+
+<nav id="mainNav">
+  <a href="#" class="nav-logo"><span class="hov">HOV!</span> &nbsp;·&nbsp; AL 6.0 STUDIO</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#tanınma" data-tr="Yöntem" data-en="Method">Yöntem</a></li>
+      <li><a href="#teshis" data-tr="Raporlar" data-en="Readings">Raporlar</a></li>
+      <li><a href="https://medium.com/@cevikgun" target="_blank" rel="noopener" data-tr="Blog" data-en="Blog">Blog</a></li>
+      <li><a href="#davet" data-tr="Sipariş" data-en="Order">Sipariş</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnTR" onclick="setLang('tr')">TR</button>
+      <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ BANNER ═══ -->
+<div class="banner" id="banner">
+  <img src="hov_banner_final.png" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;">
+</div>
+
+<!-- ═══ TRUST BAR ═══ -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <span class="trust-item" data-tr="Anonim çalışma etiği" data-en="Anonymous by principle">Anonim çalışma etiği</span>
+    <span class="trust-dot" aria-hidden="true">·</span>
+    <span class="trust-item" data-tr="Kehanet değil, gözlem" data-en="Not prophecy, observation">Kehanet değil, gözlem</span>
+    <span class="trust-dot" aria-hidden="true">·</span>
+    <span class="trust-item" data-tr="Yılların deneyimi" data-en="Years of practice">Yılların deneyimi</span>
+    <span class="trust-dot" aria-hidden="true">·</span>
+    <span class="trust-item" data-tr="48 saat içinde teslim" data-en="Delivered in 48 hours">48 saat içinde teslim</span>
+    <span class="trust-dot" aria-hidden="true">·</span>
+    <span class="trust-item" data-tr="Derinlik, sonsuz" data-en="Endless depth">Derinlik, sonsuz</span>
+  </div>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero" data-zone="light">
+  <div class="hero-mark" aria-hidden="true">
+    <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.5" style="color:var(--copper)"/>
+      <circle cx="20" cy="20" r="2" fill="currentColor" style="color:var(--copper)"/>
+      <line x1="20" y1="2" x2="20" y2="8" stroke="currentColor" stroke-width="0.8" style="color:var(--copper)"/>
+      <line x1="20" y1="32" x2="20" y2="38" stroke="currentColor" stroke-width="0.8" style="color:var(--copper)"/>
+      <line x1="2" y1="20" x2="8" y2="20" stroke="currentColor" stroke-width="0.8" style="color:var(--copper)"/>
+      <line x1="32" y1="20" x2="38" y2="20" stroke="currentColor" stroke-width="0.8" style="color:var(--copper)"/>
+    </svg>
+  </div>
+
+  <div class="hero-eyebrow reveal" style="--i:0" data-tr="Psikodinamik Astroloji · Est. MMXXVI" data-en="Psychodynamic Astrology · Est. MMXXVI">Psikodinamik Astroloji · Est. MMXXVI</div>
+  <h1 class="hero-title reveal" style="--i:1">
+    <span data-tr="Sen unutursun" data-en="You forget.">Sen unutursun</span>
+    <span class="line2"><span data-tr="ama harita " data-en="The chart ">ama harita </span><em data-tr="unutmaz." data-en="does not.">unutmaz.</em></span>
+  </h1>
+  <div class="hero-divider reveal" style="--i:2"></div>
+  <p class="hero-sub reveal" style="--i:3" data-tr="Fal değil. Teselli değil. Haritan içselliğinin belgesidir — derinlik psikolojisi gözüyle okunur." data-en="Not fortune-telling. Not comfort. Your chart is a document of the interior life — read through the lens of depth psychology.">Fal değil. Teselli değil. Haritan içselliğinin belgesidir — derinlik psikolojisi gözüyle okunur.</p>
+
+  <div class="scroll-hint reveal" style="--i:5" data-tr="Aşağı kaydır" data-en="Scroll to continue">Aşağı kaydır</div>
+</section>
+
+<!-- ═══ I. TANINMA ═══ -->
+<section id="tanınma" class="chapter" data-zone="light">
+  <div class="chapter-inner">
+    <div class="tanınma-grid">
+      <div>
+        <h2 class="chapter-heading reveal" style="--i:1">
+          <span data-tr="Her kaçtığın yerde" data-en="Every escape">Her kaçtığın yerde</span><br>
+          <em data-tr="bir iz bırakmışsın." data-en="leaves a trace.">bir iz bırakmışsın.</em>
+        </h2>
+        <div class="tanınma-body">
+          <p class="reveal" style="--i:2" data-tr="Hep aynı sahne, hep aynı geri çekilme. Bu bir huy değil. Farklı yüzler, aynı film, tesadüf de değil." data-en="Same scene, same retreat. This isn't a habit. Different faces, same film — no coincidence either.">Hep aynı sahne, hep aynı geri çekilme. Bu bir huy değil. Farklı yüzler, aynı film, tesadüf de değil.</p>
+          <p class="reveal" style="--i:3" data-tr="Altında, kimse görmesin diye bastırdığın bir kırılganlık var. Onu bulmadıkça, o bir türlü sevemediğin kişiye yansıttığın bastırılmış yüzünü tanımadıkça hep aynı kavgayı verirsin." data-en="Underneath, there is a vulnerability you have buried so no one can see. Until you find it — until you recognize the face you project onto the person you cannot bring yourself to love — you keep having the same fight.">Altında, kimse görmesin diye bastırdığın bir kırılganlık var. Onu bulmadıkça, o bir türlü sevemediğin kişiye yansıttığın bastırılmış yüzünü tanımadıkça hep aynı kavgayı verirsin.</p>
+          <p class="reveal" style="--i:4" data-tr="İşte biz orada devreye giriyoruz. O cümleyi kuran açıyı buluruz. Gerisi senin işin." data-en="That is where we come in. We find the aspect that writes that sentence. The rest is yours.">İşte biz orada devreye giriyoruz. O cümleyi kuran açıyı buluruz. Gerisi senin işin.</p>
+          <p class="reveal" style="--i:5" data-tr="Şablon yok. Korku yok. Kehanet yok. Sadece sana özel, sessizce okunmuş bir metin." data-en="No templates. No fear. No prophecy. Only a text read for you alone, in silence.">Şablon yok. Korku yok. Kehanet yok. Sadece sana özel, sessizce okunmuş bir metin.</p>
+        </div>
+      </div>
+      <aside class="tanınma-side reveal" style="--i:3">
+        <blockquote class="jung-quote">
+          <p data-tr="&ldquo;Bilinçdışını bilinçli kılana kadar, o senin hayatını yönetecek — ve sen buna kader diyeceksin.&rdquo;" data-en="&ldquo;Until you make the unconscious conscious, it will direct your life and you will call it fate.&rdquo;">&ldquo;Bilinçdışını bilinçli kılana kadar, o senin hayatını yönetecek — ve sen buna kader diyeceksin.&rdquo;</p>
+          <cite>— C.G. Jung</cite>
+        </blockquote>
+        <ul class="concepts">
+          <li><div><div class="concept-title" data-tr="Derinlik Okuması" data-en="Depth Reading">Derinlik Okuması</div><div class="concept-sub" data-tr="Harita, psikolojik belge olarak" data-en="Chart as psychological document">Harita, psikolojik belge olarak</div></div></li>
+          <li><div><div class="concept-title" data-tr="Gölge Mimarisi" data-en="Shadow Architecture">Gölge Mimarisi</div><div class="concept-sub" data-tr="Kaçışın ev kurduğu yer" data-en="Where avoidance built a house">Kaçışın ev kurduğu yer</div></div></li>
+          <li><div><div class="concept-title" data-tr="Anima / Animus" data-en="Anima / Animus">Anima / Animus</div><div class="concept-sub" data-tr="İçerde taşınan, dışarıya yansıyan" data-en="The projected inner figures">İçerde taşınan, dışarıya yansıyan</div></div></li>
+          <li><div><div class="concept-title" data-tr="Kompleks Haritalama" data-en="Complex Mapping">Kompleks Haritalama</div><div class="concept-sub" data-tr="Tekrar eden duygusal takımyıldızlar" data-en="Recurring emotional constellations">Tekrar eden duygusal takımyıldızlar</div></div></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ II. SOYUNMA ═══ -->
+<section id="soyunma" class="chapter" data-zone="dark">
+  <div class="chapter-inner">
+    <h2 class="chapter-heading reveal" style="--i:1">
+      <span data-tr="Ben söylemeden bildin." data-en="You knew before you said it.">Ben söylemeden bildin.</span><br>
+      <em data-tr="Harita senden önce biliyordu." data-en="The chart knew before you.">Harita senden önce biliyordu.</em>
+    </h2>
+    <div class="soyunma-grid">
+      <div class="soyunma-item reveal" style="--i:2"><div class="s-num">01</div><div class="s-text" data-tr="Hep sen bildin." data-en="You have always been the one who knew.">Hep sen bildin.</div></div>
+      <div class="soyunma-item reveal" style="--i:3"><div class="s-num">02</div><div class="s-text" data-tr="Hiç yapmayacağın tartışmayı defalarca provaladın." data-en="You have rehearsed the argument you will never have.">Hiç yapmayacağın tartışmayı defalarca provaladın.</div></div>
+      <div class="soyunma-item reveal" style="--i:4"><div class="s-num">03</div><div class="s-text" data-tr="Kendini silmene &lsquo;anlayış&rsquo; dedin." data-en="You have called your self-erasure consideration.">Kendini silmene &lsquo;anlayış&rsquo; dedin.</div></div>
+      <div class="soyunma-item reveal" style="--i:5"><div class="s-num">04</div><div class="s-text" data-tr="Yaranı kimliğin sandın." data-en="You have mistaken your wound for your identity.">Yaranı kimliğin sandın.</div></div>
+      <div class="soyunma-item reveal" style="--i:6"><div class="s-num">05</div><div class="s-text" data-tr="Sana geri dönmeyen şeylere sadık kaldın." data-en="You have been loyal to things that were not loyal back.">Sana geri dönmeyen şeylere sadık kaldın.</div></div>
+      <div class="soyunma-item reveal" style="--i:7"><div class="s-num">06</div><div class="s-text" data-tr="Kimse &lsquo;git&rsquo; demeden önce odayı terk ettin." data-en="You keep leaving rooms before anyone can ask you to leave.">Kimse &lsquo;git&rsquo; demeden önce odayı terk ettin.</div></div>
+    </div>
+    <div class="soyunma-coda">
+      <p class="reveal" style="--i:1" data-tr="Natal harita, mahkûm olduğun değil — elinde tuttuğun malzemenin planıdır. Yerleşimler hüküm değildir; odalardır. Bazılarını hiç açmadın." data-en="The natal chart is not what you are condemned to — it is the blueprint of the material in your hands. Placements are not sentences; they are rooms. Some you have never opened.">Natal harita, mahkûm olduğun değil — elinde tuttuğun malzemenin planıdır. Yerleşimler hüküm değildir; odalardır. Bazılarını hiç açmadın.</p>
+      <p class="reveal" style="--i:2" data-tr="Buradaki okuma bir zeka gösterisi değil. Karanlık bir odada, sessizliklerini senden önce okumuş birinin yanında, acele etmeyen bir kazı çalışmasıdır." data-en="A reading here is not a performance of insight. It is an unhurried excavation, beside someone who has already read your silences.">Buradaki okuma bir zeka gösterisi değil. Karanlık bir odada, sessizliklerini senden önce okumuş birinin yanında, acele etmeyen bir kazı çalışmasıdır.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ III. TEŞHİS ═══ -->
+<section id="teshis" class="chapter" data-zone="dark">
+  <div class="chapter-inner">
+    <h2 class="chapter-heading reveal" style="--i:1">
+      <span data-tr="Kaçtığın şeyin" data-en="Here is the shape">Kaçtığın şeyin</span><br>
+      <em data-tr="şekli budur." data-en="of what you were avoiding.">şekli budur.</em>
+    </h2>
+    <p class="teshis-sub reveal" style="--i:2" data-tr="Altı rapor. Her biri bir kapı. Hangisi seni çağırıyor?" data-en="Six reports. Each one a door. Which one is calling you?">Altı rapor. Her biri bir kapı. Hangisi seni çağırıyor?</p>
+
+    <div class="readings">
+      <article class="reading reveal" style="--i:3">
+        <div class="reading-num">01</div>
+        <div>
+          <h3 class="reading-name"><em data-tr="Natal — Doğum Haritası" data-en="Natal — The Birth Chart">Natal — Doğum Haritası</em></h3>
+          <p class="reading-desc" data-tr="Kim olduğunu sorduğun ilk cevap. Gezegenler, evler, sabit yıldızlar. Haritanın tam mimarisi. Ego&rsquo;nun, persona&rsquo;nın, gölgenin nerede durduğu. Sıfırdan sana yazılmış bir metin." data-en="The first answer to who you are. Planets, houses, fixed stars. The full architecture. Where your ego, persona, and shadow sit. Written for you alone.">Kim olduğunu sorduğun ilk cevap. Gezegenler, evler, sabit yıldızlar. Haritanın tam mimarisi. Ego&rsquo;nun, persona&rsquo;nın, gölgenin nerede durduğu. Sıfırdan sana yazılmış bir metin.</p>
+          <div class="reading-feats"><span>— Tam natal çözümleme</span><span>— Gölge ve persona</span><span>— Ev &amp; gezegen açıları</span><span>— PDF, 20–25 sayfa</span></div>
+        </div>
+        <div class="reading-price">1.000 ₺</div>
+      </article>
+
+      <article class="reading reveal" style="--i:4">
+        <div class="reading-num">02</div>
+        <div>
+          <h3 class="reading-name"><em data-tr="Predictive Stack — 6 Ay" data-en="Predictive Stack — 6 Months">Predictive Stack — 6 Ay</em></h3>
+          <p class="reading-desc" data-tr="Gelecek altı ay hangi kapıyı aralar, hangisini örter. Transit kehanet değil, pencere. Nereye itildiğini, nereye çekildiğini önceden bilmek istiyorsan." data-en="Which door opens in the next six months, which one closes. Transits aren't prophecy — they are windows.">Gelecek altı ay hangi kapıyı aralar, hangisini örter. Transit kehanet değil, pencere. Nereye itildiğini, nereye çekildiğini önceden bilmek istiyorsan.</p>
+          <div class="reading-feats"><span>— Transit + progresyon</span><span>— 6 aylık zaman çizelgesi</span><span>— Kritik pencereler</span><span>— Karar noktaları</span></div>
+        </div>
+        <div class="reading-price">1.200 ₺</div>
+      </article>
+
+      <article class="reading reveal" style="--i:5">
+        <div class="reading-num">03</div>
+        <div>
+          <h3 class="reading-name"><em data-tr="Sinastri — İki Harita" data-en="Synastry — Two Charts">Sinastri — İki Harita</em></h3>
+          <p class="reading-desc" data-tr="İki harita yan yana konunca ne oluyor? Onda senin gölgeni, sende onun aradığını mı buluyorsun? Çekim nerede projeksiyon, nerede gerçek çağrı. İlişkinin gizli motoru." data-en="What happens when two charts sit side by side? Where attraction is projection, where a real call.">İki harita yan yana konunca ne oluyor? Onda senin gölgeni, sende onun aradığını mı buluyorsun? Çekim nerede projeksiyon, nerede gerçek çağrı. İlişkinin gizli motoru.</p>
+          <div class="reading-feats"><span>— İki harita karşılaştırma</span><span>— Açısal bağlantılar</span><span>— Projeksiyon kalıpları</span><span>— Kompozit yorum</span></div>
+        </div>
+        <div class="reading-price">1.500 ₺</div>
+      </article>
+
+      <article class="reading reveal" style="--i:6">
+        <div class="reading-num">04</div>
+        <div>
+          <h3 class="reading-name"><em data-tr="Draconic — Ruhun Haritası" data-en="Draconic — The Soul Chart">Draconic — Ruhun Haritası</em></h3>
+          <p class="reading-desc" data-tr="Natal haritan kim olduğunu söyler. Draconic, buraya gelirken kim olmaya söz verdiğini. Persona&rsquo;nın altındaki ruh niyeti. Üç katman: yüzey, ruh, köprü." data-en="Your natal tells who you are. Draconic tells who you promised to be. Soul intent beneath the persona.">Natal haritan kim olduğunu söyler. Draconic, buraya gelirken kim olmaya söz verdiğini. Persona&rsquo;nın altındaki ruh niyeti. Üç katman: yüzey, ruh, köprü.</p>
+          <div class="reading-feats"><span>— Natal + Draconic</span><span>— Ay düğümü ekseni</span><span>— Ruh niyeti okuması</span><span>— Köprü yorumu</span></div>
+        </div>
+        <div class="reading-price">1.500 ₺</div>
+      </article>
+
+      <article class="reading reveal" style="--i:7">
+        <div class="reading-num">05</div>
+        <div>
+          <h3 class="reading-name"><em data-tr="Odak Analizi" data-en="Focus Reading">Odak Analizi</em></h3>
+          <p class="reading-desc" data-tr="Tek bir alan, keskin çekim. İlişki, kariyer, ya da takıldığın o tekrar eden şey. Haritanın bir kapısına yakın okuma. Her şey değil — doğru şey." data-en="One area, sharp focus. Relationship, career, or that recurring thing you keep circling.">Tek bir alan, keskin çekim. İlişki, kariyer, ya da takıldığın o tekrar eden şey. Haritanın bir kapısına yakın okuma. Her şey değil — doğru şey.</p>
+          <div class="reading-feats"><span>— Tek alan derinlemesine</span><span>— Motif taraması</span><span>— Kısa ama yoğun</span><span>— PDF özet</span></div>
+        </div>
+        <div class="reading-price">600 ₺</div>
+      </article>
+
+      <article class="reading reveal" style="--i:8">
+        <div class="reading-num">06</div>
+        <div>
+          <h3 class="reading-name"><em data-tr="Tam Paket" data-en="Full Set">Tam Paket</em></h3>
+          <p class="reading-desc" data-tr="Yüzey, ruh ve zaman. Üç rapor, tek okuma. Natal + Draconic + 3 Ay Predictive. Kendin hakkında okuyacağın en eksiksiz şey." data-en="Surface, soul, and time. Three reports, one reading. Natal + Draconic + 3-Month Predictive.">Yüzey, ruh ve zaman. Üç rapor, tek okuma. Natal + Draconic + 3 Ay Predictive. Kendin hakkında okuyacağın en eksiksiz şey.</p>
+          <div class="reading-feats"><span>— Natal rapor</span><span>— Draconic ruh haritası</span><span>— 3 aylık predictive</span><span>— Birleşik sentez</span></div>
+        </div>
+        <div class="reading-price">2.000 ₺</div>
+      </article>
+    </div>
+
+    <div class="teshis-footer">
+      <div class="reveal"><div class="tf-label" data-tr="Teslimat" data-en="Delivery">Teslimat</div><div class="tf-value" data-tr="48–72 saat" data-en="48–72 hours">48–72 saat</div></div>
+      <div class="reveal" style="--i:1"><div class="tf-label" data-tr="Format" data-en="Format">Format</div><div class="tf-value" data-tr="Dijital PDF rapor" data-en="Digital PDF report">Dijital PDF rapor</div></div>
+      <div class="reveal" style="--i:2"><div class="tf-label" data-tr="Diller" data-en="Languages">Diller</div><div class="tf-value" data-tr="Türkçe · İngilizce" data-en="Turkish · English">Türkçe · İngilizce</div></div>
+      <div class="reveal" style="--i:3"><div class="tf-label" data-tr="Lansman" data-en="Launch">Lansman</div><div class="tf-value" data-tr="İlk 50 raporda bu fiyatlar" data-en="Prices for the first 50 reports">İlk 50 raporda bu fiyatlar</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ IV. DAVET ═══ -->
+<section id="davet" class="chapter" data-zone="dark">
+  <div class="chapter-inner">
+    <div class="davet-grid">
+      <div>
+        <h2 class="chapter-heading reveal" style="--i:1">
+          <em data-tr="Haritanı" data-en="Bring">Haritanı</em><br>
+          <span data-tr="okuyalım." data-en="the chart.">okuyalım.</span>
+        </h2>
+        <p class="davet-body reveal" style="--i:2" data-tr="Bilgilerini gönder. İstediğin rapor türünü seç. Çalışırken etrafında döndüğün soruyu bir cümleyle yazabilirsin — gerisi benim işim." data-en="Send your details. Pick the reading you want. If there is a question you keep circling, write it in one line — the rest is mine.">Bilgilerini gönder. İstediğin rapor türünü seç. Çalışırken etrafında döndüğün soruyu bir cümleyle yazabilirsin — gerisi benim işim.</p>
+
+        <div class="davet-meta reveal" style="--i:3">
+          <div class="davet-meta-row"><div class="davet-meta-label" data-tr="Teslimat" data-en="Delivery">Teslimat</div><div class="davet-meta-value" data-tr="48–72 saat içinde" data-en="Within 48–72 hours">48–72 saat içinde</div></div>
+          <div class="davet-meta-row"><div class="davet-meta-label" data-tr="İkili indirim" data-en="Dual discount">İkili indirim</div><div class="davet-meta-value" data-tr="İki harita birden · %10" data-en="Two charts · 10% off">İki harita birden · %10</div></div>
+          <div class="davet-meta-row"><div class="davet-meta-label" data-tr="Ödeme" data-en="Payment">Ödeme</div><div class="davet-meta-value" data-tr="Sipariş sonrası bağlantıyla" data-en="After confirmation, via link">Sipariş sonrası bağlantıyla</div></div>
+          <div class="davet-meta-row"><div class="davet-meta-label" data-tr="Gizlilik" data-en="Confidentiality">Gizlilik</div><div class="davet-meta-value" data-tr="Her şey özel kalır" data-en="Everything remains private">Her şey özel kalır</div></div>
+        </div>
+      </div>
+
+      <form class="davet-form reveal" style="--i:2" id="orderForm" action="https://formspree.io/f/xqewbaon" method="POST">
+        <input type="hidden" name="_subject" value="HOV! — Yeni Rapor Siparişi">
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" data-tr="İsim veya Takma Ad" data-en="Name or Pseudonym">İsim veya Takma Ad</label>
+            <input class="form-input" type="text" name="name" required placeholder="Eylül E.">
+          </div>
+          <div class="form-field">
+            <label class="form-label" data-tr="E-posta" data-en="Email">E-posta</label>
+            <input class="form-input" type="email" name="email" required placeholder="eposta@adres.com">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" data-tr="Rapor Türü" data-en="Report Type">Rapor Türü</label>
+          <div class="report-options">
+            <label class="report-option"><input type="checkbox" name="report_type[]" value="natal"><span data-tr="Natal" data-en="Natal">Natal</span></label>
+            <label class="report-option"><input type="checkbox" name="report_type[]" value="predictive"><span data-tr="Predictive 6 Ay" data-en="Predictive 6M">Predictive 6 Ay</span></label>
+            <label class="report-option"><input type="checkbox" name="report_type[]" value="sinastri"><span data-tr="Sinastri" data-en="Synastry">Sinastri</span></label>
+            <label class="report-option"><input type="checkbox" name="report_type[]" value="draconic"><span data-tr="Draconic" data-en="Draconic">Draconic</span></label>
+            <label class="report-option"><input type="checkbox" name="report_type[]" value="odak"><span data-tr="Odak" data-en="Focus">Odak</span></label>
+            <label class="report-option"><input type="checkbox" name="report_type[]" value="tam_paket"><span data-tr="Tam Paket" data-en="Full Set">Tam Paket</span></label>
+          </div>
+          <p class="report-hint" data-tr="Birden fazla rapor seçebilirsin. İki harita birden alırsan %10 indirim uygulanır." data-en="You can select more than one report. Two charts together get 10% off.">Birden fazla rapor seçebilirsin. İki harita birden alırsan %10 indirim uygulanır.</p>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" data-tr="Doğum Tarihi" data-en="Birth Date">Doğum Tarihi</label>
+            <input class="form-input" type="text" name="birth_date" required placeholder="GG.AA.YYYY">
+          </div>
+          <div class="form-field">
+            <label class="form-label" data-tr="Doğum Saati (tam)" data-en="Birth Time (exact)">Doğum Saati (tam)</label>
+            <input class="form-input" type="text" name="birth_time" placeholder="SS:DD">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" data-tr="Doğum Yeri" data-en="Birth Location">Doğum Yeri</label>
+          <input class="form-input" type="text" name="birth_place" required placeholder="Şehir, Ülke">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" data-tr="Etrafında Döndüğün Soru (isteğe bağlı)" data-en="What you have been circling (optional)">Etrafında Döndüğün Soru (isteğe bağlı)</label>
+          <textarea class="form-textarea" name="note" placeholder="Bir cümle yeterli..."></textarea>
+        </div>
+
+        <button class="btn-submit" type="submit" data-tr="Analizi Başlat · →" data-en="Initiate Analysis · →">Analizi Başlat · →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand"><span class="hov">HOV!</span> &nbsp;<em>AL 6.0 Studio</em></div>
+      <div class="footer-tagline" data-tr="Psikodinamik Astroloji · İstanbul" data-en="Psychodynamic Astrology · Istanbul">Psikodinamik Astroloji · İstanbul</div>
+    </div>
+    <div class="footer-right">
+      <div data-tr="Özel pratik. Sınırlı sayıda rapor.<br>İletişim: e-posta ile." data-en="Private practice. Limited reports.<br>Contact: by email only.">Özel pratik. Sınırlı sayıda rapor.<br>İletişim: e-posta ile.</div>
+      <div style="margin-top:0.7rem;font-size:0.85rem;opacity:0.75;" data-tr="Uzun soluklu ya da kurumsal çalışmalar için de aynı kanal: e-posta." data-en="For long-term or institutional work, same channel: email.">Uzun soluklu ya da kurumsal çalışmalar için de aynı kanal: e-posta.</div>
+      <div class="footer-social">
+        <a href="https://medium.com/@cevikgun" target="_blank" rel="noopener">Medium</a>
+        <a href="https://substack.com/@al60studio" target="_blank" rel="noopener">Substack</a>
+        <a href="https://www.instagram.com/hovstudio.al" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy" data-tr="© MMXXVI · HOV! Studio" data-en="© MMXXVI · HOV! Studio">© MMXXVI · HOV! Studio</div>
+    <div class="footer-sign">herşey olucağına varır!</div>
+    <div class="footer-motto" data-tr="&ldquo;Happens On Vibe.&rdquo;" data-en="&ldquo;Happens On Vibe.&rdquo;">&ldquo;Happens On Vibe.&rdquo;</div>
+  </div>
+</footer>
+
+<script>
+/* ═══ LANG TOGGLE ═══ */
+function setLang(lang) {
+  document.getElementById('btnTR').classList.toggle('active', lang === 'tr');
+  document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-tr]').forEach(el => {
+    const t = el.getAttribute('data-' + lang);
+    if (t !== null && t !== undefined) {
+      if (t.includes('<')) el.innerHTML = t; else el.textContent = t;
+    }
+  });
+}
+
+/* ═══ NAV SCROLL ═══ */
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+}, {passive:true});
+
+/* ═══ ZONE OBSERVER — light ↔ dark transition ═══ */
+const zoneObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const zone = e.target.dataset.zone;
+      if (zone) document.body.dataset.zone = zone;
+    }
+  });
+}, { threshold: 0.35, rootMargin: '-10% 0px -40% 0px' });
+document.querySelectorAll('[data-zone]').forEach(el => zoneObserver.observe(el));
+
+/* ═══ REVEAL OBSERVER ═══ */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('is-in');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ═══ CURSOR TRAIL — kayan yıldız ═══ */
+(function() {
+  if (window.matchMedia('(hover: none), (pointer: coarse)').matches) return;
+
+  let lastX = 0, lastY = 0;
+  let throttle = 0;
+
+  function spawnStar(x, y) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = x + 'px';
+    star.style.top = y + 'px';
+    const driftX = (Math.random() * 30 - 15).toFixed(1) + 'px';
+    const driftY = (Math.random() * 20 + 8).toFixed(1) + 'px';
+    const rot = (Math.random() * 180 + 45).toFixed(0) + 'deg';
+    star.style.setProperty('--drift-x', driftX);
+    star.style.setProperty('--drift-y', driftY);
+    star.style.setProperty('--rot', rot);
+
+    // Küçük boyut varyasyonu
+    const size = 2 + Math.random() * 3;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+
+    document.body.appendChild(star);
+    setTimeout(() => star.remove(), 1300);
+  }
+
+  document.addEventListener('mousemove', (e) => {
+    const now = performance.now();
+    if (now - throttle < 35) return;  // max ~28fps spawn rate
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (dist < 10) return;
+    spawnStar(e.clientX, e.clientY);
+    lastX = e.clientX; lastY = e.clientY; throttle = now;
+  }, { passive: true });
+})();
+
+/* ═══ CHECKBOX VISUAL STATE — multi-select ═══ */
+document.querySelectorAll('.report-option input').forEach(input => {
+  input.addEventListener('change', () => {
+    input.parentElement.classList.toggle('checked', input.checked);
+  });
+});
+
+/* ═══ FORM SUBMIT — Ajax (Formspree) ═══ */
+(function() {
+  const form = document.getElementById('orderForm');
+  if (!form) return;
+
+  const labels = {
+    tr: {
+      sending: 'Gönderiliyor...',
+      success_title: 'Siparişin alındı.',
+      success_body: '24 saat içinde ödeme bilgisi e-posta ile sana ulaşacak. Rapor 48–72 saat içinde gelir.',
+      success_note: 'Spam klasörüne de bakmayı unutma.',
+      error: 'Form gönderilemedi. Tekrar dene ya da e-posta ile yaz.',
+      no_selection: 'Lütfen en az bir rapor türü seç.'
+    },
+    en: {
+      sending: 'Sending...',
+      success_title: 'Your order is in.',
+      success_body: 'Within 24 hours you will receive payment details by email. The reading arrives in 48–72 hours.',
+      success_note: 'Check your spam folder too.',
+      error: 'Form could not be sent. Try again, or reach out by email.',
+      no_selection: 'Please select at least one report type.'
+    }
+  };
+
+  function currentLang() {
+    return document.documentElement.lang === 'en' ? 'en' : 'tr';
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const lang = currentLang();
+    const L = labels[lang];
+
+    // En az bir rapor türü seçili mi kontrol et
+    const checked = form.querySelectorAll('input[name="report_type[]"]:checked');
+    if (checked.length === 0) {
+      alert(L.no_selection);
+      return;
+    }
+
+    const btn = form.querySelector('.btn-submit');
+    const originalHTML = btn.innerHTML;
+    btn.textContent = L.sending;
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.innerHTML = `
+          <div class="form-success">
+            <div class="form-success-mark">✦</div>
+            <h3 data-tr="${labels.tr.success_title}" data-en="${labels.en.success_title}">${L.success_title}</h3>
+            <p data-tr="${labels.tr.success_body}" data-en="${labels.en.success_body}">${L.success_body}</p>
+            <p class="form-success-note" data-tr="${labels.tr.success_note}" data-en="${labels.en.success_note}">${L.success_note}</p>
+          </div>
+        `;
+      } else {
+        throw new Error('submit_failed');
+      }
+    } catch (err) {
+      btn.innerHTML = originalHTML;
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      alert(L.error);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
