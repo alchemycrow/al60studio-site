@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOV! · Gökyüzü Notları</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inconsolata:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          #ede8d5;
+  --bg2:         #e4ddc8;
+  --bg3:         #d8d0b8;
+  --haki:        #2a3d4a;
+  --haki-petrol: #1e2e3a;
+  --haki-mid:    #3a5468;
+  --haki-dim:    #6a8a9a;
+  --haki-dimmer: #a0b8c4;
+  --petrol:      #1a2e3a;
+  --gold:        #9a7218;
+  --gold-bright: #c49020;
+  --crimson:     #8b1a1a;
+  --crimson-dim: #b04040;
+  --crimson-pale:rgba(139,26,26,0.08);
+  --ink:         #1e2e38;
+  --line:        rgba(42,61,74,0.14);
+  --line-solid:  rgba(42,61,74,0.25);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(138,92,10,0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 100%, rgba(42,61,74,0.07) 0%, transparent 40%),
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(42,61,74,0.04) 40px);
+  pointer-events: none; z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: radial-gradient(circle, rgba(42,61,74,0.15) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none; z-index: 0; opacity: 0.5;
+}
+
+nav, section, footer, header, main { position: relative; z-index: 2; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3rem;
+  border-bottom: 2px solid var(--crimson);
+  background: var(--bg);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 2px 20px rgba(26,46,58,0.15); }
+.nav-logo {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.82rem; font-weight: 700;
+  letter-spacing: 0.16em; color: var(--gold-bright);
+  text-decoration: none; text-transform: uppercase;
+}
+.nav-logo .hov { color: var(--crimson); }
+.nav-right { display: flex; align-items: center; gap: 2.5rem; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.12em; color: var(--haki-mid);
+  text-decoration: none; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--crimson); }
+
+/* ── BLOG HEADER ── */
+.blog-header {
+  padding: 9rem 3rem 4rem;
+  background: linear-gradient(180deg, #1a2e2a 0%, #1a2420 60%, var(--bg) 100%);
+  position: relative; overflow: hidden;
+}
+.blog-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(154,114,24,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(139,26,26,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+.blog-header-inner { max-width: 900px; position: relative; }
+.blog-eyebrow {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--gold-bright); opacity: 0.85;
+  margin-bottom: 1rem;
+}
+.blog-title {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 300; line-height: 1.1;
+  color: #ede8d5;
+  margin-bottom: 1rem;
+}
+.blog-title em { color: var(--gold-bright); font-style: italic; }
+.blog-desc {
+  font-size: 1.1rem; font-weight: 300;
+  color: rgba(237,232,213,0.65);
+  max-width: 560px; line-height: 1.7;
+}
+
+/* ── FİLTRE BAR ── */
+.filter-bar {
+  padding: 1.8rem 3rem;
+  border-bottom: 1px solid var(--line-solid);
+  display: flex; align-items: center; gap: 1rem;
+  flex-wrap: wrap;
+  background: var(--bg);
+}
+.filter-label {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--haki-dim); margin-right: 0.5rem;
+}
+.filter-btn {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--line-solid);
+  background: transparent; color: var(--haki-mid);
+  cursor: pointer; transition: all 0.2s;
+}
+.filter-btn:hover { border-color: var(--crimson); color: var(--crimson); }
+.filter-btn.active { background: var(--crimson); color: var(--bg); border-color: var(--crimson); }
+.post-count {
+  margin-left: auto;
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.65rem; color: var(--haki-dim);
+  letter-spacing: 0.1em;
+}
+
+/* ── BLOG GRID ── */
+.blog-main {
+  max-width: 1200px; margin: 0 auto;
+  padding: 3rem 3rem 6rem;
+}
+
+/* Featured post */
+.post-featured {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; margin-bottom: 4rem;
+  border: 1px solid var(--line-solid);
+  cursor: pointer; transition: box-shadow 0.3s;
+}
+.post-featured:hover { box-shadow: 0 8px 40px rgba(26,46,58,0.15); }
+.post-featured .post-visual {
+  background: linear-gradient(135deg, #1a2e2a 0%, #0d1a22 100%);
+  min-height: 320px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.post-featured .post-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 40% 50%, rgba(154,114,24,0.25) 0%, transparent 65%);
+}
+.post-visual-glyph {
+  font-size: 5rem; opacity: 0.35; color: var(--gold-bright);
+  position: relative; z-index: 1;
+  text-shadow: 0 0 60px rgba(196,144,32,0.4);
+}
+.post-featured .post-body {
+  padding: 2.5rem 2.8rem;
+  display: flex; flex-direction: column; justify-content: center;
+  background: var(--bg2);
+}
+.post-tag {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--crimson); margin-bottom: 0.8rem;
+}
+.post-featured .post-title {
+  font-size: 1.7rem; font-weight: 400; line-height: 1.25;
+  color: var(--haki-petrol); margin-bottom: 1rem;
+}
+.post-featured .post-title em { font-style: italic; color: var(--gold); }
+.post-excerpt {
+  font-size: 0.96rem; font-weight: 300;
+  color: var(--haki-mid); line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+.post-meta {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.62rem; color: var(--haki-dim);
+  letter-spacing: 0.1em;
+  display: flex; align-items: center; gap: 1rem;
+}
+.post-meta-dot { color: var(--crimson); }
+.post-read-link {
+  display: inline-block; margin-top: 1.4rem;
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--crimson); text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.post-read-link:hover { border-color: var(--crimson); }
+
+/* Post grid */
+.posts-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; background: var(--line-solid);
+  border: 1px solid var(--line-solid);
+}
+.post-card {
+  background: var(--bg);
+  padding: 2rem 2rem 1.8rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  display: flex; flex-direction: column;
+}
+.post-card:hover { background: var(--bg2); }
+.post-card .post-visual-mini {
+  height: 120px;
+  background: linear-gradient(135deg, #1a2e2a 0%, #0d1a22 100%);
+  display: flex; align-items: center; justify-content: center;
+  margin: -2rem -2rem 1.5rem;
+  position: relative; overflow: hidden;
+}
+.post-card .post-visual-mini::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(154,114,24,0.2) 0%, transparent 70%);
+}
+.post-visual-mini .mini-glyph {
+  font-size: 2.4rem; color: var(--gold-bright);
+  opacity: 0.5; position: relative; z-index: 1;
+}
+.post-card .post-title {
+  font-size: 1.15rem; font-weight: 400; line-height: 1.3;
+  color: var(--haki-petrol); margin-bottom: 0.7rem;
+  flex: 1;
+}
+.post-card .post-title em { font-style: italic; color: var(--gold); }
+.post-card .post-excerpt {
+  font-size: 0.88rem; color: var(--haki-dim);
+  line-height: 1.6; margin-bottom: 1.2rem;
+  display: -webkit-box; -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.post-card .post-meta { margin-top: auto; }
+
+/* Sayfalama */
+.pagination {
+  display: flex; align-items: center;
+  justify-content: center; gap: 0.5rem;
+  margin-top: 3rem; padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+.page-btn {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line-solid);
+  background: transparent; color: var(--haki-mid);
+  cursor: pointer; transition: all 0.2s;
+}
+.page-btn:hover, .page-btn.active {
+  background: var(--haki-petrol); color: var(--bg);
+  border-color: var(--haki-petrol);
+}
+
+/* Boş durum */
+.empty-state {
+  text-align: center; padding: 5rem 2rem;
+  color: var(--haki-dim); grid-column: 1/-1;
+}
+.empty-glyph { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+.empty-state p { font-family: 'Inconsolata', monospace; font-size: 0.75rem; letter-spacing: 0.15em; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--petrol); color: rgba(237,232,213,0.7);
+  padding: 2.5rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 2px solid var(--crimson);
+  font-family: 'Inconsolata', monospace; font-size: 0.68rem;
+  letter-spacing: 0.12em;
+}
+.footer-logo { color: var(--gold-bright); font-weight: 700; }
+.footer-links { display: flex; gap: 2rem; list-style: none; }
+.footer-links a { color: inherit; text-decoration: none; transition: color 0.2s; text-transform: uppercase; letter-spacing: 0.15em; }
+.footer-links a:hover { color: var(--gold-bright); }
+
+/* ══════════════════════════════════════════════
+   ADMIN PANEL
+══════════════════════════════════════════════ */
+.admin-overlay {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: rgba(10,18,22,0.92); backdrop-filter: blur(4px);
+  align-items: center; justify-content: center;
+}
+.admin-overlay.open { display: flex; }
+.admin-panel {
+  background: var(--bg); width: 640px; max-width: 95vw;
+  max-height: 90vh; overflow-y: auto;
+  border: 2px solid var(--crimson);
+  padding: 2.5rem;
+  position: relative;
+}
+.admin-close {
+  position: absolute; top: 1rem; right: 1.2rem;
+  font-family: 'Inconsolata', monospace; font-size: 0.8rem;
+  background: none; border: none; color: var(--haki-dim);
+  cursor: pointer; letter-spacing: 0.1em;
+}
+.admin-close:hover { color: var(--crimson); }
+.admin-title {
+  font-family: 'Inconsolata', monospace; font-size: 0.72rem;
+  font-weight: 700; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--crimson);
+  margin-bottom: 2rem;
+}
+.admin-section { margin-bottom: 2rem; }
+.admin-section-title {
+  font-family: 'Inconsolata', monospace; font-size: 0.65rem;
+  font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--haki-dim); border-bottom: 1px solid var(--line-solid);
+  padding-bottom: 0.5rem; margin-bottom: 1.2rem;
+}
+
+/* Form alanları */
+.adm-label {
+  display: block; font-family: 'Inconsolata', monospace;
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--haki-mid);
+  margin-bottom: 0.4rem; margin-top: 1rem;
+}
+.adm-input, .adm-select, .adm-textarea {
+  width: 100%; padding: 0.6rem 0.8rem;
+  background: var(--bg2); border: 1px solid var(--line-solid);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1rem; outline: none;
+  transition: border-color 0.2s;
+}
+.adm-input:focus, .adm-select:focus, .adm-textarea:focus {
+  border-color: var(--crimson);
+}
+.adm-textarea { min-height: 160px; resize: vertical; }
+.adm-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.adm-btn {
+  font-family: 'Inconsolata', monospace; font-size: 0.7rem;
+  font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0.7rem 1.6rem; border: none;
+  background: var(--crimson); color: var(--bg);
+  cursor: pointer; transition: background 0.2s; margin-top: 1.5rem;
+}
+.adm-btn:hover { background: var(--haki-petrol); }
+.adm-btn-del {
+  background: transparent; color: var(--crimson);
+  border: 1px solid var(--crimson); padding: 0.3rem 0.7rem;
+  font-family: 'Inconsolata', monospace; font-size: 0.6rem;
+  letter-spacing: 0.1em; cursor: pointer; transition: all 0.2s;
+}
+.adm-btn-del:hover { background: var(--crimson); color: var(--bg); }
+
+/* Yazı listesi admin */
+.adm-post-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.adm-post-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.7rem 0.9rem; background: var(--bg2);
+  border-left: 3px solid var(--line-solid);
+}
+.adm-post-item-title {
+  font-size: 0.9rem; color: var(--haki-petrol);
+}
+.adm-post-item-meta {
+  font-family: 'Inconsolata', monospace; font-size: 0.6rem;
+  color: var(--haki-dim); letter-spacing: 0.08em;
+}
+.adm-msg {
+  font-family: 'Inconsolata', monospace; font-size: 0.65rem;
+  letter-spacing: 0.1em; padding: 0.6rem 0.8rem;
+  margin-top: 0.8rem; display: none;
+}
+.adm-msg.ok { background: rgba(42,61,42,0.15); color: #2a5a2a; border-left: 3px solid #2a5a2a; }
+.adm-msg.err { background: rgba(139,26,26,0.1); color: var(--crimson); border-left: 3px solid var(--crimson); }
+
+/* Şifre ekranı */
+.admin-auth {
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.adm-auth-title {
+  font-family: 'Inconsolata', monospace; font-size: 0.65rem;
+  font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--haki-mid); margin-bottom: 0.5rem;
+}
+
+/* ── POST MODAL (okuma) ── */
+.post-modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 400;
+  background: rgba(10,18,22,0.88); backdrop-filter: blur(3px);
+  overflow-y: auto; padding: 5rem 1rem 3rem;
+}
+.post-modal-overlay.open { display: block; }
+.post-modal {
+  max-width: 720px; margin: 0 auto;
+  background: var(--bg); border: 1px solid var(--line-solid);
+  padding: 3.5rem;
+  position: relative;
+}
+.post-modal-close {
+  position: fixed; top: 1.5rem; right: 2rem;
+  font-family: 'Inconsolata', monospace; font-size: 0.72rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  background: var(--bg); border: 1px solid var(--line-solid);
+  color: var(--haki-mid); padding: 0.4rem 0.9rem;
+  cursor: pointer; z-index: 401; transition: all 0.2s;
+}
+.post-modal-close:hover { border-color: var(--crimson); color: var(--crimson); }
+.post-modal-tag {
+  font-family: 'Inconsolata', monospace; font-size: 0.62rem;
+  font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--crimson); margin-bottom: 0.8rem;
+}
+.post-modal-title {
+  font-size: 2.2rem; font-weight: 400; line-height: 1.2;
+  color: var(--haki-petrol); margin-bottom: 0.5rem;
+}
+.post-modal-title em { font-style: italic; color: var(--gold); }
+.post-modal-meta {
+  font-family: 'Inconsolata', monospace; font-size: 0.62rem;
+  color: var(--haki-dim); letter-spacing: 0.1em;
+  margin-bottom: 2.5rem; padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.post-modal-body {
+  font-size: 1.05rem; font-weight: 300; line-height: 1.8;
+  color: var(--ink);
+}
+.post-modal-body p { margin-bottom: 1.2rem; }
+.post-modal-body h2 {
+  font-size: 1.4rem; font-weight: 400; color: var(--haki-petrol);
+  margin: 2rem 0 0.8rem; font-style: italic;
+}
+.post-modal-body strong { font-weight: 600; }
+.post-modal-sniper {
+  margin-top: 2.5rem; padding: 1.5rem 2rem;
+  border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold);
+  font-style: italic; font-size: 1.15rem;
+  color: var(--gold); text-align: center; line-height: 1.4;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .blog-header { padding: 7rem 1.5rem 3rem; }
+  .filter-bar { padding: 1.2rem 1.5rem; }
+  .blog-main { padding: 2rem 1.5rem 4rem; }
+  .post-featured { grid-template-columns: 1fr; }
+  .post-featured .post-visual { min-height: 200px; }
+  .posts-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+  .admin-panel { padding: 2rem 1.5rem; }
+  .post-modal { padding: 2rem 1.5rem; }
+  .adm-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo"><span class="hov">HOV!</span> · <span style="color:var(--gold-bright)">AL 6.0 Studio</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="index.html#about">Stüdyo</a></li>
+      <li><a href="index.html#reports">Raporlar</a></li>
+      <li><a href="hov_blog.html" class="active">Yazılar</a></li>
+      <li><a href="index.html#order">Sipariş</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── BLOG HEADER ── -->
+<header class="blog-header">
+  <div class="blog-header-inner">
+    <p class="blog-eyebrow">HOV! · AL 6.0 Studio · Gökyüzü Notları</p>
+    <h1 class="blog-title">
+      Gökyüzü<br><em>konuşuyor.</em>
+    </h1>
+    <p class="blog-desc">Mundane analizler, natal perspektifler, dönem notları. Kehanet değil — gözlem.</p>
+  </div>
+</header>
+
+<!-- ── FİLTRE BAR ── -->
+<div class="filter-bar" id="filterBar">
+  <span class="filter-label">Kategori ·</span>
+  <button class="filter-btn active" onclick="filterPosts('tümü')">Tümü</button>
+  <button class="filter-btn" onclick="filterPosts('Mundane')">Mundane</button>
+  <button class="filter-btn" onclick="filterPosts('Natal')">Natal</button>
+  <button class="filter-btn" onclick="filterPosts('Tahmin')">Tahmin</button>
+  <button class="filter-btn" onclick="filterPosts('Gökyüzü Notu')">Gökyüzü Notu</button>
+  <span class="post-count" id="postCount">— yazı</span>
+</div>
+
+<!-- ── ANA İÇERİK ── -->
+<main class="blog-main" id="blogMain">
+  <!-- JS ile doldurulur -->
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">HOV! · AL 6.0 Studio</div>
+  <ul class="footer-links">
+    <li><a href="https://instagram.com/HOV60Studio" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a href="index.html#order">Sipariş</a></li>
+  </ul>
+  <div style="font-size:0.62rem; color:rgba(237,232,213,0.4)">© 2026 HOV!</div>
+</footer>
+
+<!-- ── ADMIN BUTONU (sağ alt) ── -->
+<button id="adminTrigger" onclick="openAdminAuth()" style="
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 300;
+  font-family: 'Inconsolata', monospace; font-size: 0.6rem;
+  font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0.5rem 0.9rem;
+  background: transparent; border: 1px solid var(--line-solid);
+  color: var(--haki-dim); cursor: pointer; opacity: 0.5;
+  transition: all 0.2s;
+" onmouseenter="this.style.opacity='1';this.style.borderColor='var(--crimson)';this.style.color='var(--crimson)'"
+   onmouseleave="this.style.opacity='0.5';this.style.borderColor='var(--line-solid)';this.style.color='var(--haki-dim)'">
+  ⚙ Admin
+</button>
+
+<!-- ── ADMIN OVERLAY ── -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel">
+    <button class="admin-close" onclick="closeAdmin()">✕ Kapat</button>
+
+    <!-- Şifre ekranı -->
+    <div id="adminAuth">
+      <p class="admin-title">⚙ Admin Girişi</p>
+      <div class="admin-auth">
+        <p class="adm-auth-title">Yönetici Şifresi</p>
+        <input class="adm-input" type="password" id="adminPass" placeholder="••••••••"
+               onkeydown="if(event.key==='Enter') checkAdminPass()">
+        <button class="adm-btn" onclick="checkAdminPass()">Giriş →</button>
+        <div class="adm-msg err" id="authErr">Yanlış şifre.</div>
+      </div>
+    </div>
+
+    <!-- Admin paneli (şifre sonrası) -->
+    <div id="adminContent" style="display:none">
+      <p class="admin-title">⚙ İçerik Yönetimi</p>
+
+      <!-- Yeni yazı formu -->
+      <div class="admin-section">
+        <p class="admin-section-title">Yeni Yazı Ekle</p>
+        <label class="adm-label">Başlık</label>
+        <input class="adm-input" type="text" id="newTitle" placeholder="Nisan 2026 — Devletin DNA'sı">
+        <div class="adm-row">
+          <div>
+            <label class="adm-label">Kategori</label>
+            <select class="adm-select" id="newCat">
+              <option value="Mundane">Mundane</option>
+              <option value="Natal">Natal</option>
+              <option value="Tahmin">Tahmin</option>
+              <option value="Gökyüzü Notu">Gökyüzü Notu</option>
+            </select>
+          </div>
+          <div>
+            <label class="adm-label">İkon (sembol)</label>
+            <select class="adm-select" id="newIcon">
+              <option value="◈">◈ — Mundane</option>
+              <option value="⚜">⚜ — Resmi</option>
+              <option value="☽">☽ — Ay</option>
+              <option value="♃">♃ — Jüpiter</option>
+              <option value="♄">♄ — Satürn</option>
+              <option value="⊕">⊕ — Dünya</option>
+              <option value="✦">✦ — Yıldız</option>
+            </select>
+          </div>
+        </div>
+        <label class="adm-label">Özet (kart açıklaması)</label>
+        <input class="adm-input" type="text" id="newExcerpt" placeholder="Kısa açıklama — 1-2 cümle">
+        <label class="adm-label">İçerik (tam yazı)</label>
+        <textarea class="adm-textarea" id="newBody" placeholder="Yazı içeriği... Paragrafları boş satırla ayırın.&#10;&#10;## Alt başlık için ## kullanın.&#10;&#10;**Kalın** için çift yıldız."></textarea>
+        <label class="adm-label">Sniper Shot (kapanış cümlesi — opsiyonel)</label>
+        <input class="adm-input" type="text" id="newSniper" placeholder="Tek cümle. Sert. Bitirici.">
+        <div class="adm-row" style="margin-top:1rem">
+          <div>
+            <label class="adm-label">Okuma Süresi (dk)</label>
+            <input class="adm-input" type="number" id="newReadTime" value="4" min="1" max="30">
+          </div>
+          <div>
+            <label class="adm-label">Öne Çıkar?</label>
+            <select class="adm-select" id="newFeatured">
+              <option value="0">Hayır</option>
+              <option value="1">Evet — Featured</option>
+            </select>
+          </div>
+        </div>
+        <button class="adm-btn" onclick="addPost()">Yazıyı Yayınla →</button>
+        <div class="adm-msg ok" id="addMsg">Yazı eklendi. ✓</div>
+        <div class="adm-msg err" id="addErr">Başlık ve içerik zorunlu.</div>
+      </div>
+
+      <!-- Mevcut yazılar -->
+      <div class="admin-section">
+        <p class="admin-section-title">Mevcut Yazılar</p>
+        <div class="adm-post-list" id="admPostList"></div>
+        <div style="margin-top:1rem; display:flex; gap:0.8rem; flex-wrap:wrap;">
+          <button class="adm-btn" onclick="exportPosts()" style="background:var(--haki-petrol)">Dışa Aktar (JSON) →</button>
+          <label class="adm-btn" style="cursor:pointer; background:var(--haki-mid)">
+            JSON İçe Aktar
+            <input type="file" accept=".json" onchange="importPosts(event)" style="display:none">
+          </label>
+        </div>
+        <div class="adm-msg ok" id="exportMsg">JSON indirildi.</div>
+        <div class="adm-msg ok" id="importMsg">İçe aktarıldı.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── POST OKUMA MODALI ── -->
+<div class="post-modal-overlay" id="postModal">
+  <button class="post-modal-close" onclick="closePostModal()">✕ Geri</button>
+  <div class="post-modal">
+    <div class="post-modal-tag" id="modalTag"></div>
+    <h1 class="post-modal-title" id="modalTitle"></h1>
+    <div class="post-modal-meta" id="modalMeta"></div>
+    <div class="post-modal-body" id="modalBody"></div>
+    <div class="post-modal-sniper" id="modalSniper" style="display:none"></div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════
+// VERİ KATMANI — localStorage tabanlı
+// ════════════════════════════════════════════
+const STORE_KEY  = 'hov_blog_posts';
+const ADMIN_HASH = 'takvacore2026'; // şifre — admin değiştirebilir
+
+function getPosts() {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); }
+  catch { return []; }
+}
+function savePosts(posts) {
+  localStorage.setItem(STORE_KEY, JSON.stringify(posts));
+}
+
+// Demo yazılar — ilk kez açılırsa ekle
+function seedDemoPosts() {
+  if (getPosts().length > 0) return;
+  const demos = [
+    {
+      id: 'demo1',
+      title: 'Nisan 2026 — Devletin DNA\'sı Yeniden Yazılıyor',
+      category: 'Mundane',
+      icon: '◈',
+      excerpt: 'Plüton Güneş\'e kare, Satürn Yükselen\'e kare, Mars kapıda. Türkiye\'nin natal haritası bu kadar yoğun transit baskısını 1939\'dan bu yana görmemişti.',
+      body: 'Bir ülkenin natal haritasında Plüton Güneş\'e kare oluşturduğunda, devletin kimliği sanki ocağa konmuş çinko gibi erimeye başlar.\n\n2026 Nisan\'ı, tam da böyle bir eritme ayı. Türkiye Cumhuriyeti\'nin astrolojik anatomisi, 1939-1941\'deki o karanlık yıllardan bu yana hiç bu kadar yoğun bir transformasyon baskısına maruz kalmamıştı.\n\n## Plüton\'un Sessiz Devrimi\n\n7 Nisan\'da exact olan Plüton karesi (orb 0.08°) ayın en sert darbesi. EWMA momentum değeri -0.037 — transit tepesinde, geri dönüş yok. Tarihsel rezonans net: 1939-1941\'de de aynı açı vardı. O dönemde Türkiye büyük güçler arasında zorlu bir denge politikası izliyordu.\n\n## Satürn\'ün Üçlü Saldırısı\n\n19 Nisan\'da hem Yükselen\'e kare hem de natal Mars\'a karşıt olan Satürn, kurumsal dayanıklılığın son sınavını yapıyor. Momentum +0.608 — baskı artıyor.\n\nSatürn Koç\'ta, yani 10. evde. Devlet otoritesi, kamu itibarı, uluslararası imaj mercek altında.\n\n## Bu Ay Ne İzlenmeli\n\nKurumsal kararlar özellikle 7, 16 ve 19 Nisan\'da kritik. Medya alanında Neptün etkisiyle bilgi bulanıklığı artacak. Dış politikada Jüpiter-Plüton kavuşumu diplomatik fırsatlar yaratıyor.',
+      sniper: 'Nisan 2026, Türkiye\'nin astrolojik kimliğinin büyük operasyon geçirdiği ay — ameliyat başarılı olursa, çıkacak olan eskisinden çok daha güçlü bir yapı olacak.',
+      date: '2026-04-16',
+      readTime: 5,
+      featured: true
+    },
+    {
+      id: 'kulaga-izin-vermek',
+      title: 'Kulağa İzin Vermek',
+      category: 'Gökyüzü Notu',
+      icon: '✦',
+      excerpt: 'Onyedi yaşındaydım. Bir parçanın sonunda piyanonun son iki tuşu uzun uzun asılıydı havada. Şimdi kırkında. Aynı albüm, aynı parça. İki tuş hâlâ orada. Ama ben mi değiştim, yoksa ses mi değişti?',
+      body: 'Onyedi yaşındaydım. Truffaz\'ın *Dawn* albümünü ilk kez dinlediğimde, bir parçanın sonunda piyanonun son iki tuşu uzun uzun asılıydı havada. Sub-bass bölgesinde, sustain\'in dağıldığı, ötede duran iki nota. Başka bir şey olmuyordu. Sadece o iki tuş. İçimde bir şey kırıldı, tarif edemediğim bir şey.\n\nŞimdi kırk yaşındayım. Aynı albüm, aynı parça. İki tuş hâlâ orada.\n\nAma ben mi değiştim, yoksa ses mi değişti?\n\n## Klişenin Asıl Tanımı\n\nİnsan o anı tekrar tekrar aradığında — o ilk kırılma anını — bir şüpheye düşer: bu hâlâ gerçek mi, yoksa nostaljim mi konuşuyor? Hatta daha kötü bir soru: bu iki tuş artık **klişe** mi?\n\nKlişenin ne olduğu konusunda genelde yanılıyoruz.\n\nKlişe yaşın ürünü değil. On yıl önceki o sahne, yirmi yıl önceki o söz, otuz yıl önceki o akor; hiçbiri doğası gereği klişe değildi. Klişeyi yapan şey tekrardır, evet, ama tekrarı klişeye çeviren asıl şey **ön-bilmedir**. Duymadan önce bildiğim bir şeyin üstünden geçmek: bu klişedir. Duymadan önce bilmediğim bir şeyi ilk kez duymak: bu mucizedir. Her yaşta.\n\n## İlk Dinlemenin Kaybı, Haritanın Kazancı\n\nİlk dinleme her yaşta mucizedir. Problem şu: zihin büyüdükçe ilk dinlemeler azalır. Her şey bir şeye benzer. Bir akor duyarsın, "bu Miles Davis\'in *Kind of Blue* kalıbı" dersin. Bir cümle okursun, "bu Rilke\'den bir şey çalıyor" dersin. Bir sahne görürsün, "Tarkovski\'nin *Ayna*\'sı gibi" dersin. İlk dinleme yok olur. Yerine bağlantı haritası geçer.\n\nBu bir kayıp.\n\nAma aynı anda bir kazanç.\n\nKayıp açık: şeyin kendisini artık yalnız göremiyorsun. Artık her şey, başka bir şeyin aynası veya kuzeni veya gölgesi. Saf karşılaşma bitiyor.\n\nKazanç daha az açık, ama daha kalıcı: **artık haritayı görüyorsun**. İlk dinleme sana sadece şeyi verirdi. Bağlantılar sana şeyin yerini veriyor. Hangi ormanın içinden çıktığını, hangi nehre bağlandığını, hangi deniz kenarında son bulduğunu.\n\nBu ayrı bir zevk. Daha sakin, daha az kırıcı, daha derin.\n\nYirmi yaşındaki ilk dinleme kırıcıdır. Kırk yaşındaki tanıma sakindir. İki farklı mucize.\n\n## Mesafeler ve Klasikleşen Ses\n\nPeki Truffaz\'ın o iki tuşu, klişe mi şimdi?\n\nHayır. Ama artık başka bir şey.\n\nİlk dinlemede bu iki tuş **tek başına** mucizeydi. Şimdi aynı iki tuş, kafamdaki yüzlerce piyano bitişi arasında bir yer alıyor. Bill Evans\'ın *Peace Piece*\'i bir yan komşu. Satie\'nin *Gymnopédies*\'i bir sokak ötesi. Keith Jarrett\'ın *Köln Concert*\'inde bir pencere. Nils Frahm\'ın *Says*\'i, gecenin içinde sürekli açık kalan bir kapı. Max Richter\'in *Horizon Variations*\'ı, aynı sessizliğin başka bir odası.\n\nİki tuş aynı titreşimde çalıyor hâlâ. Ama etrafında daha büyük bir sessizlik var artık. Daha tanıdık, daha derin, daha nüfuz eden bir sessizlik.\n\nBir zamanlar bir parça tek başınaydı. Sonra yanına bir tane daha geldi, sonra bir tane daha. Ve ben fark ettim ki, fark etmeden, aralarındaki mesafeleri ölçmeye başlamışım. Tam burada bir şey değişiyor. Parçalar artık parça değil; bir yıldız haritasının noktaları. Mesafelerin kendisi anlam taşımaya başlıyor.\n\nTanıdıkça bir şey klasikleşir. Klasikleştikçe, ilginçtir, ya yozlaşır ya türetir. Yozlaştığında: iki tuşu duyduğunda "evet, bildik" deyip geçersin. Türettiğinde: o iki tuştan çıkıp başka bir şeye varırsın, yeni bir cümle söylersin, hiç olmayan bir mesafeyi ölçersin. Belki de bizi biz yapan şey bu mesafelerdir. Hatırladığın bir ses ile şu an duyduğun ses arasındaki yirmi yıl. Bir anı ile başka bir anı arasındaki sessiz boşluk. Mesafeler silinip her şey birbirine benzediğinde klişeye gireriz belki de. Klişe, aslında, mesafesizliktir.\n\nAma zihin, iyi kullanıldığında, içini doldurur ve o doluluğun içinde yeni boşluklar keşfeder. Büyüyen bir şeyin önünde duruyorum sanki. Ve ister istemez aklıma geliyor: acaba bu zihnin hareketi, daha büyük bir şeyin küçük bir yansıması mı?\n\n## Evren Genişliyor, Zihin Doluyor\n\nVe işte burada hermetik soruya geliyoruz: **evren de zihin gibi büyüyor mu?**\n\nHermes\'in aynası der ki: yukarıda ne varsa, aşağıda da o var. *As above, so below.* Kozmik düzey, psişik düzeyin kardeşidir. O zaman şunu sormak meşru: evren genişliyor, zihin büyüyor; ikisi aynı şey mi?\n\nGözlemcilerin son elli yıllık ölçümleri gösteriyor: evren genişliyor, ama daha hızlı. Hız sabit değil, artıyor. Yani evren sadece büyümüyor; büyümenin hızı da büyüyor. Bu ne demek? Galaksiler arasındaki **boşluk** büyüyor. Madde büyümüyor, madde yerli yerinde. Aradaki boşluk sürekli açılıyor.\n\nZihin tam tersine büyüyor. Zihin büyüdükçe **içerik** artıyor. Daha fazla kitap, daha fazla ses, daha fazla karşılaşma, daha fazla bağlantı. İçerik dolar.\n\nİki hareket birbirinin aynası mı?\n\nBence evet, ama beklenmedik bir biçimde. Evren **boşluk** büyütürken, zihin **içerik** büyütüyor. Birinde açılma dışarı, diğerinde içeri. İkisi de büyüyor. Yön zıt, hareket aynı.\n\nVe burada şaşırtıcı bir şey oluyor: **zihin ne kadar dolarsa, o kadar çok iç-boşluğa ihtiyaç duyar.** Çünkü içerik yalnız duramaz; içeriğin nefes alması için arada boşluk gerekir. Çok kitap okumuş biri sustuğunda bu yüzden daha derin susar. Çok müzik dinlemiş biri iki tuşun arasındaki sessizliği daha çok duyar.\n\nOlgunlaşma içeriğin dolmasından çok, **boşluğun tanınmasıdır.**\n\n## İki Tuş Hâlâ Orada\n\nO piyanonun son iki tuşu hâlâ aynı titreşimde. Değişen ben miyim, Truffaz mı?\n\nİkimiz de değiliz.\n\nDeğişen şey aradaki sessizliktir. Yirmi yıl önce o iki tuş sustuğunda, etrafında küçük bir sessizlik vardı. Şimdi sustuğunda, etrafında yirmi yıllık bir sessizlik var.\n\nİlk dinleme değil bu. Ama tanıma. Ve belki asıl bilgelik orada: **klişe olmayan tek şey, klişenin etrafında büyüyen sessizliktir.**\n\nKulağa izin vermek budur.\n\nDuyduğuna değil, duyduktan sonraki boşluğa izin vermek. Zihnin o boşlukta ne yaptığına izin vermek. Yirmi yıl önce o iki tuş kulağı deldi. Şimdi kulaktan geçip sessizliğin içine yerleşiyor, orada oturuyor, orada büyüyor.',
+      sniper: 'Sessizliğin büyümesi ne zaman klişe olur? Hiçbir zaman.',
+      date: '2026-04-22',
+      readTime: 7,
+      featured: false
+    },
+    {
+      id: 'demo2',
+      title: 'Koç Mevsimi — <em>Başlamak</em> da Bir Sanat',
+      category: 'Gökyüzü Notu',
+      icon: '✦',
+      excerpt: 'Güneş Koç\'a girdiğinde herkes harekete geçmek ister. Ama Koç enerjisi ham ateştir — yönlendirmezsen yakar.',
+      body: 'Güneş her yıl Koç\'a girdiğinde, astroloji topluluğu "yeni başlangıçlar" retoriğine boğulur. Ama Koç mevsimi o kadar masum değil.\n\n## Koç Ne Değildir\n\nKoç başlamak isteyen ama nasıl başlayacağını düşünmek istemeyen enerjidir. Hız var, yön tartışmalı. Bu yüzden Koç mevsimi kimi insanlar için harika bir hamle anı, kimi insanlar için ise yarım kalmış projelerin başlangıç noktası olur.\n\n## Mars Faktörü\n\n2026 Koç mevsiminde Mars da Koç\'ta. Bu enerji ikilisi ciddi. Koç/Mars kombinasyonu fiziksel enerjiyi, saldırganlık kapasitesini ve acelecilik eğilimini üst düzeye taşıyor.\n\nEğer haritanızda Mars zor açılar alıyorsa, bu mevsimde yavaşlamak paradoksal biçimde daha hızlı gitmenizi sağlar.',
+      sniper: 'Koç mevsimi yarış pistine girdiğin an değil, nereye gittiğini bildiğin andır.',
+      date: '2026-03-20',
+      readTime: 3,
+      featured: false
+    },
+    {
+      id: 'demo3',
+      title: 'Satürn Koç\'ta — Disiplin mi, Baskı mı?',
+      category: 'Tahmin',
+      icon: '♄',
+      excerpt: 'Satürn Mart 2025\'te Koç\'a geçti ve 2028\'e kadar orada kalacak. Bu transit nesil tanımlar — kimin toprağa bastığını gösterir.',
+      body: 'Satürn her burca yaklaşık 2.5 yıl geçirir. Koç\'ta Satürn tartışmalı bir kombinasyon: Koç\'un özgür atılımını Satürn\'ün yapısal gereklilikleriyle çarpıştırır.\n\n## Tarihsel Bağlam\n\nSon Satürn/Koç dönemlerine bakalım: 1996-1999 arası. O dönemde internet balonunun öncesi, küresel yeniden yapılanma, Türkiye\'de 28 Şubat süreci.\n\n## Bireysel Etkisi\n\nBu transit Koç, Yengeç, Terazi ve Oğlak burçlu bireyleri —özellikle bu burçlardan ASC, MC veya kişisel gezegen taşıyanları— doğrudan etkiler. Satürn gerçeği sever: sahte yapılar çöker, gerçek zemine basan yapılar sağlamlaşır.\n\n## 2026 Özelinde\n\nMars\'ın da Koç\'ta olduğu bu dönemde Satürn daha da keskin çalışıyor. Sürtünme yüksek, ama verim de yüksek olabilir — eğer doğru projeyi, doğru hızda yürütüyorsanız.',
+      sniper: 'Satürn Koç\'ta bize şunu soruyor: Nereye koştuğunu gerçekten biliyor musun?',
+      date: '2026-04-01',
+      readTime: 4,
+      featured: false
+    },
+    {
+      id: 'demo4',
+      title: 'Jüpiter Yengeç\'te — <em>Bolluğun</em> Şartları',
+      category: 'Tahmin',
+      icon: '♃',
+      excerpt: 'Jüpiter\'in kendi evine benzer güç aldığı Yengeç transiti, 2026 yazına kadar sürüyor. Kim faydalanır, kim gözden kaçırır?',
+      body: 'Jüpiter\'in Yengeç\'te konumu "yüceltme" olarak tanımlanır — yani burc gezegeni güçlendirir. Ama her güçlenme koşulsuz değil.\n\n## Yengeç Jüpiter\'in Paradoksu\n\nJüpiter genişlemek, büyümek, risk almak ister. Yengeç ise korumak, tutmak, içerlemek ister. Bu iki eğilim birlikte "büyük ama güvenli" bir enerji yaratır. Fırsatlar var, ama kapı çok açık tutulmaz.\n\n## Türkiye Haritasında\n\nJüpiter şu an Türkiye\'nin natal Plüton\'una yakın kavuşum yapıyor. Bu ekonomik anlamda yabancı sermaye girişi, diplomatik açılımlar veya uluslararası ittifak güçlenmesi anlamına gelebilir.\n\nJüpiter aynı zamanda natal MC\'ye güzel bir üçgen yapıyor — itibar artışı, uluslararası görünürlük.',
+      sniper: 'Jüpiter kapı açar ama içeri girip girmeyeceğini sen seçersin.',
+      date: '2026-04-08',
+      readTime: 4,
+      featured: false
+    },
+    {
+      id: 'demo5',
+      title: 'Doğum Haritası Nasıl Okunur — <em>Başlangıç Kılavuzu</em>',
+      category: 'Natal',
+      icon: '⚜',
+      excerpt: 'Natal harita okumak sembolleri ezberlemeye değil, kalıpları görmeye dayanır. İşte başlangıç noktanız.',
+      body: 'Natal harita, doğum anınızdaki gezegen pozisyonlarının haritasıdır. Ama astroloji bu pozisyonları ezberlemek değil, aralarındaki ilişkileri okumak demektir.\n\n## Üç Temel Katman\n\nHer natal harita üç temel katmana ayrılır: Gezegenler (ne), Burçlar (nasıl), Evler (nerede).\n\nGüneş Aslan\'da 1. evde farklı bir anlam taşır vs. Güneş Aslan\'da 12. evde. Burç aynı, ev farklı — tema ve alan değişir.\n\n## ASC Neden Önemli\n\nYükselen burç, haritanızın anahtarıdır. Dünya sizi nasıl görür, siz dünyayla nasıl karşılaşırsınız sorusunu yanıtlar. Pek çok geleneksel astroloji okulunda ASC, Güneş\'ten bile önemli kabul edilir.\n\n## HOV! Yaklaşımı\n\nBiz haritayı psikodinamik bir araç olarak görürüz. Her gezegen bir iç ses, her ev bir yaşam alanı, her açı iki sesin diyaloğu. Kehanet değil, ayna.',
+      sniper: 'Harita kader değildir — ama harita gerçektir.',
+      date: '2026-03-10',
+      readTime: 6,
+      featured: false
+    }
+  ];
+  savePosts(demos);
+}
+
+// ════════════════════════════════════════════
+// RENDER
+// ════════════════════════════════════════════
+let activeFilter = 'tümü';
+
+function renderBlog(filter) {
+  activeFilter = filter || 'tümü';
+  const posts = getPosts();
+  const filtered = activeFilter === 'tümü'
+    ? posts
+    : posts.filter(p => p.category === activeFilter);
+
+  document.getElementById('postCount').textContent = filtered.length + ' yazı';
+
+  // Filtre buton state
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === activeFilter || (btn.textContent === 'Tümü' && activeFilter === 'tümü'));
+  });
+
+  const main = document.getElementById('blogMain');
+  main.innerHTML = '';
+
+  if (filtered.length === 0) {
+    main.innerHTML = `<div class="empty-state"><div class="empty-glyph">◈</div><p>Bu kategoride henüz yazı yok.</p></div>`;
+    return;
+  }
+
+  const featured = filtered.find(p => p.featured);
+  const rest = filtered.filter(p => !p.featured || !featured || p.id !== featured.id);
+
+  // Featured post
+  if (featured) {
+    const fc = document.createElement('div');
+    fc.className = 'post-featured';
+    fc.onclick = () => openPost(featured.id);
+    fc.innerHTML = `
+      <div class="post-visual">
+        <div class="post-visual-glyph">${featured.icon || '◈'}</div>
+      </div>
+      <div class="post-body">
+        <div class="post-tag">${featured.category}</div>
+        <h2 class="post-title">${featured.title}</h2>
+        <p class="post-excerpt">${featured.excerpt}</p>
+        <div class="post-meta">
+          <span>${formatDate(featured.date)}</span>
+          <span class="post-meta-dot">·</span>
+          <span>${featured.readTime} dk okuma</span>
+        </div>
+        <a class="post-read-link" onclick="event.stopPropagation(); openPost('${featured.id}')">Devamını Oku →</a>
+      </div>`;
+    main.appendChild(fc);
+  }
+
+  // Grid
+  if (rest.length > 0) {
+    const grid = document.createElement('div');
+    grid.className = 'posts-grid';
+    rest.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'post-card';
+      card.onclick = () => openPost(p.id);
+      card.innerHTML = `
+        <div class="post-visual-mini">
+          <span class="mini-glyph">${p.icon || '◈'}</span>
+        </div>
+        <div class="post-tag">${p.category}</div>
+        <h3 class="post-title">${p.title}</h3>
+        <p class="post-excerpt">${p.excerpt}</p>
+        <div class="post-meta">
+          <span>${formatDate(p.date)}</span>
+          <span class="post-meta-dot">·</span>
+          <span>${p.readTime} dk</span>
+        </div>`;
+      grid.appendChild(card);
+    });
+    main.appendChild(grid);
+  }
+}
+
+function filterPosts(cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderBlog(cat);
+}
+
+// ════════════════════════════════════════════
+// POST OKUMA
+// ════════════════════════════════════════════
+function openPost(id) {
+  const posts = getPosts();
+  const post = posts.find(p => p.id === id);
+  if (!post) return;
+
+  document.getElementById('modalTag').textContent = post.category;
+  document.getElementById('modalTitle').innerHTML = post.title;
+  document.getElementById('modalMeta').textContent = formatDate(post.date) + '  ·  ' + post.readTime + ' dakika okuma';
+
+  // Markdown benzeri basit render
+  let body = post.body || '';
+  body = body
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>');
+  const paras = body.split('\n\n').filter(Boolean).map(p => {
+    if (p.startsWith('<h2>')) return p;
+    return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+  });
+  document.getElementById('modalBody').innerHTML = paras.join('\n');
+
+  const sniper = document.getElementById('modalSniper');
+  if (post.sniper) {
+    sniper.textContent = post.sniper;
+    sniper.style.display = 'block';
+  } else { sniper.style.display = 'none'; }
+
+  document.getElementById('postModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePostModal() {
+  document.getElementById('postModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ════════════════════════════════════════════
+// ADMIN
+// ════════════════════════════════════════════
+let adminAuthed = false;
+
+function openAdminAuth() {
+  document.getElementById('adminOverlay').classList.add('open');
+  if (adminAuthed) {
+    document.getElementById('adminAuth').style.display = 'none';
+    document.getElementById('adminContent').style.display = 'block';
+    renderAdminList();
+  } else {
+    document.getElementById('adminAuth').style.display = 'block';
+    document.getElementById('adminContent').style.display = 'none';
+  }
+}
+
+function closeAdmin() {
+  document.getElementById('adminOverlay').classList.remove('open');
+}
+
+function checkAdminPass() {
+  const pass = document.getElementById('adminPass').value;
+  if (pass === ADMIN_HASH) {
+    adminAuthed = true;
+    document.getElementById('adminAuth').style.display = 'none';
+    document.getElementById('adminContent').style.display = 'block';
+    renderAdminList();
+    document.getElementById('authErr').style.display = 'none';
+  } else {
+    const err = document.getElementById('authErr');
+    err.style.display = 'block';
+    setTimeout(() => err.style.display = 'none', 2000);
+  }
+}
+
+function renderAdminList() {
+  const posts = getPosts();
+  const list = document.getElementById('admPostList');
+  if (posts.length === 0) {
+    list.innerHTML = '<p style="font-size:0.8rem;color:var(--haki-dim)">Henüz yazı yok.</p>';
+    return;
+  }
+  list.innerHTML = posts.map((p, i) => `
+    <div class="adm-post-item">
+      <div>
+        <div class="adm-post-item-title">${p.title.replace(/<[^>]+>/g, '')}</div>
+        <div class="adm-post-item-meta">${p.category} · ${formatDate(p.date)} ${p.featured ? '· ★ Featured' : ''}</div>
+      </div>
+      <div style="display:flex;gap:0.4rem;align-items:center">
+        <button class="adm-btn-del" onclick="toggleFeatured('${p.id}')">${p.featured ? '★' : '☆'}</button>
+        <button class="adm-btn-del" onclick="deletePost('${p.id}')">Sil</button>
+      </div>
+    </div>`).join('');
+}
+
+function addPost() {
+  const title    = document.getElementById('newTitle').value.trim();
+  const body     = document.getElementById('newBody').value.trim();
+  const cat      = document.getElementById('newCat').value;
+  const icon     = document.getElementById('newIcon').value;
+  const excerpt  = document.getElementById('newExcerpt').value.trim();
+  const sniper   = document.getElementById('newSniper').value.trim();
+  const readTime = parseInt(document.getElementById('newReadTime').value) || 4;
+  const featured = document.getElementById('newFeatured').value === '1';
+
+  if (!title || !body) {
+    flashMsg('addErr'); return;
+  }
+
+  const posts = getPosts();
+  // Eğer featured ise diğerlerinin featured'ını kaldır
+  if (featured) posts.forEach(p => { p.featured = false; });
+
+  posts.unshift({
+    id: 'post_' + Date.now(),
+    title, body, category: cat, icon, excerpt, sniper,
+    readTime, featured,
+    date: new Date().toISOString().slice(0,10)
+  });
+  savePosts(posts);
+
+  // Formu sıfırla
+  ['newTitle','newExcerpt','newBody','newSniper'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('newReadTime').value = '4';
+  document.getElementById('newFeatured').value = '0';
+
+  renderAdminList();
+  renderBlog(activeFilter);
+  flashMsg('addMsg');
+}
+
+function deletePost(id) {
+  if (!confirm('Bu yazıyı silmek istiyor musunuz?')) return;
+  const posts = getPosts().filter(p => p.id !== id);
+  savePosts(posts);
+  renderAdminList();
+  renderBlog(activeFilter);
+}
+
+function toggleFeatured(id) {
+  const posts = getPosts();
+  posts.forEach(p => { p.featured = (p.id === id) ? !p.featured : false; });
+  savePosts(posts);
+  renderAdminList();
+  renderBlog(activeFilter);
+}
+
+function exportPosts() {
+  const data = JSON.stringify(getPosts(), null, 2);
+  const blob = new Blob([data], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'hov_blog_posts_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  flashMsg('exportMsg');
+}
+
+function importPosts(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const posts = JSON.parse(e.target.result);
+      if (Array.isArray(posts)) {
+        savePosts(posts);
+        renderAdminList();
+        renderBlog(activeFilter);
+        flashMsg('importMsg');
+      }
+    } catch { alert('Geçersiz JSON dosyası.'); }
+  };
+  reader.readAsText(file);
+}
+
+function flashMsg(id) {
+  const el = document.getElementById(id);
+  el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 2500);
+}
+
+// ════════════════════════════════════════════
+// YARDIMCILAR
+// ════════════════════════════════════════════
+function formatDate(str) {
+  if (!str) return '';
+  const [y,m,d] = str.split('-');
+  const months = ['','Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+  return `${parseInt(d)} ${months[parseInt(m)]} ${y}`;
+}
+
+// ESC ile modal kapat
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeAdmin(); closePostModal(); }
+});
+
+// Nav scroll
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), {passive:true});
+
+// Başlat
+seedDemoPosts();
+renderBlog();
+</script>
+</body>
+</html>
