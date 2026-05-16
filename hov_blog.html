@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOV! · Gökyüzü Notları</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inconsolata:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          #ede8d5;
+  --bg2:         #e4ddc8;
+  --bg3:         #d8d0b8;
+  --haki:        #2a3d4a;
+  --haki-petrol: #1e2e3a;
+  --haki-mid:    #3a5468;
+  --haki-dim:    #6a8a9a;
+  --haki-dimmer: #a0b8c4;
+  --petrol:      #1a2e3a;
+  --gold:        #9a7218;
+  --gold-bright: #c49020;
+  --crimson:     #8b1a1a;
+  --crimson-dim: #b04040;
+  --crimson-pale:rgba(139,26,26,0.08);
+  --ink:         #1e2e38;
+  --line:        rgba(42,61,74,0.14);
+  --line-solid:  rgba(42,61,74,0.25);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(138,92,10,0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 100%, rgba(42,61,74,0.07) 0%, transparent 40%),
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(42,61,74,0.04) 40px);
+  pointer-events: none; z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: radial-gradient(circle, rgba(42,61,74,0.15) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none; z-index: 0; opacity: 0.5;
+}
+
+nav, section, footer, header, main { position: relative; z-index: 2; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3rem;
+  border-bottom: 2px solid var(--crimson);
+  background: var(--bg);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 2px 20px rgba(26,46,58,0.15); }
+.nav-logo {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.82rem; font-weight: 700;
+  letter-spacing: 0.16em; color: var(--gold-bright);
+  text-decoration: none; text-transform: uppercase;
+}
+.nav-logo .hov { color: var(--crimson); }
+.nav-right { display: flex; align-items: center; gap: 2.5rem; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.12em; color: var(--haki-mid);
+  text-decoration: none; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--crimson); }
+
+/* ── BLOG HEADER ── */
+.blog-header {
+  padding: 9rem 3rem 4rem;
+  background: linear-gradient(180deg, #1a2e2a 0%, #1a2420 60%, var(--bg) 100%);
+  position: relative; overflow: hidden;
+}
+.blog-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(154,114,24,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(139,26,26,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+.blog-header-inner { max-width: 900px; position: relative; }
+.blog-eyebrow {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--gold-bright); opacity: 0.85;
+  margin-bottom: 1rem;
+}
+.blog-title {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 300; line-height: 1.1;
+  color: #ede8d5;
+  margin-bottom: 1rem;
+}
+.blog-title em { color: var(--gold-bright); font-style: italic; }
+.blog-desc {
+  font-size: 1.1rem; font-weight: 300;
+  color: rgba(237,232,213,0.65);
+  max-width: 560px; line-height: 1.7;
+}
+
+/* ── FİLTRE BAR ── */
+.filter-bar {
+  padding: 1.8rem 3rem;
+  border-bottom: 1px solid var(--line-solid);
+  display: flex; align-items: center; gap: 1rem;
+  flex-wrap: wrap;
+  background: var(--bg);
+}
+.filter-label {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--haki-dim); margin-right: 0.5rem;
+}
+.filter-btn {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid var(--line-solid);
+  background: transparent; color: var(--haki-mid);
+  cursor: pointer; transition: all 0.2s;
+}
+.filter-btn:hover { border-color: var(--crimson); color: var(--crimson); }
+.filter-btn.active { background: var(--crimson); color: var(--bg); border-color: var(--crimson); }
+.post-count {
+  margin-left: auto;
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.65rem; color: var(--haki-dim);
+  letter-spacing: 0.1em;
+}
+
+/* ── BLOG GRID ── */
+.blog-main {
+  max-width: 1200px; margin: 0 auto;
+  padding: 3rem 3rem 6rem;
+}
+
+/* Featured post */
+.post-featured {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; margin-bottom: 4rem;
+  border: 1px solid var(--line-solid);
+  cursor: pointer; transition: box-shadow 0.3s;
+}
+.post-featured:hover { box-shadow: 0 8px 40px rgba(26,46,58,0.15); }
+.post-featured .post-visual {
+  background: linear-gradient(135deg, #1a2e2a 0%, #0d1a22 100%);
+  min-height: 320px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.post-featured .post-visual::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 40% 50%, rgba(154,114,24,0.25) 0%, transparent 65%);
+}
+.post-visual-glyph {
+  font-size: 5rem; opacity: 0.35; color: var(--gold-bright);
+  position: relative; z-index: 1;
+  text-shadow: 0 0 60px rgba(196,144,32,0.4);
+}
+.post-featured .post-body {
+  padding: 2.5rem 2.8rem;
+  display: flex; flex-direction: column; justify-content: center;
+  background: var(--bg2);
+}
+.post-tag {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.62rem; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--crimson); margin-bottom: 0.8rem;
+}
+.post-featured .post-title {
+  font-size: 1.7rem; font-weight: 400; line-height: 1.25;
+  color: var(--haki-petrol); margin-bottom: 1rem;
+}
+.post-featured .post-title em { font-style: italic; color: var(--gold); }
+.post-excerpt {
+  font-size: 0.96rem; font-weight: 300;
+  color: var(--haki-mid); line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+.post-meta {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.62rem; color: var(--haki-dim);
+  letter-spacing: 0.1em;
+  display: flex; align-items: center; gap: 1rem;
+}
+.post-meta-dot { color: var(--crimson); }
+.post-read-link {
+  display: inline-block; margin-top: 1.4rem;
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--crimson); text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.post-read-link:hover { border-color: var(--crimson); }
+
+/* Post grid */
+.posts-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; background: var(--line-solid);
+  border: 1px solid var(--line-solid);
+}
+.post-card {
+  background: var(--bg);
+  padding: 2rem 2rem 1.8rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  display: flex; flex-direction: column;
+}
+.post-card:hover { background: var(--bg2); }
+.post-card .post-visual-mini {
+  height: 120px;
+  background: linear-gradient(135deg, #1a2e2a 0%, #0d1a22 100%);
+  display: flex; align-items: center; justify-content: center;
+  margin: -2rem -2rem 1.5rem;
+  position: relative; overflow: hidden;
+}
+.post-card .post-visual-mini::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(154,114,24,0.2) 0%, transparent 70%);
+}
+.post-visual-mini .mini-glyph {
+  font-size: 2.4rem; color: var(--gold-bright);
+  opacity: 0.5; position: relative; z-index: 1;
+}
+.post-card .post-title {
+  font-size: 1.15rem; font-weight: 400; line-height: 1.3;
+  color: var(--haki-petrol); margin-bottom: 0.7rem;
+  flex: 1;
+}
+.post-card .post-title em { font-style: italic; color: var(--gold); }
+.post-card .post-excerpt {
+  font-size: 0.88rem; color: var(--haki-dim);
+  line-height: 1.6; margin-bottom: 1.2rem;
+  display: -webkit-box; -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; overflow: hidden;
+}
+.post-card .post-meta { margin-top: auto; }
+
+/* Sayfalama */
+.pagination {
+  display: flex; align-items: center;
+  justify-content: center; gap: 0.5rem;
+  margin-top: 3rem; padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+.page-btn {
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line-solid);
+  background: transparent; color: var(--haki-mid);
+  cursor: pointer; transition: all 0.2s;
+}
+.page-btn:hover, .page-btn.active {
+  background: var(--haki-petrol); color: var(--bg);
+  border-color: var(--haki-petrol);
+}
+
+/* Boş durum */
+.empty-state {
+  text-align: center; padding: 5rem 2rem;
+  color: var(--haki-dim); grid-column: 1/-1;
+}
+.empty-glyph { font-size: 3rem; margin-bottom: 1rem; opacity: 0.4; }
+.empty-state p { font-family: 'Inconsolata', monospace; font-size: 0.75rem; letter-spacing: 0.15em; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--petrol); color: rgba(237,232,213,0.7);
+  padding: 2.5rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 2px solid var(--crimson);
+  font-family: 'Inconsolata', monospace; font-size: 0.68rem;
+  letter-spacing: 0.12em;
+}
+.footer-logo { color: var(--gold-bright); font-weight: 700; }
+.footer-links { display: flex; gap: 2rem; list-style: none; }
+.footer-links a { color: inherit; text-decoration: none; transition: color 0.2s; text-transform: uppercase; letter-spacing: 0.15em; }
+.footer-links a:hover { color: var(--gold-bright); }
+
+/* ══════════════════════════════════════════════
+   ADMIN PANEL
+══════════════════════════════════════════════ */
+.admin-overlay {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: rgba(10,18,22,0.92); backdrop-filter: blur(4px);
+  align-items: center; justify-content: center;
+}
+.admin-overlay.open { display: flex; }
+.admin-panel {
+  background: var(--bg); width: 640px; max-width: 95vw;
+  max-height: 90vh; overflow-y: auto;
+  border: 2px solid var(--crimson);
+  padding: 2.5rem;
+  position: relative;
+}
+.admin-close {
+  position: absolute; top: 1rem; right: 1.2rem;
+  font-family: 'Inconsolata', monospace; font-size: 0.8rem;
+  background: none; border: none; color: var(--haki-dim);
+  cursor: pointer; letter-spacing: 0.1em;
+}
+.admin-close:hover { color: var(--crimson); }
+.admin-title {
+  font-family: 'Inconsolata', monospace; font-size: 0.72rem;
+  font-weight: 700; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--crimson);
+  margin-bottom: 2rem;
+}
+.admin-section { margin-bottom: 2rem; }
+.admin-section-title {
+  font-family: 'Inconsolata', monospace; font-size: 0.65rem;
+  font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--haki-dim); border-bottom: 1px solid var(--line-solid);
+  padding-bottom: 0.5rem; margin-bottom: 1.2rem;
+}
+
+/* Form alanları */
+.adm-label {
+  display: block; font-family: 'Inconsolata', monospace;
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--haki-mid);
+  margin-bottom: 0.4rem; margin-top: 1rem;
+}
+.adm-input, .adm-select, .adm-textarea {
+  width: 100%; padding: 0.6rem 0.8rem;
+  background: var(--bg2); border: 1px solid var(--line-solid);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1rem; outline: none;
+  transition: border-color 0.2s;
+}
+.adm-input:focus, .adm-select:focus, .adm-textarea:focus {
+  border-color: var(--crimson);
+}
+.adm-textarea { min-height: 160px; resize: vertical; }
+.adm-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.adm-btn {
+  font-family: 'Inconsolata', monospace; font-size: 0.7rem;
+  font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0.7rem 1.6rem; border: none;
+  background: var(--crimson); color: var(--bg);
+  cursor: pointer; transition: background 0.2s; margin-top: 1.5rem;
+}
+.adm-btn:hover { background: var(--haki-petrol); }
+.adm-btn-del {
+  background: transparent; color: var(--crimson);
+  border: 1px solid var(--crimson); padding: 0.3rem 0.7rem;
+  font-family: 'Inconsolata', monospace; font-size: 0.6rem;
+  letter-spacing: 0.1em; cursor: pointer; transition: all 0.2s;
+}
+.adm-btn-del:hover { background: var(--crimson); color: var(--bg); }
+
+/* Yazı listesi admin */
+.adm-post-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.adm-post-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.7rem 0.9rem; background: var(--bg2);
+  border-left: 3px solid var(--line-solid);
+}
+.adm-post-item-title {
+  font-size: 0.9rem; color: var(--haki-petrol);
+}
+.adm-post-item-meta {
+  font-family: 'Inconsolata', monospace; font-size: 0.6rem;
+  color: var(--haki-dim); letter-spacing: 0.08em;
+}
+.adm-msg {
+  font-family: 'Inconsolata', monospace; font-size: 0.65rem;
+  letter-spacing: 0.1em; padding: 0.6rem 0.8rem;
+  margin-top: 0.8rem; display: none;
+}
+.adm-msg.ok { background: rgba(42,61,42,0.15); color: #2a5a2a; border-left: 3px solid #2a5a2a; }
+.adm-msg.err { background: rgba(139,26,26,0.1); color: var(--crimson); border-left: 3px solid var(--crimson); }
+
+/* Şifre ekranı */
+.admin-auth {
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.adm-auth-title {
+  font-family: 'Inconsolata', monospace; font-size: 0.65rem;
+  font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--haki-mid); margin-bottom: 0.5rem;
+}
+
+/* ── POST MODAL (okuma) ── */
+.post-modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 400;
+  background: rgba(10,18,22,0.88); backdrop-filter: blur(3px);
+  overflow-y: auto; padding: 5rem 1rem 3rem;
+}
+.post-modal-overlay.open { display: block; }
+.post-modal {
+  max-width: 720px; margin: 0 auto;
+  background: var(--bg); border: 1px solid var(--line-solid);
+  padding: 3.5rem;
+  position: relative;
+}
+.post-modal-close {
+  position: fixed; top: 1.5rem; right: 2rem;
+  font-family: 'Inconsolata', monospace; font-size: 0.72rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  background: var(--bg); border: 1px solid var(--line-solid);
+  color: var(--haki-mid); padding: 0.4rem 0.9rem;
+  cursor: pointer; z-index: 401; transition: all 0.2s;
+}
+.post-modal-close:hover { border-color: var(--crimson); color: var(--crimson); }
+.post-modal-tag {
+  font-family: 'Inconsolata', monospace; font-size: 0.62rem;
+  font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--crimson); margin-bottom: 0.8rem;
+}
+.post-modal-title {
+  font-size: 2.2rem; font-weight: 400; line-height: 1.2;
+  color: var(--haki-petrol); margin-bottom: 0.5rem;
+}
+.post-modal-title em { font-style: italic; color: var(--gold); }
+.post-modal-meta {
+  font-family: 'Inconsolata', monospace; font-size: 0.62rem;
+  color: var(--haki-dim); letter-spacing: 0.1em;
+  margin-bottom: 2.5rem; padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.post-modal-body {
+  font-size: 1.05rem; font-weight: 300; line-height: 1.8;
+  color: var(--ink);
+}
+.post-modal-body p { margin-bottom: 1.2rem; }
+.post-modal-body h2 {
+  font-size: 1.4rem; font-weight: 400; color: var(--haki-petrol);
+  margin: 2rem 0 0.8rem; font-style: italic;
+}
+.post-modal-body strong { font-weight: 600; }
+.post-modal-sniper {
+  margin-top: 2.5rem; padding: 1.5rem 2rem;
+  border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold);
+  font-style: italic; font-size: 1.15rem;
+  color: var(--gold); text-align: center; line-height: 1.4;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .blog-header { padding: 7rem 1.5rem 3rem; }
+  .filter-bar { padding: 1.2rem 1.5rem; }
+  .blog-main { padding: 2rem 1.5rem 4rem; }
+  .post-featured { grid-template-columns: 1fr; }
+  .post-featured .post-visual { min-height: 200px; }
+  .posts-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 1rem; text-align: center; }
+  .admin-panel { padding: 2rem 1.5rem; }
+  .post-modal { padding: 2rem 1.5rem; }
+  .adm-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="mainNav">
+  <a href="index.html" class="nav-logo"><span class="hov">HOV!</span> · <span style="color:var(--gold-bright)">AL 6.0 Studio</span></a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="index.html#about">Stüdyo</a></li>
+      <li><a href="index.html#reports">Raporlar</a></li>
+      <li><a href="hov_blog.html" class="active">Yazılar</a></li>
+      <li><a href="index.html#order">Sipariş</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── BLOG HEADER ── -->
+<header class="blog-header">
+  <div class="blog-header-inner">
+    <p class="blog-eyebrow">HOV! · AL 6.0 Studio · Gökyüzü Notları</p>
+    <h1 class="blog-title">
+      Gökyüzü<br><em>konuşuyor.</em>
+    </h1>
+    <p class="blog-desc">Mundane analizler, natal perspektifler, dönem notları. Kehanet değil — gözlem.</p>
+  </div>
+</header>
+
+<!-- ── FİLTRE BAR ── -->
+<div class="filter-bar" id="filterBar">
+  <span class="filter-label">Kategori ·</span>
+  <button class="filter-btn active" onclick="filterPosts('tümü')">Tümü</button>
+  <button class="filter-btn" onclick="filterPosts('Mundane')">Mundane</button>
+  <button class="filter-btn" onclick="filterPosts('Natal')">Natal</button>
+  <button class="filter-btn" onclick="filterPosts('Tahmin')">Tahmin</button>
+  <button class="filter-btn" onclick="filterPosts('Gökyüzü Notu')">Gökyüzü Notu</button>
+  <button class="filter-btn" onclick="filterPosts('Deneme')">Deneme</button>
+  <span class="post-count" id="postCount">— yazı</span>
+</div>
+
+<!-- ── ANA İÇERİK ── -->
+<main class="blog-main" id="blogMain">
+  <!-- JS ile doldurulur -->
+</main>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">HOV! — herşey olacağına varır</div>
+  <ul class="footer-links">
+    <li><a href="https://instagram.com/happensonvibe" target="_blank" rel="noopener">Instagram</a>
+    <li><a href="https://medium.com/@happensonvibe" target="_blank" rel="noopener">Medium</a></li>
+    <li><a href="https://happensonvibe.substack.com" target="_blank" rel="noopener">Substack</a></li></li>
+    <li><a href="index.html#order">Sipariş</a></li>
+  </ul>
+  <div style="font-size:0.62rem; color:rgba(237,232,213,0.4)">© 2026 HOV!</div>
+</footer>
+
+<!-- ── ADMIN BUTONU (sağ alt) ── -->
+<button id="adminTrigger" onclick="openAdminAuth()" style="
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 300;
+  font-family: 'Inconsolata', monospace; font-size: 0.6rem;
+  font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0.5rem 0.9rem;
+  background: transparent; border: 1px solid var(--line-solid);
+  color: var(--haki-dim); cursor: pointer; opacity: 0.5;
+  transition: all 0.2s;
+" onmouseenter="this.style.opacity='1';this.style.borderColor='var(--crimson)';this.style.color='var(--crimson)'"
+   onmouseleave="this.style.opacity='0.5';this.style.borderColor='var(--line-solid)';this.style.color='var(--haki-dim)'">
+  ⚙ Admin
+</button>
+
+<!-- ── ADMIN OVERLAY ── -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel">
+    <button class="admin-close" onclick="closeAdmin()">✕ Kapat</button>
+
+    <!-- Şifre ekranı -->
+    <div id="adminAuth">
+      <p class="admin-title">⚙ Admin Girişi</p>
+      <div class="admin-auth">
+        <p class="adm-auth-title">Yönetici Şifresi</p>
+        <input class="adm-input" type="password" id="adminPass" placeholder="••••••••"
+               onkeydown="if(event.key==='Enter') checkAdminPass()">
+        <button class="adm-btn" onclick="checkAdminPass()">Giriş →</button>
+        <div class="adm-msg err" id="authErr">Yanlış şifre.</div>
+      </div>
+    </div>
+
+    <!-- Admin paneli (şifre sonrası) -->
+    <div id="adminContent" style="display:none">
+      <p class="admin-title">⚙ İçerik Yönetimi</p>
+
+      <!-- Yeni yazı formu -->
+      <div class="admin-section">
+        <p class="admin-section-title">Yeni Yazı Ekle</p>
+        <label class="adm-label">Başlık</label>
+        <input class="adm-input" type="text" id="newTitle" placeholder="Nisan 2026 — Devletin DNA'sı">
+        <div class="adm-row">
+          <div>
+            <label class="adm-label">Kategori</label>
+            <select class="adm-select" id="newCat">
+              <option value="Mundane">Mundane</option>
+              <option value="Natal">Natal</option>
+              <option value="Tahmin">Tahmin</option>
+              <option value="Gökyüzü Notu">Gökyüzü Notu</option>
+              <option value="Deneme">Deneme</option>
+            </select>
+          </div>
+          <div>
+            <label class="adm-label">İkon (sembol)</label>
+            <select class="adm-select" id="newIcon">
+              <option value="◈">◈ — Mundane</option>
+              <option value="⚜">⚜ — Resmi</option>
+              <option value="☽">☽ — Ay</option>
+              <option value="♃">♃ — Jüpiter</option>
+              <option value="♄">♄ — Satürn</option>
+              <option value="⊕">⊕ — Dünya</option>
+              <option value="✦">✦ — Yıldız</option>
+            </select>
+          </div>
+        </div>
+        <label class="adm-label">Özet (kart açıklaması)</label>
+        <input class="adm-input" type="text" id="newExcerpt" placeholder="Kısa açıklama — 1-2 cümle">
+        <label class="adm-label">İçerik (tam yazı)</label>
+        <textarea class="adm-textarea" id="newBody" placeholder="Yazı içeriği... Paragrafları boş satırla ayırın.&#10;&#10;## Alt başlık için ## kullanın.&#10;&#10;**Kalın** için çift yıldız."></textarea>
+        <label class="adm-label">Sniper Shot (kapanış cümlesi — opsiyonel)</label>
+        <input class="adm-input" type="text" id="newSniper" placeholder="Tek cümle. Sert. Bitirici.">
+        <label class="adm-label">Substack URL (opsiyonel — varsa tıklayınca Substack'e yönlendirir)</label>
+        <input class="adm-input" type="url" id="newSubstackUrl" placeholder="https://happensonvibe.substack.com/p/yazi-slug">
+        <div class="adm-row" style="margin-top:1rem">
+          <div>
+            <label class="adm-label">Okuma Süresi (dk)</label>
+            <input class="adm-input" type="number" id="newReadTime" value="4" min="1" max="30">
+          </div>
+          <div>
+            <label class="adm-label">Öne Çıkar?</label>
+            <select class="adm-select" id="newFeatured">
+              <option value="0">Hayır</option>
+              <option value="1">Evet — Featured</option>
+            </select>
+          </div>
+        </div>
+        <button class="adm-btn" onclick="addPost()">Yazıyı Yayınla →</button>
+        <div class="adm-msg ok" id="addMsg">Yazı eklendi. ✓</div>
+        <div class="adm-msg err" id="addErr">Başlık ve içerik zorunlu.</div>
+      </div>
+
+      <!-- Mevcut yazılar -->
+      <div class="admin-section">
+        <p class="admin-section-title">Mevcut Yazılar</p>
+        <div class="adm-post-list" id="admPostList"></div>
+        <div style="margin-top:1rem; display:flex; gap:0.8rem; flex-wrap:wrap;">
+          <button class="adm-btn" onclick="exportPosts()" style="background:var(--haki-petrol)">Dışa Aktar (JSON) →</button>
+          <label class="adm-btn" style="cursor:pointer; background:var(--haki-mid)">
+            JSON İçe Aktar
+            <input type="file" accept=".json" onchange="importPosts(event)" style="display:none">
+          </label>
+        </div>
+        <div class="adm-msg ok" id="exportMsg">JSON indirildi.</div>
+        <div class="adm-msg ok" id="importMsg">İçe aktarıldı.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── POST OKUMA MODALI ── -->
+<div class="post-modal-overlay" id="postModal">
+  <button class="post-modal-close" onclick="closePostModal()">✕ Geri</button>
+  <div class="post-modal">
+    <div class="post-modal-tag" id="modalTag"></div>
+    <h1 class="post-modal-title" id="modalTitle"></h1>
+    <div class="post-modal-meta" id="modalMeta"></div>
+    <div class="post-modal-body" id="modalBody"></div>
+    <div class="post-modal-sniper" id="modalSniper" style="display:none"></div>
+    <div style="margin-top:2rem; text-align:center; font-family:'Inconsolata',monospace; font-size:0.65rem; letter-spacing:0.2em; color:var(--haki-dim); text-transform:uppercase;">HOV! — herşey olacağına varır</div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════
+// VERİ KATMANI — localStorage tabanlı
+// ════════════════════════════════════════════
+const STORE_KEY  = 'hov_blog_posts';
+const ADMIN_HASH = 'takvacore2026'; // şifre — admin değiştirebilir
+
+function getPosts() {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); }
+  catch { return []; }
+}
+function savePosts(posts) {
+  localStorage.setItem(STORE_KEY, JSON.stringify(posts));
+}
+
+// Demo yazılar — ilk kez açılırsa ekle
+function seedDemoPosts() {
+  if (getPosts().length > 0) return;
+  const demos = [
+    {
+      id: 'saturn-neptun-sifirda',
+      title: 'Satürn Neptün\'le <em>Sıfırda</em> Buluştuğunda',
+      category: 'Mundane',
+      icon: '♄',
+      excerpt: 'Her otuz altı yılda Satürn ile Neptün buluşur. 2026\'da sıfır Koç\'ta — zodyakın mutlak başlangıç noktasında. Üç ülke, üç fok, ve bırakmayan bir kucaklama.',
+      body: 'Zodyakın ilk derecesinin bir resmi var. 1925\'te San Diego\'da park etmiş bir arabanın içinde kaydedildi. Durugörücü Elsie Wheeler, gökyüzünün 360 derecesinin her biri için gördüklerini anlatıyordu. Sıfır Koç, her şeyin başladığı derece, için gördüğü şuydu:\n\n*Bir kadın okyanustan çıkmış. Bir fok onu kucaklıyor.*\n\nBir şey doğuyor. Derin sulardan, biçimsiz ve bilinçdışı olandan yeni bir şekil yüzeye çıkıyor. Ama eski dünya bırakmıyor. Fok, yani içgüdü, alışkanlık, önceki beden, sarılıyor. Saldırmıyor. Sarılıyor. Sorun da bu. Seni *severek* alıkoyuyor.\n\nBirkbeck bu derece hakkında yazarken net konuşmuş: Bebek rahime geri dönemez kadar geri dönüşü yoktur bu noktanın. Sonra uyarısı: eski sen, seni geri çekmeye çalışabilir. Düşman olarak değil. Tanıdık bir şey olarak. Korkunun sadakat kılığına girmiş hali olarak.\n\n20 Şubat 2026\'da Satürn ile Neptün bu derecede buluştu. Duvar ören gezegen ile duvarı eriten gezegen, her şeyin başladığı ve hiçbir şeyin geri dönemeyeceği noktada, yan yana.\n\nBu yazıda sudan çıkmaya çalışan üç ülkeden bahsedeceğim. Ve bırakmayan üç foktan.\n\n---\n\nHer otuz altı yılda Satürn ile Neptün buluşur. Liz Greene bu kavuşumları tanımlarken şöyle der: tarihte Eden\'i bedene indirme çabasının, bazen şiddetle, bazen barışla, işaret fişekleri.\n\nEden bedende. Hayal edilen değil, vaat edilen değil. *İnşa edilen* Eden. Bir toplumun kurucu rüyasını fiziksel bir yapıya dönüştürmeye çalıştığı an. Bir anayasa. Bir duvar. Bir devrim.\n\nEden inşa etmenin sorunu şu: inşaat her zaman Satürn\'ü gerektirir. Kurallar, sınırlar, kontrol. Ve rüya her zaman Neptün\'dür. Sınırsız, biçimsiz, güzel ve tam olarak tutturulması imkânsız. İkisi buluştuğunda rüya ile yapı aynı odaya girer. Ya yapı rüyaya hizmet eder, ya da rüya yapının altında boğulur.\n\nBu iki gezegenin her buluşmasında, Amerika-İsrail-İran üçgenine ne olduğuna bak.\n\n**1917. Aslan.** Balfour Deklarasyonu, imparatorluk antetli kâğıdı üzerinde tek paragraf, Filistin\'de bir Yahudi yurdu tohumunu ekti. Bolşevik Devrimi Rus monarşisini çözdü ve bir gecede işçi Eden\'i inşa etmeye kalktı. Ve İran\'da, İngiliz ve Rus işgali altında, bir kıtlık milyonlarca can aldı. Üç tohum, bir kavuşum. Bir vaat, bir devrim, bir yara.\n\n**1953. Terazi.** İkinci ve üçüncü tam kavuşum arasında, 19 Ağustos\'ta, CIA ve MI6 İran\'ın seçilmiş başbakanını devirdi. Musaddık\'ın suçu bir İngiliz petrol şirketinin defterlerini denetlemek istemesiydi. 1953\'te açılan yara hiç kapanmadı. Yirmi altı yıl sonra İslam Devrimi olarak patladı. Bu sırada beş yaşındaki İsrail kurumlarını inşa ediyordu. Amerika ise gizli operasyonlarla dünyayı ucuza şekillendirebildiğini keşfediyordu. Üçgenin mimarisi bu kavuşumda kuruldu. Sözleşmeler burcunda bir sözleşme çiğnendi.\n\n**1989. Oğlak.** Berlin Duvarı yıkıldı. Bu manşeti herkes biliyor. Üçgen açısından asıl önemli olan: Ayetullah Humeyni 3 Haziran 1989\'da, birinci ve ikinci tam kavuşum arasında öldü. Kurucu figür, Satürn ile Neptün hâlâ aynı derecede dans ederken dünyadan ayrıldı. İlk kez İran kendini kurucusu olmadan hayal etmek zorunda kaldı. Bu sırada Birinci İntifada İsrail\'in güvenlik paradigmasını yeniden biçimlendiriyordu. Amerika Soğuk Savaş zaferiyle dolup tek süper güç rolüne girdi. Üçgendeki her Eden test ediliyordu.\n\n**2026. Koç. Sıfır derece.** Zodyakın mutlak başlangıç noktası. Bu derece üç yüzyıldan fazladır bir Satürn-Neptün kavuşumuna ev sahipliği yapmadı. Bir hikâyeyi sürdürmüyoruz. Yeni bir hikâyenin ilk nefesindeyiz. Okyanustan çıkan kadın. Kucaklayan fok.\n\nBu kavuşumun üzerinden üç ay geçti ve üçgen artık geometri değil. Amerika ve İsrail İran\'la savaşta. Hürmüz Boğazı, dünya petrolünün beşte birinin aktığı dar geçit, tehdit altında. Bu hafta Amerikan başkanı Pekin\'e uçtu, Çin liderinden İran\'ı masaya döndürmesi için yardım istedi. Gösterişli ziyafetlerle döndü, elde somut hiçbir şey yok. Çin liderinin Amerika\'yı "belki düşüşe geçen bir ülke" olarak tanımladığı iddia edildi. Amerikan başkanı önceki yönetimi suçlayarak katıldı bu değerlendirmeye.\n\nSıfır Koç\'taki Satürn-Neptün soyut olmaktan çıkıp Salı günü olmaya başlayınca işte böyle görünüyor.\n\nHer ülke için soru aynı: fokun ne? Seni o kadar sıkı kucaklayan şey ki, artık onun kendin olduğunu sanıyorsun?\n\n---\n\n## Amerika: Gösterinin Foku\n\nSibly haritası. 4 Temmuz 1776, 17:10, Philadelphia. Koç beşinci evi yönetiyor: spekülasyon, eğlence, kültür, performans olarak ifade edilen ulusal moral.\n\nSatürn ile Neptün\'ün sıfır Koç\'ta buluşması, Amerika\'nın sahnesinin kapısında buluşmaları demek. Ulusun kendini sergilediği yer. Satürn senaryoyu sıkıyor. Neptün gösteri ile arkasındaki gerçeklik arasındaki çizgiyi eritiyor. İkisi aynı anda.\n\nTransit Neptün 3° Koç\'tan natal Venüs\'e (3° Yengeç) kare yapıyor. Orb 0.02°. Cerrahi. Yedinci evdeki Venüs diplomasi ve ticaret ittifaklarını yönetir. Neptün\'ün beşinci evden kare yapması ittifakları yıkmaz, bulandırır. Ülke, bir anlaşma ile bir gösteri arasındaki farkı ayırt edemez hale gelir. Müttefik ile izleyici arasındaki farkı.\n\nBu haftanın Pekin zirvesi bu aspektin canlı yayınıydı: şirket yöneticileri ve kamera ekipleriyle gelen bir başkan, gül bahçelerinde ve Pekin ördeğiyle ağırlanan, sıcak sözlerle dönen ama yürüttüğü savaşta sıfır ilerleme kaydeden. Performans kusursuzdu. Diplomasi sisti. Neptün Venüs\'e kare yapınca anlaşmayı yıkmaz. Başından beri bir anlaşma olup olmadığını ayırt etmeyi imkânsız kılar.\n\nVe bu, Amerika\'nın Uranüs Dönüşü\'yle aynı anda yaşanıyor. Uranüs altıncı evde 8° İkizler\'e, Sabian sembolü *Endüstriyel Grev* olan dereceye dönüyor. Emek yapısı yapay zekâ ve otomasyonla yeniden yazılırken diplomasi aygıtı sisin içinde çalışıyor. İki kriz, iki ev, birbirini besliyor. Çalışmanın ne anlama geldiği konusunda içeride anlaşamayan bir ülke, net olarak değerlendiremediği ittifaklar üzerinden dışarıya güven yansıtıyor.\n\nAmerika\'nın foku gösteri. Amerika olmayı oynamak, yani marka, mitoloji, sinematik versiyon, gerçek ülkeyi o kadar sıkı kucaklıyor ki ikisini ayırmak intihar gibi hissettiriyor. Kadın çıkmaya çalışıyor. Fok ışıklara doğru çekmeye devam ediyor.\n\nCampion mundane tahmin hakkında yazdığında bir prensip sunmuştu: geçen kavuşumda olanın tekrar olacağını söyleyemeyiz, ama benzer bir doğada bir şeyin tekrar olabileceğini söyleyebiliriz. 1989\'da Satürn-Neptün en son buluştuğunda Amerikan performansı zaferdi. Tek süper güç anlatısı doğdu. 2026\'da performans devam ediyor. Ama Neptün artık kimsenin buna inanıp inanmadığını soruyor. Amerika\'nın kendisi dahil.\n\n---\n\n## İsrail: Duvarın Foku\n\n14 Mayıs 1948, 16:00, Tel Aviv. Ben-Gurion bildirgeyi okuyor. Satürn-Plüton kavuşumuyla doğan bir ülke. Yapı ve varoluşsal tehdit, kökten kaynaşmış. Duvar dekoratif değil. Duvar kimliğin kendisi.\n\nNeptün gelip duvarları eritmeye başladığında, Satürn-Plüton ülkesi kolay uyum sağlayamaz. Ya daha sıkı tutar, ya çatlar. Orta yol çok dar. Bu yazının yazıldığı saatlerde İsrail bu prensibi gerçek zamanlı test ediyor. İran\'a karşı askerî operasyonlar yürütürken, savaşın hem maskelediği hem derinleştirdiği iç kırılmaları yönetmeye çalışıyor.\n\nTransit Satürn İsrail\'in natal Ay\'ına 0.06° orbla karşıt. Neredeyse tam. Mundane haritada Ay halktır. Kolektif hafıza, vatandaş olmanın nasıl hissettirdiği. Satürn\'ün bu Ay\'a karşı taraftan oturması, devletin hikâyesinin halkın yaşadığıyla çatışması demek. Bu ikisi ayrışmaya başladığında açılan boşluk siyasi muhalefet değil. Daha sessiz ve daha tehlikeli bir şey: inancın geri çekilmesi.\n\nSatürn natal Mars\'a da kare yapıyor. 0.72°. Askerî tepki refleksi, İsrail\'in en çalışılmış kası, yavaşlatılıyor. Savaş halindeki bir ülke ihtiyaç duyduğu tempoyu bulamıyor. Hızlı hamle dürtüsü, hızı kaldıramayan bir zeminle karşılaşıyor. Mars-Satürn baskısı altında yürütülen savaşlar, başlatanların beklediği temiz sonuçlarla bitmeme eğilimindedir.\n\nEros transit Satürn\'e 0.00° yarı-kare. Juno 0.11°. Bağların ve ittifakların kalitesinden bahsediyorlar. İsrail\'in onlarca yıldır dayandığı ortaklık yapıları sürtünme bölgesinde. Kopmak değil. Aşınmak. Sonunda yeniden müzakereye zorlayan türden bir aşınma.\n\nUranüs İkizler\'den natal Güneş\'e 0.03° yarı-kare. Devletin çekirdek kimliğine cerrahi hassasiyetle dokunuyor. Ama Uranüs natal Plüton\'a 0.28° üçgen de yapıyor. Ve paradoks burada. Fok seni sadece geri tutmaz. Seni tutar da. Bazen eski tarafından sahiplenilmek gibi hissedilen şey, dönüşümün mümkün hale gelmesinden önceki son kucaklama da olabilir.\n\nİsrail\'in foku duvar. Güvenlik paradigması, varoluşsal tehdit anlatısı, "bir daha asla" ahdi. Bu fok bir ulus inşa etti ve onu yaşattı. Ama kadın yükseliyor ve soru şu: duvar kapıya dönüşebilir mi, yoksa bir şey çatlayana kadar sıkılaşmaya devam mı eder?\n\nGreene ulusal haritalar hakkında yazarken şunu söylemişti: uluslar eskisine kıyasla biraz daha az kaderseldir, çünkü insanlar genel olarak biraz daha bilinçli. Anahtar kelime *biraz*. İsrail toplumu ikiye değil, belki üçe bölünüyor olabilir: savaşanlar, sorgulayanlar ve sessiz kalanlar. Sessiz kalanlar tarihte en tehlikeli gruptur. Ne zaman konuşacakları bilinmez.\n\n---\n\n## İran: Devrimin Foku\n\n1 Nisan 1979, Tahran. İslam Cumhuriyeti\'ni resmen kuran referandum. Kendini yeniden başlatan bir ülke. En azından resmî hikâye bu.\n\nİran bu üçgendeki en Satürn-Neptüncü ülke, çünkü İslam Cumhuriyeti kelimenin tam anlamıyla bir Satürn-Neptün dinamiğinden doğdu. 1979 devrimi Satürn-Neptün karşıtlık döngüsü sırasında yaşandı. Yapı eridi. Yeni bir şey kristalize oldu. 2026 için soru şu: 1979\'da kristalize olan şey, şimdi eriyenin kendisi mi?\n\nHer yapı kendini kalıcı sanır. Neptün aynı fikirde değil.\n\nTransit Satürn İran\'ın natal Güneş\'ine 1.77° orbla kavuşum yapıyor. Mundane astrolojide ulusal haritadaki Güneş, ülkenin liderliğini yansıtır. Greene bunu SSCB\'nin natal Güneş\'ine her büyük transit dokunduğunda liderlik değişikliği olduğunu göstererek kanıtlamıştı. İran\'ın Güneş\'ine Satürn kavuşumu, liderlik yapısının doğrudan yapısal sorgulamaya girmesi demek. Ve 2026\'da bu akademik bir tartışma değil: ülke savaşta, altyapısı askerî baskı altında, liderliği bombaların yükselttiği ama yanıtlamadığı sorularla karşı karşıya. Satürn yıkmaz. Satürn sorar: bunun hâlâ işlediğini kanıtlayabilir misin? Faturayı gösterebilir misin?\n\nNeptün, yanı başında yol alırken, cevabı bulandırıyor.\n\nSedna transit Satürn\'e 0.93° kare yapıyor. İnuit mitolojisinde Sedna, babası tarafından denize atılan, kayığa tutunurken parmakları kesilen kadındır. Battı. Okyanus tabanından tüm deniz canlılarına hükmetmeye başladı. Gömülmüş gerçeğin tanrıçası. İran\'ın gömülmüş gerçekleri küçük bir liste değil: 1953, devrim sonrası tasfiyeler, sekiz yıllık Irak savaşı, 2009, 2019, 2022. Ve şimdi 2026, maliyetini halkın ödediği yeni bir savaş, resmi anlatı tutmaya zorlanırken. Resmî hafıza ile yaşayan hafıza onlarca yıldır birbirinden uzaklaşıyor. Ateş altında bu uzaklaşma hızlanır.\n\nUranüs İkizler\'den natal Plüton\'a 0.17° karşıt. Neredeyse sıfır hata payı. Sedna\'ya kare 0.26°. İki transit üst üste. Satürn-Neptün yavaş, yapısal; Uranüs ani, elektriksel. Kurucu kesinliklerin yavaş aşınması, enformasyon akışı ve kamusal ruh halindeki ani bozulmalarla buluşuyor.\n\nİran\'ın foku devrimin kendisi. 1979 kristalizasyonu. İlahi egemenlik, emperyalizme direniş, küllerin altından yeniden doğuş mitosu. Ülkeyi düşman olarak değil, kimlik olarak kucaklıyor. Ve kimlikler, her psikolog bilir, bırakılması en zor şeylerdir. Kimliğinle savaşmazsın. Kimliğin *sensin*. Ta ki başka bir şey olabileceğini fark ettiğin ana kadar.\n\nGreene bir keresinde keskin bir gözlemde bulunmuştu: Humeyni\'nin İran\'ı, on dördüncü yüzyılda tiranca yönetilen bir İtalyan şehir devletinden çok farklı değildir. Gözlem kesiyor çünkü siyaseti tamamen atlayıp doğrudan yapıya gidiyor: güç yoğunlaşmış, muhalefet yönetiliyor, meşruiyet ilahi hakka dayandırılıyor. Sıfır Koç\'taki Satürn-Neptün bu yapının iyi mi kötü mü olduğunu sormuyor. *Gerçek* mi diye soruyor, yoksa son kullanma tarihini geçmiş bir hikâye mi?\n\nGenç kuşağın devletle ilişkisi yeniden şekilleniyor. Görünmeden. Sessizce. Kalıcı biçimde. Uranüs kolektif hafızaya dokunduğunda, dönem nadiren anlık krizle biter. Genellikle geri dönüşü olmayan bir değişimle biter.\n\n---\n\n## Yukarıdan Bakınca Üçgen\n\nÜç Eden. Üç fok.\n\nAmerika gösteri Eden\'i inşa etti. Parlak şehir, serbest piyasa, liberal düzen. Gösteri foku sıkı tutuyor. Artık sahnenin nerede bitip ülkenin nerede başladığını ayırt edemez durumda.\n\nİsrail güvenlik Eden\'i inşa etti. Yurt, duvar, hayatta kalma ahdi. Duvar foku sıkı tutuyor. Bir şeye *karşı* inşa edilmişti ve bir şeye karşı inşa edildiğinde, tehditten vazgeçmek kendinden vazgeçmek demek.\n\nİran devrim Eden\'i inşa etti. İlahi egemenlik, direniş, 1953\'ün küllerinden yeniden doğuş. Devrim foku sıkı tutuyor. Ülkeyi bir yapıdan kurtaran kimlik, bir sonraki yapı haline geldi.\n\nSıfır Koç\'taki Satürn-Neptün üçüne de diyor ki: kadın yükseliyor. Yeni bir şey doğmaya çalışıyor. Ama fok hâlâ orada. Sıcak. Tanıdık. Sevgi gibi hissettiriyor.\n\nVe şu an, Mayıs 2026\'da, üçgen savaşta. Amerika Ortadoğu\'da savaş yürütürken başkanı Pekin\'de müttefik arıyor. İsrail, kurucu mitosunu tam da bu direnişe dayandıran bir ülkeye hava saldırıları düzenliyor. İran askeri baskıyı absorbe ederken nüfusu farklı türden bir darbeyi absorbe ediyor. Devrimin fokunun yaklaşan şeyden onları koruyamayabileceğinin yavaş farkındalığı. Foklar artık metafor değil. Politikalar. Ve ateşle test ediliyorlar.\n\nBirkbeck\'in uyarısı yankılanıyor: yalnızca bencil ya da korkuya dayalı çıkarları olan baştan çıkarıcı tekliflere, rüşvetlere, tavizlere dikkat et. Jeopolitikte bu baştan çıkarıcı tekliflerin isimleri var: güvenlik garantileri, stratejik ortaklıklar, nükleer anlaşmalar, silah anlaşmaları, dondurulmuş çatışmalar. Çünkü çözmek korkutucu.\n\nVe Rudhyar\'ın bu derecenin tek satırlık okuması: benliğin potansiyelliği, birey kolektiften çıkıyor ve kendini ilk kez tanıyor. Uluslara uygula: bu üç ülkenin her biri, düşman tarafından değil, müttefik tarafından değil, gökyüzü tarafından, kendini ilk kez tanımaya çağrılıyor. Sergilediği versiyonunu değil. Arkasına saklandığı duvarı değil. Sarıldığı devrimi değil. Gerçek kendini. Her ne çıkarsa.\n\nBunların hiçbiri tahmin değil. Campion\'ın dediği gibi: geçen kavuşumda olanın tekrar olacağını söyleyemeyiz. Benzer bir doğada bir şeyin tekrar olabileceğini söyleyebiliriz. Bu seferki doğa: yüzeye çıkış. Acılı, yavaş, dirençle karşılanan, ama geri dönüşsüz. Bir kadın, bir okyanus, ve eninde sonunda bırakmak zorunda kalacak bir fok.\n\n---\n\nSatürn diyor ki: inşa ettiğine bak.\nNeptün diyor ki: şimdi onu gerçekte neyin ayakta tuttuğuna bak.\nKoç diyor ki: ve ne yapacaksın?\n\nHenüz kimse cevap vermiyor. Ama bombalar düşüyor, anlaşmalar bulanıklaşıyor, boğaz kapalı. Transit kimsenin hazır olmasını beklemedi.\n\nKadın su çizgisinin üzerinde. Ve fok? Fok hâlâ tutuyor. Şimdilik.\n\n---\n\n*Harita kader değildir. Ama harita gerçektir.*\n\n---\n\n*HOV!*\n*Mayıs 2026*\n\n---\n\n*Başvurulan kaynaklar: Dane Rudhyar, An Astrological Mandala; Lyndon Birkbeck, The Sabian Oracle; Liz Greene, The Astrological Neptune and the Quest for Redemption; Liz Greene, The Outer Planets and Their Cycles; Nicholas Campion, The Ultimate Astrologer; Raphael Cross, Mundane Astrology.*',
+      sniper: 'Kadın su çizgisinin üzerinde. Ve fok? Fok hâlâ tutuyor. Şimdilik.',
+      substackUrl: null,
+      date: '2026-05-15',
+      readTime: 13,
+      featured: true,
+      author: 'HOV!'
+    },
+    {
+      id: 'uranus-ikizlerde-cam-tabanli-tekne',
+      title: 'Uranüs İkizler\'de — <em>Cam Tabanlı Tekne</em>',
+      category: 'Mundane',
+      icon: '◈',
+      excerpt: 'Her 84 yılda bir bilginin yapısı değişiyor. Matbaa, telgraf, bilgisayar. Her seferinde eski kapı bekçileri kontrolü kaybetti. Türkiye\'nin natal haritasında Sedna-Uranüs kavuşumu 0.03°.',
+      body: 'Sabian sembollerinde Gemini 1° şöyle tanımlanır: *A glass-bottomed boat in still water.* Durgun suda cam tabanlı bir tekne. Dalmak zorunda değilsiniz. Sadece bakmanız yeterli. Su hâlâ, ışık doğru açıda, ve orada, derinlerde, her zaman var olan ama görmediğiniz şey yüzünüze bakıyor.\n\nUranüs, 26 Nisan 2026\'da İkizler\'e döndü. 2033\'e kadar burada kalacak.\n\n"Giriyor" demek için geç kaldık. Zaten içindeyiz.\n\n---\n\n## Proleg: Spiral\n\nUranüs\'ün yörüngesi 84 yıl. Her 84 yılda bir İkizler\'e döner. İkizler\'in alanı: dil, iletişim, bilgi, haber, çoğulluk, hız.\n\nBu bir tesadüf değilse, ve astroloji tesadüf saymaz, şu tablo ortaya çıkıyor.\n\n**MÖ ~3200.** Mezopotamya\'da, Fırat nehrine yakın bir yerde, biri çamur üzerine küçük işaretler kazıdı. Çivi yazısı. Tahıl sayımı için başladı. Kaç koyun, kaç çuval arpa. Sonra ticaret kayıtları, yasalar, destanlar. Bilgi, ilk kez insan zihninin dışında var olmaya başladı. Bellek artık yalnızca biyolojik değildi. Uranüs o dönemde neredeydi? Kesin hesap yok. Ama educated guess olarak: spiral buradan başlıyor.\n\n**1438–1445.** Gutenberg, Mainz\'da bir baskı makinesinin üzerinde çalışıyor. Hareketli metal harfler, mürekkep, kâğıt. 1440\'ta ilk baskı. Bilginin çoğaltılma maliyeti çöktü. Manastırlarda elle kopyalanan el yazmalarının bin yıllık tekeli kırıldı. Bilgiyi kim kontrol eder sorusunun cevabı değişti.\n\n**1522–1529.** Seksen dört yıl sonra: Luther\'in tezleri matbaadan çıkıyor. Worms Diyeti, Alman Köylü Savaşı, Reformasyon\'un ateşi. Gutenberg\'in makinesi olmasaydı Luther bir bölgesel gürültü olarak kalırdı. Matbaa olmadan Reformasyon olmazdı. Bilginin yapısı değişince, iktidarın yapısı değişti.\n\n**1774–1781.** Thomas Paine *Common Sense*\'i yazdı. Küçük bir pamflet, elli sayfadan az. Ama kıta boyunca basıldı, okundu, sesli okundu. Amerikan Devrimi\'nin fikri silahı. Aynı dönemde Fransız ansiklopedistleri tüm insan bilgisini tek bir eserde toplamaya çalışıyordu: *Encyclopédie.* İktidarın bilgiyi tekelinde tutma döneminin sonu.\n\n**1858–1866.** Transatlantik telgraf kablosu. İngiltere ile Amerika arasında, denizin altından. 1858\'de ilk mesaj iletildi, teknik sorunlar yüzünden koptu. 1866\'da kalıcı hat kuruldu. Londra\'da borsada açılan bir haber birkaç saat içinde New York\'ta fiyatları değiştiriyordu. Finans coğrafyayı aştı. Bilgi elektrik hızıyla aktı.\n\n**1942–1949.** ENIAC, dünyanın ilk elektronik bilgisayarı, 1945\'te çalışmaya başladı. Aynı yıl atom bombası. Aynı dönem: sinema altın çağı, Hollywood propagandası, radyonun zirve yılları. Ve 1948\'de Claude Shannon\'ın *A Mathematical Theory of Communication* makalesi. Bilginin matematiği yazıldı. Bit kavramı doğdu. Dijital çağın temeli atıldı. Henüz kimse bilmeden.\n\n**26 Nisan 2026. Şu an.** Büyük dil modelleri. Deepfake. Kuantum hesaplama eşiği. Yapay zekanın içerik üretmesi. Bilginin kaynağını doğrulama krizinin zirvesi. Epstein dosyaları, algoritma habercileri, sızıntı platformları, devlet destekli dezenformasyon. Uranüs İkizler\'e ilk kez 7 Temmuz 2025\'te girdi, bir ön dalga. Retrograd yaparak Boğa\'ya çekildi. 26 Nisan 2026\'da döndü. Bu sefer kalıcı.\n\nHer seksen dört yılda bir, bilginin yapısı değişti. Her seferinde eski iktidar biçimleri titredi. Her seferinde yeni bir alfabe öğrenildi. Ya da öğrenilmek zorunda kalındı.\n\nUranüs şimdi İkizler\'de. Sekizinci tur, ya da belki daha fazlası; geriye doğru sayamıyoruz.\n\nSpiral devam ediyor.\n\n---\n\n## I. Denizin Altı Her Zaman Oradaydı\n\nJeffrey Epstein 2019\'da öldü. Ya da öldürüldü. Dosyalar mühürlendi. İsimler karardı. Sistemi koruyan sistem, her zamanki gibi çalıştı.\n\nSonra bir şey oldu. Yavaş yavaş, bir sızıntıyla başladı. Bir belge, bir tanıklık, bir yargı kararı. Ardından başka bir belge. Ardından Florida savcısının kayıt dışı anlaşması. Ardından adalar, uçuş kayıtları, isimler: politikacılar, finans dünyasının mimarları, kraliyet ailesi üyeleri, Nobel ödüllü akademisyenler. Skandal bir çığ gibi akmıyor. Damla damla, ama durmuyor da.\n\nUranüs İkizler\'e girmeden bu süreç başlamıştı. Ama bir gezegenin bir burca girişi yeni bir şey yaratmaz. Zaten işleyen dinamiklerin frekansını değiştirir. Cam tabanlı tekne, fırtınayla değil sakinlikle görür. Baskı değil, netlik. Ve netlik bazen fırtınadan daha tahripkârdır.\n\n2026 ile birlikte iletişim altyapısı dönüşüyor: algoritmalar yeniden yazılıyor, yapay zeka gazetecilik üretiyor, bilgi akış kanalları beklenmedik rotalar buluyor. Eski kapı bekçileri, medya tekelleri, kurumsal filtreler, devlet propagandaları, titriyor. Bilginin yapısı değişince, gizlinin tutulma maliyeti artıyor.\n\nEpstein dosyaları bu bağlamda sembolik bir kırılma noktasıdır. Tek bir adamın suçları değil. Küresel bir ağın görünür hale gelmesi. Kim kimi biliyor, kim kime borçlu, iktidar nasıl el sıkışıyor, çocuklar nasıl ticaret metası oluyor: bunlar artık mahkeme arşivlerinde değil, ekranlarda. Uranüs İkizler altında bu bilgi akar. Durdurulamaz değil belki. Ama çok daha hızlı.\n\n---\n\n## II. Eski İttifakın Kırılması\n\nİsrail-Filistin. Bu kelimeler artık o eski kulvardan çıktı.\n\n2024\'te başlayan şey Gazze\'de bir savaş değildi sadece. Batı\'nın iç cephesinde de bir kırılmaydı. Amerika Birleşik Devletleri, on yıllar boyunca sürdürdüğü söylemi, demokrasi, insan hakları, uluslararası hukuk, tam da en fazla ihtiyaç duyulan anda sahiplenilmesi gereken yerde terk etti. Bu terk ediliş pek çok şeyi değiştirdi.\n\nÜniversite kampüsleri çalkalandı. Senatörler istifa etti. Askeri yardım paketleri Kongre\'de tartışmaya açıldı. Nesiller arası bir yarık derinleşti: Z kuşağı ve genç millennialler, ebeveynlerinin "gerçekçi dış politika" diye savunduğu şeye karşı duruyor. Bu bir idealizm meselesi değil. Bir bilgi akışı meselesi. Ceplerdeki telefonlar Gazze\'den görüntü aktarıyor. Filtre yok, gecikme yok, düzenleyici arabulucu yok.\n\nUranüs İkizler bu dinamiği güçlendirir. İkizler\'in alanı haber, söylem, bilgi kanalları, dil. Uranüs burada eski frekansları bozar, yeni taşıyıcı dalgalar açar. NATO içindeki Türkiye tartışmaları, BRICS+ genişlemesi, dolar egemenliğinin sorgulanması: bunlar birbirinden bağımsız gelişmeler değil. Tek bir sistemin farklı noktalarından çıkan çatlaklar.\n\nAmerika-İsrail ekseninin kırılması tam burada: artık eski ittifak dilinin tutması için gereken enformasyon kontrolü sağlanamıyor. Ve bu kontrolsüzlük, Uranüs\'ün yedi yılında giderek derinleşebilir.\n\n---\n\n## III. Bu Daha Önce Oldu\n\nUranüs\'ün döngüsü 84 yıl. İkizler\'e her girişinde aynı şey tekrar etmez. Ama aynı frekans çalar.\n\n**1942–1949.** Uranüs İkizler\'deydi, dünya yanıyordu. Türkiye tarafsız kaldı. Hem Almanya\'ya krom sattı hem İngiltere ile anlaşmalar imzaladı. Hem yanında hem karşısında olmak: İkizler\'in eski taktiksel dili. Savaş bittiğinde, masanın doğru tarafında oturabilmek için yeni bir dil öğrenmek gerekiyordu. 1945\'te BM\'ye girdik. 1952\'de NATO\'ya katıldık. Batı\'nın alfabesi öğrenildi. Ya da öğrenilmiş gibi yapıldı.\n\nBu geçiş bir bilinç dönüşümü değildi. Bir kod değişikliğiydi. Eski kelimelerin yerine yeni kelimeler yazıldı: demokrasi, ittifak, Batılı değerler. Ama cümlenin grameri aynı kaldı. Hayatta kalmak için güçlünün yanında durmak.\n\n**1858–1865.** Islahat Fermanı 1856\'da imzalandı, Tanzimat\'ın ikinci büyük dalgası. Osmanlı, Avrupalı devletlerin basıncıyla gayrimüslimlere eşit haklar tanıdığını ilan etti. Dışarıdan bakılınca bir reform. İçeriden bakılınca bir hayatta kalma manevrasıdır. Aynı dönemde Osmanlı, İngiliz ve Fransız bankalarından ilk büyük dış borçları aldı. Tanzimat\'ın dili: "medeniyet." Medeni olmak, Avrupalı olmak. Borçlanmak, reformu finanse etmek, karşılığında yabancı sermayeye kapıları açmak.\n\nHer iki dönemde de ortak şema: **global bir kırılma, yeni bir güç geometrisi, Türkiye ya da Osmanlı\'nın hangi dili konuşacağına dair bir seçim.** Ve her iki dönemde de kısmen öğrenilmiş, kısmen sahte, kısmen zorunlu bir dil değişikliği. Yeni kelimeleri öğrenmek, kelimenin arkasındaki gerçeği değiştirmiyor.\n\n2026–2029. Üçüncü tur.\n\n---\n\n## IV. Türkiye: Altın Hücumunun Ortasında\n\nTC natal haritası 29 Ekim 1923, saat 20:30, Ankara. Güneş Akrep 6°. Sabian sembolü: *A Gold Rush. The Pursuit of Happiness.* Altın hücumu. Mutluluğun peşinde koşma.\n\nBirkbeck bu sembole şöyle uyarıyor: *"Watch out for… outright greed and amoral opportunism. …losing what is of real value in pursuit of something of notional or perceived value."* Gerçek değeri, görünürde değerli olanı kovalayarak kaybetme riski.\n\nAma tuzak açgözlülük değildir. Asıl tuzak hızdır. Herkes koşuyor, sen de koşmak zorunda hissediyorsun, durduğunda geride kalıyorsun. Ve tam da durduğunda görebileceğin şeyi hiç göremiyorsun. Ne için koştuğunu.\n\nBu cumhuriyet, kuruluşundan bu yana altın hücumunun ortasındadır. Bazen gerçek altın, bazen sahte. Bazen Batı ittifakı, bazen Doğu eksenine kayış. Bazen laik modernleşme, bazen dini muhafazakârlık. Her dönem bir öncekinin mirasını sormaktan kaçındı. Her dönem kendi altın nuggetını bulduğunu sandı.\n\nŞimdi, Uranüs İkizler\'in TC natal haritasına dokunduğu noktalara bakın.\n\n**Güneş Kare Uranüs, 0.57°.** Devletin kimliği baskı altında. Cumhuriyet tanımı yeniden yazılmaya zorlanıyor. Bu pasif bir süreç değil: aktif bir gerilim. Kim olduğumuzu söylediğimiz ile ne yaptığımız arasındaki mesafe açılıyor.\n\n**Satürn Kare Uranüs, 0.46°.** Kurumsal iskelet çatırdıyor. Yargı, ordu, bürokrasi; otoritenin taşıyıcıları beklenmedik baskılarla karşılaşıyor. Ama bu aynı zamanda köhnemiş yapıların zorla yenilenmesi anlamına geliyor.\n\n**Plüton Kare Uranüs, 0.83°.** Güç yapıları altüst oluyor. Gizliden açığa geçiş. Bu Plüton\'un işi. Ve Sedna kavuşumu 0.03° ile birleşince, bir şey netleşiyor.\n\n---\n\n## V. Sedna Uyanıyor\n\nSedna, Inuit mitolojisinde denizin dibine gömülmüş tanrıça. Babası tarafından kayığa atıldı. Parmakları kesildi. Battı. Ve denizin dibinden tüm deniz yaratıklarına hükmeder oldu. Bastırılmış travmanın, derinlere gömülmüş gerçeğin sembolü.\n\nTC natal haritasında Sedna, Uranüs\'e 0.03° kavuşumda. Bu hata payı neredeyse yok.\n\nTürkiye\'nin bastırdıkları: Ermeni meselesi. Kürt meselesi. 1 Temmuz\'lar, 12 Eylül\'ler, 28 Şubat\'lar. Kaybedilenler, yargılanmayanlar, arşive kaldırılanlar. Devletin resmi hafızası ile toplumun yaşayan hafızası arasındaki mesafe.\n\nUranüs bu kavuşuma dokunduğunda, dokunuyor, 0.03° ile, Sedna yüzeye çıkar. Mecazi değil, literal: bastırılmış gerçekler, gizlenen arşivler, anlatılmayan hikayeler yeniden dolaşıma girebilir. Bu bir iç hesaplaşma olmak zorunda değil. Dışarıdan da zorlanabilir. Uluslararası mahkemeler, yabancı arşivlerin açılması, diaspora aktivizmi, dijital hafıza projeleri.\n\nSedna\'nın uyanışı bir intikam değil. Bir tamamlanma. Denizin dibindeki tanrıça, denizin tüm canlılarına hükmedebilmek için önce ölmek zorundaydı.\n\n---\n\n## VI. MC Üçgen: Tek Açık Kapı\n\nBütün bu kaos ve baskı içinde, tek akıcı aspekt: **MC Üçgen Uranüs, 0.93°.** Orta Gök: uluslararası itibar, kamusal misyon, tarihin önündeki konum.\n\nÜçgen bir armağandır, ama pasif bir armağan. Almak için bir şey yapmak gerekir. TC haritasında bu şunu söylüyor: bu dönemde Türkiye, uluslararası arenada beklenmedik bir pozisyon avantajı elde edebilir. Eğer eski ittifak dilini terk edip yeni frekanslara ayar yaparsa.\n\nGlobal kırılmanın geometrisine bakın: Amerika-İsrail ekseni sarsılıyor, BRICS genişliyor, Küresel Güney ağırlığını hissettiriyor, tahıl koridorları yeniden müzakere ediliyor. Türkiye, coğrafi ve siyasi konumu itibarıyla bu geometrinin birden fazla köşesinde duruyor. Bu henüz bir güç değil. Ama potansiyel. Ve potansiyeli potansiyel olarak tutmak, Altın Hücumu sembolünün en büyük tuzağı.\n\n---\n\n## VII. Cam Tabanlı Tekne Bize Ne Soruyor\n\nUranüs İkizler\'in sorusu basit görünüyor: *Ne anlatıyorsun ve neden?*\n\nDevletlere, medyaya, kurumlara yönelik. Ama aynı zamanda hepimize.\n\nEpstein ağının görünür hale gelmesi, iktidarın kendini nasıl koruduğunu açıkça ortaya koyuyor: enformasyon kontrolü. O kontrol sarsıldığında sistem yıkılmıyor. Ama çatlak derinleşiyor.\n\nAmerika-İsrail kırılması, siyasi bir kopuştan önce anlatısal bir kopuştur. Hikaye artık tutmuyor. Yeni bir jenerasyon, eski anlatının içindeki tutarsızlıkları kuşak hafızasından değil, ekran başında canlı izleyerek görüyor. Fark büyük. Devralınan bir şüphe değil, bizzat gözlemlenen bir çöküş bu.\n\nTürkiye için bu dönem, ve arkasından gelen yıllar, bir seçim anıdır. Sedna\'nın bastırdığı her şeyle yüzleşmek ya da tekrar bastırmak. Altın hücumunun notional değerlerini kovalamak ya da gerçek değeri aramak. MC üçgeninin açtığı kapıdan geçmek ya da kapıyı görmezden gelmek.\n\nVe bu ülke en çabasızca şunu yapıyor: İslam ile laik, Doğu ile Batı, hafıza ile inkâr. Hepsini aynı anda, aynı bedende taşımak. Başka ülkeler bunu bir tercih olarak yapıyor. Bu topraklar onu neredeyse farkında olmadan yapıyor.\n\nBunu özgürce yapabilse, sorun gibi görünen şeyler engel olmaktan çıkıyor.\n\nCam tabanlı tekne, suyu dalgalandırmaz. Sadece gösterir.\n\n---\n\n*Uranüs Gemini 1°: A glass-bottomed boat in still water. Insight through calm transparency.*\n\n*TC natal Güneş Scorpio 6°: A Gold Rush. The pursuit of happiness — and the risk of losing what is of real value in pursuit of something notional.*\n\n*Sedna kavuşum Uranüs 0.03°. Bu hata payı, neredeyse yok.*',
+      sniper: 'Cam tabanlı tekne, suyu dalgalandırmaz. Sadece gösterir.',
+      substackUrl: null,
+      date: '2026-05-02',
+      readTime: 13,
+      featured: false,
+      author: 'HOV!'
+    },
+    {
+      id: 'amerika-uranus-donusu',
+      title: 'Amerika Son Uranüs Dönüşünde <em>Dünya Savaşına Girdi</em>',
+      category: 'Mundane',
+      icon: '◈',
+      excerpt: 'ABD\'nin 84 yıllık sıfırlaması başladı. Üç aks aynı anda tetikleniyor. Sabian sembolü: An Industrial Strike.',
+      body: '84 yıllık sıfırlama başladı. Üç aks aynı anda tetikleniyor. Ve Sabian sembolü bir endüstriyel grev.\n\n*Whose Life Was This Anyway? — Ülke Edisyonu*\n\n---\n\nAmerika Birleşik Devletleri\'nin astrolojik haritası Sibly haritası olarak bilinir: 4 Temmuz 1776, 17:10, Philadelphia. Yay yükselen. O haritada Uranüs 8° İkizler\'de, altıncı evde oturuyor.\n\nUranüs Güneş\'in etrafını 84 yılda dolanır. Bir ülkenin natal haritasında doğduğu dereceye döndüğünde, o ülke yapısal bir yeniden yazım dönemine girer. Reform değil. Ayarlama değil. İşletim sistemi değişikliği. Hiçbir insan kişisel Uranüs Dönüşü yaşayamaz, ömür yetmez. Ama devletler insanlardan uzun yaşar.\n\n26 Nisan 2026\'da Uranüs İkizler\'e 0° ile girdi. 8°\'ye ulaşması, yani dönüşün tam olması, 2026 sonu ile 2027 arasında gerçekleşecek.\n\nBunun en son olduğu yıl: 1942.\n\n---\n\n## 1942\n\nPearl Harbor Aralık 1941\'di. Uranüs natal derecesine vardığında, 1942-43\'te, Amerika modern tarihin en hızlı yapısal dönüşümlerinden birini yaşamıştı.\n\nOn yıllık izolasyonist politika haftalar içinde çöktü. Otomobil fabrikaları tank üretti. Sivil ekonomi savaş ekonomisine döndü. Kadınlar, kimsenin planlamadığı bir ölçekte endüstriyel işgücüne girdi. Manhattan Projesi başladı. Teorik fizik gizlice, olmaması gereken bir hızda silaha dönüştü.\n\nSavaş bittiğinde Amerika geri çekilmedi. Bretton Woods, NATO, Marshall Planı. Doların dünya rezerv para birimi olması. BM\'nin New York\'a yerleşmesi. Uranüs Dönüşü\'nden çıkan ülke, girenden farklıydı.\n\nAltıncı ev, emek, günlük operasyonlar, sağlık, askerlik hizmeti: hepsi kökten yeniden yapılandırılmıştı. Ve tüm bunların gerçekleştiği derecenin Sabian sembolü? Ona geleceğiz.\n\n---\n\n## Altıncı Ev: Uranüs\'ün Evi\n\nSibly haritasının çoğu okuması yedinci eve takılır. Güneş, Venüs, Jüpiter ve Merkür\'ün Yengeç\'te toplandığı devasa küme, Amerika\'nın ilişki mimarisini tanımlar. O küme önemli, ona da değineceğiz. Ama Uranüs Dönüşü yedinci evde gerçekleşmiyor. Altıncı evde gerçekleşiyor.\n\nMundane astrolojide altıncı ev emek ve emekçi sınıfları, halk sağlığını, askerlik hizmetini, kamu hizmetini, ulusal altyapıyı yönetir. Bir ülkeyi ayakta tutan günlük makine. Rulership Book açıkça atıyor: *labor, laborers, labor forces, Labor Party, places of labor.*\n\nNatal Uranüs\'ün altıncı evde olması, bozulmanın Amerika\'nın emek DNA\'sına işlenmiş olduğu anlamına gelir. Ülke erken sanayi devrimi sırasında kuruldu. Ekonomisi her kuşakta teknoloji tarafından yeniden yapılandırıldı. Çırçır makinesi, demiryolu, montaj hattı, bilgisayar, internet. Her seferinde işgücü şoku absorbe etti ve yeniden inşa etti. Altıncı evde İkizler\'de Uranüs: bozulma her zaman bilgi teknolojisinin emeğe uygulanmasıyla gelir.\n\nUranüs Dönüşü şunu söylüyor: mevcut emek düzeni ne ise, yakında tanınmaz hale gelecek. 1942\'de bu, sivil sanayinin bir gecede savaş üretimine dönüştürülmesi demekti. 2026\'da en belirgin aday yapay zeka. Teorik bir bozulma olarak değil, operasyonel bir bozulma olarak. Altıncı ev düşünce deneyleriyle ilgilenmez. Pazartesi günü işe kimin geleceğiyle ve o işin hâlâ var olup olmadığıyla ilgilenir.\n\n---\n\n## 3-9 Aksı: Bilgi ve Doktrin\n\nUranüs İkizler\'den transit geçerken İkizler-Yay aksını burç olarak aktive eder. Sibly haritasında bu, ufuk hattının kendisidir: Yay Yükselen, İkizler Alçalan. Ama İkizler\'in doğal olarak yönettiği ev aksı üçüncü ve dokuzuncu.\n\nÜçüncü ev Kova\'da. Mundane astrolojide bu iletişim altyapısı, medya, ulaşım, komşu ülkelerle ilişkiler demek. Ulusun bilgi sinir sistemi. Sibly haritasının natal Ay\'ı 27° Kova\'da burada oturuyor. Bir ulusal haritada Ay halktır. İnsanlar. Kolektif ruh hali. Amerika\'nın halkı üçüncü evde yaşıyor, gerçekliği medya üzerinden, ağlar üzerinden, enformasyon üzerinden işliyor. Kova\'da Ay: gerçeği zaten bildiğine inanan bir seçmen kitlesi.\n\nTransit Uranüs 0° İkizler\'den bu Ay\'a kare yapıyor, orb 2.9°, 2026 boyunca daralıyor. Bu, kamusal mutabakatın bozulması. Aşınma değil. Kırılma.\n\nTransit Plüton 5° Kova\'da da üçüncü evde, natal Ay\'a aynı burçtan yaklaşıyor. Plüton bozmaz. Çürütür. Medya ortamı sadece değişmiyor. Zemin çözülüyor. Yerini alacak şey henüz oluşmadı.\n\nDokuzuncu ev Aslan\'da. Dış politika doktrini, yargı, yüksek öğretim, anayasal çerçeveyi bir arada tutan hukuk felsefesi. 30 Haziran\'da Jüpiter Aslan\'a giriyor, Sibly haritasının dokuzuncu evine. Jüpiter Sibly Yükseleni\'ni yönetiyor. Harita yöneticisi dokuzuncu eve girdiğinde, ulusun öz imgesi dünya sahnesine maksimum sesle yansıtılır. Dokuzuncu evde Aslan\'da Jüpiter: Amerika kendi mitolojisini yüksek sesle sergiliyor, artık izlemiyor olabilecek bir izleyici kitlesi için.\n\n2026\'nın ikinci yarısında tablo şu: iç bilgi ortamı parçalanırken dış politika aygıtı şişiyor. Temel gerçekler üzerinde içeride giderek anlaşamayan, ama dışarıya güven yansıtan bir ülke. Bu yapısal bir çelişki. Görüş değil.\n\n---\n\n## 5-11 Aksı: Spekülasyon ve Yasama\n\nBeşinci ev Koç\'ta. Spekülasyon, finans piyasaları, eğlence, çocuklar, kültür üzerinden ifade edilen ulusal moral. Şu anda transit Satürn, Neptün ve Mars hep Koç\'tan geçiyor.\n\nBeşinci evde Satürn spekülasyonu kısar, kültürel ifadeyi sıkıştırır. Beşinci evde Neptün eğlence ile gerçeklik arasındaki sınırı eritir. Ya da piyasa değeri ile gerçek değer arasındakini. İkisi aynı anda mevcut.\n\nTransit Neptün 3° Koç\'ta natal Venüs\'e 3° Yengeç\'te kare yapıyor, orb 0.02°. Neredeyse tam. Mundane haritada yedinci evdeki Venüs diplomasi ve ticaret ittifaklarını yönetir. Neptün beşinci evden kare yaparken sis dışarıdan gelmiyor. İç spekülasyon makinesinden geliyor. Piyasalar, eğlence-medya kompleksi, performans kültürü diplomatik gerçekliğe sızıyor. İttifaklar karışıyor; düşmanlar akıllı olduğu için değil, ülke artık bir anlaşma ile bir gösteri arasındaki farkı ayırt edemediği için.\n\nOn birinci ev Terazi\'de. Ulusal amaçlar, ittifaklar, arzular, projeler. Amerikan bağlamında Kongre. Yasama organı. Natal Satürn 14° Terazi\'de onuncu evde oturuyor ama on birinci ev üzerinde uzun bir gölge düşürüyor. O Satürn anayasal yapının kendisidir. Kurumsal iskelet.\n\nTransit Uranüs 0° İkizler\'den natal Satürn\'e sesquikadrat yapıyor, orb 0.22°. Neredeyse tam. Sesquikadratlar sürtünme aspektleridir. Karenin doğrudan yüzleşmesi değil, ama sonunda yapısal yanıt vermeye zorlayan kalıcı tahriş. Bilgi devrimi ile kurumsal çerçeve arasındaki ilişki, aşındıran bir gerilimdir. Kurumlar bu hız için inşa edilmedi. Bilgi umursamıyor.\n\n11 Ekim: 18° Terazi Yeniayı, natal Satürn\'e 4° uzaklıkta. Anayasal yapıya ekilmiş bir tohum. Ya yenilenme ya da hesap verme.\n\n---\n\n## Yedinci Ev Kümesi: Müttefiklerin Kim Şimdi?\n\nYedinci evdeki Yengeç stelliumu, Güneş 13°, Venüs 3°, Jüpiter 5°, Merkür 24° retrograd, Amerika\'nın ilişki mimarisinin temelidir. İttifaklarıyla tanımlanan ülke. Koruyucu. Masayı kuran.\n\nHaziran ile Ekim 2026 arasında bu küme tekrar tekrar tetikleniyor.\n\n15 Haziran. 24° İkizler Yeniayı, natal Mars\'a 3° uzaklıkta. Mars yedinci evin eşiğini tutuyor. Bu tarih civarında başlayan her konuşma tırmanacak.\n\n29 Haziran. Mars İkizler\'e giriyor. Natal Uranüs\'ün, ardından natal Mars\'ın üzerinden geçiyor. Çatışma gezegeni bozulma bölgesine giriyor, düşmanlar ve müttefikler evinde.\n\n14 Temmuz. 22° Yengeç Yeniayı, doğrudan natal Merkür-Güneş kümesinin üzerinde. Diplomatik tohumlar. Ya da diplomatik el bombaları.\n\n11 Ağustos. Mars Yengeç\'e giriyor, yedinci ev stelliumunun tamamı üzerinden transit geçmeye başlıyor. Mars natal Venüs\'ün üzerinden geçer önce, ticaret sürtünmesi. Sonra Jüpiter, ittifak gerginliği. Sonra Güneş, yürütme ile yüzleşme. Altı haftalık aktivasyon.\n\n28 Ağustos. 9° Balık Ay Tutulması. Değişken burç. Tutulma aksı İkizler-Yay Yükselen-Alçalan hattıyla T-kare oluşturuyor. Ulusal haritanın ufuk aksındaki tutulmalar kimlik eşiklerini işaretler. Felsefe olarak "biz kimiz?" değil. Operasyonel olarak "şimdi biz kimiz?" sorusu.\n\n---\n\n## Sabian Sembolü\n\n8° İkizler\'in Sabian derecesi, Amerika\'nın natal Uranüs\'ünün oturduğu, dönüşün tamamlanacağı yer:\n\n*An Industrial Strike. Endüstriyel Grev.*\n\nBirkbeck\'in yorumu: örgütlü protesto. Sistemin konumunu kullanarak sıradan bireyden mümkün olduğunca çok şeyi mümkün olduğunca aza karşılık aldığı bir zaman. Ve drastik önlemlerin zorunlu hale geldiği an.\n\nBu, astrolojinin üzerine katlanmış bir metafor değil. Astrolojinin kendisi bu. Altıncı evde, bir iş durması sembolü taşıyan derecede natal Uranüs. Ülke bu gerilimle kodlanmış olarak doğdu: makine işçiye ihtiyaç duyar, işçi makineye ihtiyaç duyar, ve periyodik olarak koşulların kökten yeniden müzakere edilmesi gerekir.\n\n1942\'de yeniden müzakere istemsizdi. Bir dünya savaşı zorladı. Sivil işgücü bir gecede askeri-endüstriyel işgücüne dönüştü. Koşullar değişti çünkü hayatta kalmak bunu gerektirdi.\n\n2026\'da makine çelikle değil veriyle çalışıyor. İşgücü savaş seferberliğiyle değil, otomasyonla, algoritmik yönetimle, bilişsel emeği gerçekleştirebilen yapay zeka sistemleriyle yeniden yapılandırılıyor. Altıncı ev sorusu 1776\'da da, 1860\'ta da, 1942\'de de aynıydı: makineyi kim çalıştırıyor, makineden kim faydalanıyor, ve yeterince insan mevcut düzenin artık işlemediğine karar verdiğinde ne oluyor.\n\n---\n\nBir Uranüs Dönüşü ne olacağını söylemez. Belirli bir büyüklükteki değişim için yapısal koşulların ne zaman zirveye ulaştığını söyler. Dönüş diyor ki: önümüzdeki 18 ay, 1942-1944 ile aynı enerjetik imzayı taşıyor. Aynı olayları değil. Aynı ölçekteki yeniden yazımı.\n\nÜç aks aynı anda aktive oluyor. Bilgi ve doktrin. Spekülasyon ve yasama. Ben ve öteki. Natal Ay\'a kare. Natal Venüs\'e sis. Natal Satürn\'e aşınma. Ve hepsinin altında, altıncı evde, endüstriyel grevin derecesi: koşullar değişene kadar makine duruyor.\n\nAmerika\'nın bununla ne yapacağı, yeniden yazımın bilinçli mi felaket mi, seçilmiş mi zorlanmış mı olacağı, haritada yok. Hiçbir zaman olmadı.\n\nHarita baskıyı gösterir. Tepki insana aittir.\n\n⌁\n\n*Harita kader değildir. Ama harita gerçektir.*\n\nHOV!\nMayıs 2026',
+      sniper: 'Harita baskıyı gösterir. Tepki insana aittir.',
+      substackUrl: null,
+      date: '2026-05-02',
+      readTime: 11,
+      featured: false,
+      author: 'HOV!'
+    },
+    {
+      id: 'kulaga-izin-vermek',
+      title: 'Kulağa İzin Vermek',
+      category: 'Deneme',
+      icon: '✦',
+      excerpt: 'Onyedi yaşındaydım. Bir parçanın sonunda piyanonun son iki tuşu uzun uzun asılıydı havada. Şimdi kırkında. Aynı albüm, aynı parça. İki tuş hâlâ orada.',
+      body: 'Onyedi yaşındaydım. Truffaz\'ın *Dawn* albümünü ilk kez dinlediğimde, bir parçanın sonunda piyanonun son iki tuşu uzun uzun asılıydı havada. Sub-bass bölgesinde, sustain\'in dağıldığı, ötede duran iki nota. Başka bir şey olmuyordu. Sadece o iki tuş. İçimde bir şey kırıldı, tarif edemediğim bir şey.\n\nŞimdi kırk yaşındayım. Aynı albüm, aynı parça. İki tuş hâlâ orada.\n\nAma ben mi değiştim, yoksa ses mi değişti?\n\n## Klişenin Asıl Tanımı\n\nİnsan o anı tekrar tekrar aradığında — o ilk kırılma anını — bir şüpheye düşer: bu hâlâ gerçek mi, yoksa nostaljim mi konuşuyor? Hatta daha kötü bir soru: bu iki tuş artık **klişe** mi?\n\nKlişenin ne olduğu konusunda genelde yanılıyoruz.\n\nKlişe yaşın ürünü değil. On yıl önceki o sahne, yirmi yıl önceki o söz, otuz yıl önceki o akor; hiçbiri doğası gereği klişe değildi. Klişeyi yapan şey tekrardır, evet, ama tekrarı klişeye çeviren asıl şey **ön-bilmedir**. Duymadan önce bildiğim bir şeyin üstünden geçmek: bu klişedir. Duymadan önce bilmediğim bir şeyi ilk kez duymak: bu mucizedir. Her yaşta.\n\n## İlk Dinlemenin Kaybı, Haritanın Kazancı\n\nİlk dinleme her yaşta mucizedir. Problem şu: zihin büyüdükçe ilk dinlemeler azalır. Her şey bir şeye benzer. Bir akor duyarsın, "bu Miles Davis\'in *Kind of Blue* kalıbı" dersin. Bir cümle okursun, "bu Rilke\'den bir şey çalıyor" dersin. Bir sahne görürsün, "Tarkovski\'nin *Ayna*\'sı gibi" dersin. İlk dinleme yok olur. Yerine bağlantı haritası geçer.\n\nBu bir kayıp.\n\nAma aynı anda bir kazanç.\n\nKayıp açık: şeyin kendisini artık yalnız göremiyorsun. Artık her şey, başka bir şeyin aynası veya kuzeni veya gölgesi. Saf karşılaşma bitiyor.\n\nKazanç daha az açık, ama daha kalıcı: **artık haritayı görüyorsun**. İlk dinleme sana sadece şeyi verirdi. Bağlantılar sana şeyin yerini veriyor. Hangi ormanın içinden çıktığını, hangi nehre bağlandığını, hangi deniz kenarında son bulduğunu.\n\nBu ayrı bir zevk. Daha sakin, daha az kırıcı, daha derin.\n\nYirmi yaşındaki ilk dinleme kırıcıdır. Kırk yaşındaki tanıma sakindir. İki farklı mucize.\n\n## Mesafeler ve Klasikleşen Ses\n\nPeki Truffaz\'ın o iki tuşu, klişe mi şimdi?\n\nHayır. Ama artık başka bir şey.\n\nİlk dinlemede bu iki tuş **tek başına** mucizeydi. Şimdi aynı iki tuş, kafamdaki yüzlerce piyano bitişi arasında bir yer alıyor. Bill Evans\'ın *Peace Piece*\'i bir yan komşu. Satie\'nin *Gymnopédies*\'i bir sokak ötesi. Keith Jarrett\'ın *Köln Concert*\'inde bir pencere. Nils Frahm\'ın *Says*\'i, gecenin içinde sürekli açık kalan bir kapı. Max Richter\'in *Horizon Variations*\'ı, aynı sessizliğin başka bir odası.\n\nİki tuş aynı titreşimde çalıyor hâlâ. Ama etrafında daha büyük bir sessizlik var artık. Daha tanıdık, daha derin, daha nüfuz eden bir sessizlik.\n\nBir zamanlar bir parça tek başınaydı. Sonra yanına bir tane daha geldi, sonra bir tane daha. Ve ben fark ettim ki, fark etmeden, aralarındaki mesafeleri ölçmeye başlamışım. Tam burada bir şey değişiyor. Parçalar artık parça değil; bir yıldız haritasının noktaları. Mesafelerin kendisi anlam taşımaya başlıyor.\n\nTanıdıkça bir şey klasikleşir. Klasikleştikçe, ilginçtir, ya yozlaşır ya türetir. Yozlaştığında: iki tuşu duyduğunda "evet, bildik" deyip geçersin. Türettiğinde: o iki tuştan çıkıp başka bir şeye varırsın, yeni bir cümle söylersin, hiç olmayan bir mesafeyi ölçersin. Belki de bizi biz yapan şey bu mesafelerdir. Hatırladığın bir ses ile şu an duyduğun ses arasındaki yirmi yıl. Bir anı ile başka bir anı arasındaki sessiz boşluk. Mesafeler silinip her şey birbirine benzediğinde klişeye gireriz belki de. Klişe, aslında, mesafesizliktir.\n\nAma zihin, iyi kullanıldığında, içini doldurur ve o doluluğun içinde yeni boşluklar keşfeder. Büyüyen bir şeyin önünde duruyorum sanki. Ve ister istemez aklıma geliyor: acaba bu zihnin hareketi, daha büyük bir şeyin küçük bir yansıması mı?\n\n## Evren Genişliyor, Zihin Doluyor\n\nVe işte burada hermetik soruya geliyoruz: **evren de zihin gibi büyüyor mu?**\n\nHermes\'in aynası der ki: yukarıda ne varsa, aşağıda da o var. *As above, so below.* Kozmik düzey, psişik düzeyin kardeşidir. O zaman şunu sormak meşru: evren genişliyor, zihin büyüyor; ikisi aynı şey mi?\n\nGözlemcilerin son elli yıllık ölçümleri gösteriyor: evren genişliyor, ama daha hızlı. Hız sabit değil, artıyor. Yani evren sadece büyümüyor; büyümenin hızı da büyüyor. Bu ne demek? Galaksiler arasındaki **boşluk** büyüyor. Madde büyümüyor, madde yerli yerinde. Aradaki boşluk sürekli açılıyor.\n\nZihin tam tersine büyüyor. Zihin büyüdükçe **içerik** artıyor. Daha fazla kitap, daha fazla ses, daha fazla karşılaşma, daha fazla bağlantı. İçerik dolar.\n\nİki hareket birbirinin aynası mı?\n\nBence evet, ama beklenmedik bir biçimde. Evren **boşluk** büyütürken, zihin **içerik** büyütüyor. Birinde açılma dışarı, diğerinde içeri. İkisi de büyüyor. Yön zıt, hareket aynı.\n\nVe burada şaşırtıcı bir şey oluyor: **zihin ne kadar dolarsa, o kadar çok iç-boşluğa ihtiyaç duyar.** Çünkü içerik yalnız duramaz; içeriğin nefes alması için arada boşluk gerekir. Çok kitap okumuş biri sustuğunda bu yüzden daha derin susar. Çok müzik dinlemiş biri iki tuşun arasındaki sessizliği daha çok duyar.\n\nOlgunlaşma içeriğin dolmasından çok, **boşluğun tanınmasıdır.**\n\n## İki Tuş Hâlâ Orada\n\nO piyanonun son iki tuşu hâlâ aynı titreşimde. Değişen ben miyim, Truffaz mı?\n\nİkimiz de değiliz.\n\nDeğişen şey aradaki sessizliktir. Yirmi yıl önce o iki tuş sustuğunda, etrafında küçük bir sessizlik vardı. Şimdi sustuğunda, etrafında yirmi yıllık bir sessizlik var.\n\nİlk dinleme değil bu. Ama tanıma. Ve belki asıl bilgelik orada: **klişe olmayan tek şey, klişenin etrafında büyüyen sessizliktir.**\n\nKulağa izin vermek budur.\n\nDuyduğuna değil, duyduktan sonraki boşluğa izin vermek. Zihnin o boşlukta ne yaptığına izin vermek. Yirmi yıl önce o iki tuş kulağı deldi. Şimdi kulaktan geçip sessizliğin içine yerleşiyor, orada oturuyor, orada büyüyor.',
+      sniper: 'Sessizliğin büyümesi ne zaman klişe olur? Hiçbir zaman.',
+      substackUrl: null,
+      date: '2026-04-22',
+      readTime: 9,
+      featured: false,
+      author: 'HOV!'
+    },
+    {
+      id: 'tuzun-ve-atesin-psikodinamigi',
+      title: 'Tuzun ve Ateşin <em>Psikodinamiği</em>',
+      category: 'Mundane',
+      icon: '◈',
+      excerpt: 'Gandhi tuzu kaldırdı. 2026\'da biz gerçeği kaldıracağız. Koç-Terazi dolunayı, Türkiye\'nin natal Plüton\'una cerrahi hassasiyetle kare yapıyor.',
+      body: '*Bu yazı, 2 Nisan 2026 Koç-Terazi dolunayı öncesinde kaleme alındı. Tarih geçti, ama tuz hâlâ masada. Okurken kendinize sorun: o gece, ya da o hafta, avucunuzdaki tuzu fark ettiniz mi?*\n\n---\n\nGeometri yalan söylemez, sadece bazen biz duymak istemeyiz. İki Nisan 2026 tarihinde, Ay Terazi ve Güneş Koç aksında on iki derece yirmi bir dakikada karşı karşıya geldiğinde, gökyüzü Türkiye\'nin kuruluş haritasındaki natal Plüton\'una sıfır nokta sıfır iki derece gibi sarsıcı, neredeyse "cerrahi" bir hassasiyetle kare yapıyor. Bu bir tahmin ya da temenni değil; bu bir kolektif bilinçdışı sarsıntısı. Bir ülkenin güç yapısına, dönüşüm hafızasına ve o meşhur "yıkılıp yeniden doğma" döngüsüne indirilen bir balyoz darbesi. Artık o kapının nerede olduğunu ve neye açıldığını biliyoruz: Bu kapı, yıllardır iliklerimize işleyen o "onaylanma bağımlılığı" hapishanesinden, kendi öz kaynaklarımızın çıplak ve sert gerçekliğine açılan mutlak eşiktir.\n\nTarihin tozlu ama diri bir sayfasını açalım: On iki Mart 1930. Altmış yaşında, çıplak ayaklı bir adam, elinde sadece bir asayla sessizce yola çıktı. Mahatma Gandhi, arkasında bir orduyla değil, sadece sarsılmaz bir kararla yürüyordu: "Denize yürüyeceğim ve kendi tuzumu alacağım." Üç yüz seksen sekiz kilometre boyunca her köyden birileri eklendi; çiftçiler, dokumacılar, anneler... Kimse silah kuşanmadı ama herkes uyandı. Altı Nisan\'da Dandi kıyısına ulaştığında, eğilip yerden o bir avuç çamurlu tuzu kaldırdığında koca bir imparatorluk titredi. Çünkü en basit şey, aynı zamanda en tehlikeli olandır: Kendi ihtiyacını kendin karşılayabileceğini hatırlamak.\n\nİki Nisan 2026 dolunayı Türkiye\'nin tepesinde patladığında, gökyüzü bize bu "Tuz" hikayesini modern bir dille yeniden anlatacak. Türkiye\'nin Akrep olan o derin ve krizden beslenen ruhu, Koç-Terazi aksındaki bu gerilimle sarsılırken, karşımıza çıkan manzara tam bir "Mutfakta İhtilal" senaryosudur. Diplomasiyi, dengeyi ve "aman tadımız kaçmasın"cılığı temsil eden Terazi yerleşimlerimiz, Koç\'taki o pervasız ve tavizsiz eylem enerjisiyle kuşatılmış durumda. Bu süreci biz "Operation Springe"* olarak adlandırıyoruz. Bu bir dış müdahale değil, içeride biriken basıncın artık tencereyi patlatma noktasına gelmesi; sınırların eridiği ve eski kimliğin kabuk değiştirerek yeni bir bilince sıçradığı o kaçınılmaz kırılma anıdır.\n\nPsikodinamik açıdan bu süreç, toplumun o meşhur "onay hapishanesinden" çıkış biletidir. Yıllardır "başkaları ne der, dünya ne düşünür?" diye süzülen o bulanık suyun, artık bir Consommé titizliğiyle arıtılma vaktidir. Otuz\'da filtre tuzdu; basit, net ve hayati. Yirmi altı\'da ise filtreniz bizzat kendi duyularınız, sezgileriniz ve o hiç silinmeyen kök hafızanız olacak. Unutmayın, krizdeki bir toplum kendi krizinden filtre üretir. Tıpkı yumurta akının et suyundaki tüm tortuları toplayıp yüzeye çekmesi gibi, bu dolunay da kolektif hafızadaki tüm bağımlılık ve korku tortularını yüzeye çıkaracaktır.\n\nBu bir bahar başlatma operasyonudur. Ama şunu bil: Bahar her zaman çiçeklerle gelmez; bazen Gandhi\'nin ayaklarındaki tozla, bazen de avucundaki çamurlu tuzla gelir. Türkiye\'nin ocağı hep yanıyor ama İki Nisan\'da ocağın üzerindeki tencere devrilmek üzere. Akrep olan bu ülke, o gün kendi "pervasız çocuğuyla" yüzleşecek ve o kadersel eşikten, kimseden izin almadan geçecektir.\n\n**Keskin nişan:**\n\nBin dokuz yüz otuz\'da Gandhi tuzu kaldırdı, Yirmi altı\'da biz gerçeği kaldıracağız. Kendi denizinden tuz çıkarmayana okyanus bile yardım etmez. Artık onay istemeyi bırak; kapı senin önünde, anahtar senin avucundaki tuzda.\n\nŞimdi asıl soru sofrada asılı duruyor: Zehri yedik, peki panzehir hangi kapının ardında? Cevabı uzaklarda arama. Panzehir; Bin dokuz yüz otuz\'da o çamurlu tuzu avuçlayan elin sıcaklığında, İki Nisan 2026\'da ise o korkulan eşiği kimseden izin almadan geçen iradenin tam kalbinde. Kapı açıldı ve karşında tadı kaçmamış ama kendinden çok kaybetmiş bir yansıma göreceksin.\n\nBahar Operasyonu Başlasın.\n\n---\n\n*\\*Springe: Sınırda olma (fringe) ve sıçrama/bahar (spring) kavramlarından türetilen; sistemdeki kadersel kırılmayı ve bilincin bir boyuttan diğerine geçişini tanımlayan teknik-edebi bir terimdir.*',
+      sniper: 'Kendi denizinden tuz çıkarmayana okyanus bile yardım etmez.',
+      substackUrl: null,
+      date: '2026-04-02',
+      readTime: 4,
+      featured: false,
+      author: 'HOV!'
+    },
+    {
+      id: 'gokyuzunun-tuttugu-bir-an',
+      title: 'Gökyüzünün Tuttuğu <em>Bir An</em>',
+      category: 'Mundane',
+      icon: '⊕',
+      excerpt: '17 Ağustos 1999, 03:01:37. Bir depremin yıldız hafızasına bıraktığı imza. Tahmin yok, kader yok — sadece bir gözlem.',
+      body: 'Gökyüzünün Tuttuğu Bir An\n17 Ağustos 1999, 03:01:37. Bir depremin yıldız hafızasına bıraktığı imza.\n\n1999 yazı. Ağustosun ortası. İstanbul\'dan Adapazarı\'na uzanan bir hat boyunca milyonlarca insan uyuyordu. Pencereler açık, fanlar dönüyor, çocuklar serin yastıklara sığınmıştı. Kuzey Anadolu Fay Hattı\'nın altında onlarca yıldır biriken basınç, gece yarısını üç dakika geçe serbest kaldı. Kırk beş saniye sürdü. Bittiğinde Türkiye\'nin yüzyılı değişti.\n\nResmi rakamlar 17.000 ile 45.000 arasında hayat kaybı söylüyor. Bu aralığın genişliği bile o gecenin karanlığını anlatıyor. 300.000\'den fazla insan evsiz kaldı, 120.000 yapı çöktü ya da kullanılamaz hale geldi. Sayılar oldu bunlar. Ama her sayı bir uyku, bir nefes, yarım kalan bir cümle taşıyor.\n\nYıllar sonra bu büyüklükte bir olay sorulduğunda cevaplar farklı yerlerden gelir: bilim, mühendislik, siyaset, ekonomi. Bu yazı başka bir yerden bakıyor. Tahmin yapmıyor, kehanet sunmuyor. Sadece bir soru soruyor: o gecenin gökyüzü, sonradan baktığımızda, neyi tutuyordu?\n\n---\n\nOlay Haritası. Bir Anın Astrolojisi.\n\nMundane astroloji, doğum haritası okumaktan farklı çalışır. Burada bir insan değil, bir olay haritalanır. Zamanı ve yeri olan bir an. Doğal afetler, savaş ilanları, devlet kuruluşları. Olayın gerçekleştiği saatteki gökyüzü sembolik bir kayıt sunar. Fizikle değil, yapısal okumayla ilgilidir bu.\n\n17 Ağustos 1999, saat 03:01:37 (TRT). İzmit Körfezi, 40.748°K, 29.864°D. Bu üç bilgiyle çıkarılan harita, o gece yıldızların duruşunun fotoğrafıdır. Bilim için bir veri değil. Ama o anı tarif etmek isteyenler için bir okuma malzemesi.\n\nAşağıdaki satırlar bunun bir denemesi. Tahmin yok, kader yok, "olacak olan oldu" yok. Sadece bir gözlem: yıldızlar o gece nereye bakıyordu.\n\n---\n\nGece Yarısının İmzası\n\nBu haritanın belki en çarpıcı özelliği bir köşede toplanmıyor. İki köşede birden patlıyor. Yükselen burç eksenine, haritanın doğu kapısına, üç sabit yıldız aynı anda kavuşmuş: Canopus, Sirius, Acubens. Karşı uca, batı kapısına, üç yıldız daha: Alya, Manubrium, Vega. Toplam altı yıldız. İki uçta. Gece yarısının ardındaki o saatte, birden çekilmiş tek bir fotoğrafa girmiş gibiler.\n\nBu yoğunluk az rastlanır. Sabit yıldızlar gökte çok yavaş hareket eder. Belirli bir derece ve belirli bir saat çakışması, hele altı yıldızın iki simetrik eksende toplanması, son derece dar bir koordinat ve zaman penceresinde mümkün olur.\n\nSirius geleneksel astrolojide en güçlü kabul edilen sabit yıldız. Jüpiter ve Mars\'ın birleşmiş tabiatında, büyük olayları işaret ettiği söylenir. Canopus dümencidir. Yön bulan ama büyük yolculuğa çıkana yalnızlık taşıyan bir yıldız. Acubens, Yengeç burcunun pençesi, bataklık ve tehlike sembolizmi taşır. Vega Lir takımyıldızının başı, Venüs-Neptün tabiatında: büyüleyici ama ulaşılmaz olanın imgesi. Alya ve Manubrium, Akrep\'te oturan iki yıldız, Mars-Satürn tabiatıyla keskinlik ve yapısal tahribat çağırır.\n\nBu yorumun bilimsel bir karşılığı yok. Ama bir anı tarif etmenin sembolik bir dili var. O gece doğu ve batı kapılarının ikisinde de büyük olay göstergeleri toplandı. Bir tarafta hız ve yön kayboluşu. Diğer tarafta keskinlik ve kayıp.\n\n---\n\nToprağın Kalbinde\n\nMundane okumada IC, haritanın en alt noktası, toprağı temsil eder. Zemini, halkın evini. Gölcük haritasında IC Başak burcunun sonlarında duruyor. Bu noktaya neredeyse mükemmel bir yakınlıkla Cor Caroli kavuşmuş. "Köpeğin kalbi" demek bu. Latince adı Alpha Canum Venaticorum. Geleneksel sınıflandırmada Merkür-Mars tabiatında: ani aktivasyon, beklenmedik tepki.\n\nToprağın kalbinde bir Mars yıldızı. Bu kadar.\n\nAnalitik anlam da zaten aynı yere çıkıyor: zeminin sembolik noktasına vuran enerji sakin bir yıldız değil. Hızlı çarpıyor, geri durmuyor.\n\nAynı anda haritanın 5. evinde, Yay burcunun başlarında, Plüton retrograd duruyor. Plüton\'a yakın iki şey daha var: Lilith ve Antares. Antares, Akrep\'in kalbindeki kırmızı dev, savaş ve ani toplu ölüm ve geri dönülmez dönüm noktalarıyla bağdaştırılan bir yıldız. Plüton mundane astrolojide yeraltının kendisi. Kelimenin tam anlamıyla: toprağın altından gelen, dönüştüren, geri almayan güç.\n\nPlüton-Lilith-Antares bir zincir kurar. 5. evden başlayan bu zincir, 4. eve, halkın evlerine, çok yakın yerleşimlerle iniyor. Aynı anda Mars kendi evinde, Akrep\'te duruyor. Karşı tarafta Boğa\'da Satürn\'le karşıt açıda. Mars sertliği temsil ederken Satürn yapıyı, kalıcılığı, inşa edileni temsil eder. Mars\'ın Boğa\'daki Satürn\'e karşıt durması mundane okumada oldukça belirgin: yapı çatlar, taş kırılır, beton dökülür.\n\nBu okumalar olayın "nedenini" söylemez. Söylediği şu: yıldızların düzeni, fiziksel olayın tabiatıyla sembolik düzlemde örtüştü. Bu örtüşme bir anlam taşır. Ama o anlam fizikten değil, dilden gelir.\n\n---\n\nYıllar Önce Başlamıştı\n\nBu haritanın en az konuşulan özelliği modal dengesi. Sabit burçlarda dokuz gezegen var. Kardinal burçlarda hiç yok. Mundane astrolojide bu dağılım sıradan değil.\n\nSabit mod birikim demek. Kalıcılık, taşıma kapasitesi. Bir şeyin uzun süre aynı yerde durması, basıncı içinde tutması, bir noktaya kadar dayanması. Kardinal mod ise başlatma, harekete geçirme, dönüm noktası. Haritada sabit baskınsa ve kardinal yoksa okunan şey net: bu olay aniden başlayan bir şey değil. Uzun süre biriken bir şeyin son noktada boşalması.\n\nKuzey Anadolu Fay Hattı\'nın yıllarca biriktirdiği basınç, gökyüzünde de bir karşılık buldu. Yıldızlar bu basıncı yaratmıyor. Ama o gecenin yıldızları, basıncın ne kadar uzun süredir bekletildiğini sembolik olarak kayıt altına aldı.\n\nVe bir detay daha: harita üzerindeki gezegenlerin önemli bir kısmı retrograd. Neptün, Uranüs, Plüton, Venüs, Satürn. Retrograd mundane astrolojide içe dönen, görünmek istenmeyen, dile gelmemiş enerjiyi temsil eder. Yıllarca konuşulmamış altyapı yetersizliği, atlanmış denetimler, görmezden gelinen fay riski. Bu birikimin sembolik karşılığı gökyüzünde retrograd yoğunluğu olarak duruyor. Yıldızlar bu ihmali yaratmadı. Ama ihmalin tablosunu, sonradan bakıldığında, kayıt altına aldı.\n\nUranüs 8. evde, Kova burcunda, retrograd ve Güney Düğüm ile kavuşum halinde. Uranüs sismik aktivitenin, ani kırılmanın klasik mundane göstergelerinden biridir. Güney Düğüm geçmişten taşınan, henüz çözülmemiş yükün sembolüdür. Bu ikisi yan yana geldiğinde okunan şey net: geçmişten gelen bir basıncın, ani bir kırılmayla serbest kalması.\n\n---\n\n1939, 1988, 1999\n\nTek bir olay haritası okumak yetmez. Mundane astroloji aynı zamanda zaman içindeki tekrarları sorgular.\n\n1939 Erzincan depremi. Türkiye Cumhuriyeti tarihinin belki en büyük doğal afeti. O dönem Satürn de Boğa burcuna yakın bölgedeydi. Mars, Akrep yakınında, sertlikle yerleşmişti. Aynı yapısal eksen, Mars Akrep ve Satürn Boğa, altmış yıl arayla iki büyük yer hareketinde tekrar etti. Bu altmış yıl Satürn\'ün iki tam devrine yakın. Sembolik düzlemde okunduğunda: yapısal sorumluluk denkleminin yenilenmek zorunda kaldığı bir ölçek.\n\n1988 Erzincan\'ı (Mw 6.8), 1992 Erzincan\'ı, 1999 Düzce\'yi (Mw 7.2, İzmit\'ten üç ay sonra) hesaba kattığımızda görülen şey yalnız bir gece değil. Yarım yüzyılın aralıklı sismik haritası. 1995-2008 arasında Plüton\'un Yay burcundaki uzun geçişi, bu dönem boyunca dünyanın çeşitli bölgelerinde büyük sismik olaylarla denk geldi. İzmit bu zincirin içindeki tek halka değil.\n\nBunları söylemek bir astrolojik öngörü sistemi önermek değil. Söylenen şu: belirli gökyüzü konfigürasyonları belirli olay tipleriyle tarihsel olarak örtüştü. Korelasyon nedensellik değildir. Ama korelasyon hatırlamaya yarar.\n\n---\n\nHalk, Karanlık, Susturulmuş Sözler\n\nMundane astrolojide Ay halkın kendisidir. Duygusal beden, ortak hafıza, gündelik hayatın ritmi. Gölcük haritasında Ay 4. evde, Akrep burcunun başlarında duruyor. Akrep, Ay\'ın "düştüğü" burç. Düşen Ay zayıf bir konumdur. Halk savunmasız, hazırlıksız, yanlış zamanda yakalandı.\n\nAy aynı zamanda Neptün ile gergin bir açıda. Neptün\'ün mundane karşılığı belirsizliktir: su, sis, yön kaybı. Bu açının arama-kurtarma operasyonlarındaki ilk saatlerle örtüşmesi dikkat çekici. Enkaz altında kimin kaldığının, hangi caddenin dolu hangi caddenin boş olduğunun günlerce belirsiz kalması. Koordinasyon zorluğu, bilgi akışındaki sis. Bu detaylar gökyüzünde tahmin edilmedi. Ama kayıt edildi.\n\n12. ev mundane astrolojide gizli kalan, sessizleştirilen, görünmez kılınanların alanı. Bu evde Pallas, strateji ve zekâ asteroidi, ile Karma asteroidi yer alıyor. 12. evde Pallas "seferber edilemeyen kapasite" olarak okunur. Bilen, hazırlıklı olabilecek ama söze geçmemiş zekâ. 12. evde Karma ise enkaz altında sessiz kalanların sembolik ağırlığını taşır.\n\nBu okumalar bir hesap sorma değil. Bir hatırlama.\n\nGüneş 2. evde, Aslan burcunda, kendi evinde duruyor. Mundane astrolojide Güneş devleti, lideri, otoriteyi temsil eder. Güçlü konumda olmasına karşın 2. evde ve gece yarısı haritasında bulunması, otoritenin sahaya çıkamadığı, görkeminin görünmez kaldığı bir dönemi simgeler. Tepkinin gecikmesi, koordinasyon kopukluğu, ilk saatlerdeki iletişim sessizliği. Bu detaylar haritanın bir köşesinde, sembolik biçimde yazılıydı zaten.\n\n---\n\nMesele Tahmin Değil\n\nBu yazı bir kehanet değil. Olamaz. Astroloji bir öngörü sistemi olarak çalışmıyor. Çalışsaydı, 17 Ağustos 1999 akşamı milyonlarca insan dışarıda olurdu.\n\nMundane astrolojinin yaptığı öngörü değil, işaret etme. Olay olduktan sonra gökyüzünün o anı nasıl tuttuğunu okumak. Fiziksel olmayan ama sembolik bir kayıt sistemi. Yıldızların hafızası, sembollerle yazılmış bir tarih.\n\nBu hafıza neye yarar? Bilimsel bir uyarı sistemine değil, kuşkusuz. Ama belki başka bir şeye: olayların yalnız fiziksel değil, aynı zamanda anlamsal bir boyutunun da kayıt altına alınmasına. 17 Ağustos 1999 sayılarla anlatılır. Ama yalnız sayılarla anlatıldığında geride bir şey kalır. Yıldızların o gece tuttuğu anlam katmanı, belki o boşluğun bir parçasını doldurur.\n\nHer büyük olayın ardında bir gökyüzü var. Bu gökyüzü tahmin etmedi. Ama tuttu. Sirius parladı, Cor Caroli zeminin kalbine vurdu, Mars ve Satürn karşı uçlarda durdu, Plüton retrograd derinlerden yükseldi. Bunlar fizik kuralları değil. Bir sembolik dilin dilbilgisi.\n\nVe sembollerin görevi cevap vermek değil, hatırlatmak.\n\nGökyüzü o gece bir tahminde bulunmadı. Sadece bir anı, kendi dilinde, kayıt altına aldı.\n\n---\n\n*Bu yazı, 17 Ağustos 1999 İzmit depremi anına ait olay haritasının mundane astroloji çerçevesinde sembolik bir okumasıdır. Bilimsel bir deprem öngörü sistemi değildir. Hayatını kaybedenlerin anısına saygıyla.*',
+      sniper: 'Gökyüzü o gece bir tahminde bulunmadı. Sadece bir anı, kendi dilinde, kayıt altına aldı.',
+      substackUrl: null,
+      date: '2026-03-15',
+      readTime: 10,
+      featured: false,
+      author: 'HOV!'
+    }
+  ];
+  savePosts(demos);
+}
+
+// ════════════════════════════════════════════
+// RENDER
+// ════════════════════════════════════════════
+let activeFilter = 'tümü';
+
+function renderBlog(filter) {
+  activeFilter = filter || 'tümü';
+  const posts = getPosts();
+  const filtered = activeFilter === 'tümü'
+    ? posts
+    : posts.filter(p => p.category === activeFilter);
+
+  document.getElementById('postCount').textContent = filtered.length + ' yazı';
+
+  // Filtre buton state
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === activeFilter || (btn.textContent === 'Tümü' && activeFilter === 'tümü'));
+  });
+
+  const main = document.getElementById('blogMain');
+  main.innerHTML = '';
+
+  if (filtered.length === 0) {
+    main.innerHTML = `<div class="empty-state"><div class="empty-glyph">◈</div><p>Bu kategoride henüz yazı yok.</p></div>`;
+    return;
+  }
+
+  const featured = filtered.find(p => p.featured);
+  const rest = filtered.filter(p => !p.featured || !featured || p.id !== featured.id);
+
+  // Featured post
+  if (featured) {
+    const fc = document.createElement('div');
+    fc.className = 'post-featured';
+    fc.onclick = () => openPost(featured.id);
+    fc.innerHTML = `
+      <div class="post-visual">
+        <div class="post-visual-glyph">${featured.icon || '◈'}</div>
+      </div>
+      <div class="post-body">
+        <div class="post-tag">${featured.category}</div>
+        <h2 class="post-title">${featured.title}</h2>
+        <p class="post-excerpt">${featured.excerpt}</p>
+        <div class="post-meta">
+          <span>${featured.author || 'HOV!'}</span>
+          <span class="post-meta-dot">·</span>
+          <span>${formatDate(featured.date)}</span>
+          <span class="post-meta-dot">·</span>
+          <span>${featured.readTime} dk okuma</span>
+        </div>
+        <a class="post-read-link" onclick="event.stopPropagation(); openPost('${featured.id}')">Devamını Oku →</a>
+      </div>`;
+    main.appendChild(fc);
+  }
+
+  // Grid
+  if (rest.length > 0) {
+    const grid = document.createElement('div');
+    grid.className = 'posts-grid';
+    rest.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'post-card';
+      card.onclick = () => openPost(p.id);
+      card.innerHTML = `
+        <div class="post-visual-mini">
+          <span class="mini-glyph">${p.icon || '◈'}</span>
+        </div>
+        <div class="post-tag">${p.category}</div>
+        <h3 class="post-title">${p.title}</h3>
+        <p class="post-excerpt">${p.excerpt}</p>
+        <div class="post-meta">
+          <span>${p.author || 'HOV!'}</span>
+          <span class="post-meta-dot">·</span>
+          <span>${formatDate(p.date)}</span>
+          <span class="post-meta-dot">·</span>
+          <span>${p.readTime} dk</span>
+        </div>`;
+      grid.appendChild(card);
+    });
+    main.appendChild(grid);
+  }
+}
+
+function filterPosts(cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderBlog(cat);
+}
+
+// ════════════════════════════════════════════
+// POST OKUMA
+// ════════════════════════════════════════════
+function openPost(id) {
+  const posts = getPosts();
+  const post = posts.find(p => p.id === id);
+  if (!post) return;
+
+  // Substack URL check removed — all posts open in modal
+
+  document.getElementById('modalTag').textContent = post.category;
+  document.getElementById('modalTitle').innerHTML = post.title;
+  document.getElementById('modalMeta').textContent = (post.author || 'HOV!') + '  ·  ' + formatDate(post.date) + '  ·  ' + post.readTime + ' dakika okuma';
+
+  // Markdown benzeri basit render
+  let body = post.body || '';
+  body = body
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>');
+  const paras = body.split('\n\n').filter(Boolean).map(p => {
+    if (p.startsWith('<h2>')) return p;
+    return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+  });
+  document.getElementById('modalBody').innerHTML = paras.join('\n');
+
+  const sniper = document.getElementById('modalSniper');
+  if (post.sniper) {
+    sniper.textContent = post.sniper;
+    sniper.style.display = 'block';
+  } else { sniper.style.display = 'none'; }
+
+  document.getElementById('postModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePostModal() {
+  document.getElementById('postModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ════════════════════════════════════════════
+// ADMIN
+// ════════════════════════════════════════════
+let adminAuthed = false;
+
+function openAdminAuth() {
+  document.getElementById('adminOverlay').classList.add('open');
+  if (adminAuthed) {
+    document.getElementById('adminAuth').style.display = 'none';
+    document.getElementById('adminContent').style.display = 'block';
+    renderAdminList();
+  } else {
+    document.getElementById('adminAuth').style.display = 'block';
+    document.getElementById('adminContent').style.display = 'none';
+  }
+}
+
+function closeAdmin() {
+  document.getElementById('adminOverlay').classList.remove('open');
+}
+
+function checkAdminPass() {
+  const pass = document.getElementById('adminPass').value;
+  if (pass === ADMIN_HASH) {
+    adminAuthed = true;
+    document.getElementById('adminAuth').style.display = 'none';
+    document.getElementById('adminContent').style.display = 'block';
+    renderAdminList();
+    document.getElementById('authErr').style.display = 'none';
+  } else {
+    const err = document.getElementById('authErr');
+    err.style.display = 'block';
+    setTimeout(() => err.style.display = 'none', 2000);
+  }
+}
+
+function renderAdminList() {
+  const posts = getPosts();
+  const list = document.getElementById('admPostList');
+  if (posts.length === 0) {
+    list.innerHTML = '<p style="font-size:0.8rem;color:var(--haki-dim)">Henüz yazı yok.</p>';
+    return;
+  }
+  list.innerHTML = posts.map((p, i) => `
+    <div class="adm-post-item">
+      <div>
+        <div class="adm-post-item-title">${p.title.replace(/<[^>]+>/g, '')}</div>
+        <div class="adm-post-item-meta">${p.category} · ${formatDate(p.date)} ${p.featured ? '· ★ Featured' : ''}</div>
+      </div>
+      <div style="display:flex;gap:0.4rem;align-items:center">
+        <button class="adm-btn-del" onclick="toggleFeatured('${p.id}')">${p.featured ? '★' : '☆'}</button>
+        <button class="adm-btn-del" onclick="deletePost('${p.id}')">Sil</button>
+      </div>
+    </div>`).join('');
+}
+
+function addPost() {
+  const title    = document.getElementById('newTitle').value.trim();
+  const body     = document.getElementById('newBody').value.trim();
+  const cat      = document.getElementById('newCat').value;
+  const icon     = document.getElementById('newIcon').value;
+  const excerpt  = document.getElementById('newExcerpt').value.trim();
+  const sniper   = document.getElementById('newSniper').value.trim();
+  const readTime = parseInt(document.getElementById('newReadTime').value) || 4;
+  const featured = document.getElementById('newFeatured').value === '1';
+  const substackUrl = (document.getElementById('newSubstackUrl').value || '').trim() || null;
+
+  if (!title || !body) {
+    flashMsg('addErr'); return;
+  }
+
+  const posts = getPosts();
+  // Eğer featured ise diğerlerinin featured'ını kaldır
+  if (featured) posts.forEach(p => { p.featured = false; });
+
+  posts.unshift({
+    id: 'post_' + Date.now(),
+    title, body, category: cat, icon, excerpt, sniper,
+    readTime, featured, substackUrl,
+    date: new Date().toISOString().slice(0,10),
+    author: 'HOV!'
+  });
+  savePosts(posts);
+
+  // Formu sıfırla
+  ['newTitle','newExcerpt','newBody','newSniper','newSubstackUrl'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('newReadTime').value = '4';
+  document.getElementById('newFeatured').value = '0';
+
+  renderAdminList();
+  renderBlog(activeFilter);
+  flashMsg('addMsg');
+}
+
+function deletePost(id) {
+  if (!confirm('Bu yazıyı silmek istiyor musunuz?')) return;
+  const posts = getPosts().filter(p => p.id !== id);
+  savePosts(posts);
+  renderAdminList();
+  renderBlog(activeFilter);
+}
+
+function toggleFeatured(id) {
+  const posts = getPosts();
+  posts.forEach(p => { p.featured = (p.id === id) ? !p.featured : false; });
+  savePosts(posts);
+  renderAdminList();
+  renderBlog(activeFilter);
+}
+
+function exportPosts() {
+  const data = JSON.stringify(getPosts(), null, 2);
+  const blob = new Blob([data], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'hov_blog_posts_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  flashMsg('exportMsg');
+}
+
+function importPosts(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const posts = JSON.parse(e.target.result);
+      if (Array.isArray(posts)) {
+        savePosts(posts);
+        renderAdminList();
+        renderBlog(activeFilter);
+        flashMsg('importMsg');
+      }
+    } catch { alert('Geçersiz JSON dosyası.'); }
+  };
+  reader.readAsText(file);
+}
+
+function flashMsg(id) {
+  const el = document.getElementById(id);
+  el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 2500);
+}
+
+// ════════════════════════════════════════════
+// YARDIMCILAR
+// ════════════════════════════════════════════
+function formatDate(str) {
+  if (!str) return '';
+  const [y,m,d] = str.split('-');
+  const months = ['','Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+  return `${parseInt(d)} ${months[parseInt(m)]} ${y}`;
+}
+
+// ESC ile modal kapat
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeAdmin(); closePostModal(); }
+});
+
+// Nav scroll
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), {passive:true});
+
+// Başlat
+seedDemoPosts();
+renderBlog();
+</script>
+</body>
+</html>
